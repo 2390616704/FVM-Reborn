@@ -16,19 +16,23 @@ if (hover_alpha > 0) {
     var box_width = text_width + 20;
     var box_height = text_height + 15;
 	var display_description = description;
-	if (!is_ready && global.flame < current_cost && cooldown_timer >= cooldown) {
+	if (global.flame < current_cost) {
 		box_height += text_height 
 		display_description = description + "\n没有足够的火苗" 
 	}
-	else if (!is_ready &&  cooldown_timer < cooldown) {
+	else if (charges <= 0) {
 		box_height += text_height 
 		if (array_length(pending_ghosts) > 0) {
 			display_description = description + "\n已预放置" + string(array_length(pending_ghosts)) + "个，等待冷却"
-		} else if (global.pre_place_on_cooldown && global.flame >= current_cost) {
+		} else if (reloading && global.pre_place_on_cooldown) {
 			display_description = description + "\n冷却中，可预放置虚影"
 		} else {
 			display_description = description + "\n正在冷却中"
 		}
+	}
+	else if (charges > 1) {
+		box_height += text_height
+		display_description = description + "\n已装填" + string(charges) + "/" + string(max_charges) + "次"
 	}
 	if slot_index <= 14{
 		var box_x = x;

@@ -41,7 +41,7 @@ var slot_x1 = x - sprite_width/2
 var slot_y1 = y - sprite_height/2
 
 // 绘制深灰色覆盖层（所有不可用状态）
-if (!is_ready || is_selected) &&  cooldown_timer >= cooldown{
+if ((!is_ready && (charges > 0 || cooldown_timer >= cooldown)) || (is_selected && cooldown_timer >= cooldown)) {
     draw_set_alpha(0.6)
     draw_set_color(make_color_rgb(0, 0,0))
     draw_rectangle(slot_x1, slot_y1, slot_x1 + slot_width, slot_y1 + slot_height, false)
@@ -49,7 +49,7 @@ if (!is_ready || is_selected) &&  cooldown_timer >= cooldown{
 }
 
 // 绘制冷却进度条
-if (cooldown_timer < cooldown) {
+if (charges <= 0 && cooldown_timer < cooldown) {
     // 计算冷却进度百分比
     var progress = 1.0 - (cooldown_timer / cooldown)
     var progress_height = slot_height * progress
@@ -67,7 +67,7 @@ if (cooldown_timer < cooldown) {
 }  
 
 // 绘制冷却时间显示
-if (cooldown_timer < cooldown) {
+if (charges <= 0 && cooldown_timer < cooldown) {
     // 计算剩余时间（秒）
     var time_left = (cooldown - cooldown_timer) / 60;
     
@@ -92,6 +92,18 @@ if (cooldown_timer < cooldown) {
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
 }
+
+// 绘制装填层数
+draw_set_font(font_number);
+draw_set_halign(fa_right);
+draw_set_valign(fa_middle);
+draw_set_color(c_black);
+draw_text(x+31, y+45, "x"+string(charges));
+draw_set_color(c_white);
+draw_text(x+30, y+44, "x"+string(charges));
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+
 //快捷键提示
 var slot_key = global.keybind_map[? "卡槽" + string(slot_index)]
 draw_set_color(c_black);

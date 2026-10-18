@@ -16,24 +16,39 @@ if card_id != "magic_chicken"{
 if global.debug{
 	cooldown_timer = cooldown
 }
-if cooldown_timer < cooldown{
-	cooldown_timer ++
 
-
-    // 冷却中状态
-    is_ready = false;
-    cooling_alpha = min(cooling_alpha + 0.05, 0.7); // 淡入冷却效果
-} else {
-    // 冷却完成状态
-    cooling_alpha = max(cooling_alpha - 0.05, 0); // 淡出冷却效果
-    
-    // 检查阳光是否足够
-    if (global.flame >= current_cost) {
-        is_ready = true;
-    } else {
-        is_ready = false;
-    }
+if (startup_reload_pending && info_got) {
+	startup_reload_pending = false;
+	reloading = true;
+	cooldown_timer = 0;
 }
+
+loaded_charge = false;
+if (reloading) {
+	if (cooldown_timer < cooldown) {
+		cooldown_timer++;
+	}
+	if (cooldown_timer >= cooldown) {
+		if (charges < max_charges) {
+			charges++;
+			loaded_charge = true;
+		}
+		if (charges < max_charges) {
+			cooldown_timer = 0;
+		} else {
+			cooldown_timer = cooldown;
+			reloading = false;
+		}
+	}
+}
+
+if (charges <= 0) {
+	cooling_alpha = min(cooling_alpha + 0.05, 0.7);
+} else {
+	cooling_alpha = max(cooling_alpha - 0.05, 0);
+}
+
+is_ready = (charges > 0 && global.flame >= current_cost);
 
 // 更新所有预放置虚影的位置和深度
 var i = 0;
@@ -62,8 +77,8 @@ while (i < array_length(pending_ghosts)) {
 	i++;
 }
 
-// 冷却完成后只实体化最前面的一个虚影
-if (cooldown_timer >= cooldown) {
+// 每装填一次只实体化最前面的一个虚影
+if (loaded_charge && array_length(pending_ghosts) > 0 && charges > 0) {
 	while (array_length(pending_ghosts) > 0) {
 		var mat_rec = pending_ghosts[0];
 		if (!instance_exists(mat_rec.ghost)) {
@@ -90,8 +105,7 @@ if (cooldown_timer >= cooldown) {
 				instance_destroy(mat_rec.ghost);
 			}
 			array_delete(pending_ghosts, 0, 1);
-			cooldown_timer = 0;
-			is_ready = false;
+			consume_charge();
 			break;
 		}
 		else {
@@ -105,15 +119,12 @@ if (cooldown_timer >= cooldown) {
 	}
 }
 
-if (cooldown_timer >= cooldown) {
-	is_ready = (global.flame >= current_cost);
-}
-
-var can_select = (global.flame >= current_cost) && (cooldown_timer >= cooldown || global.pre_place_on_cooldown);
+var can_select = (global.flame >= current_cost) && (charges > 0 || (reloading && global.pre_place_on_cooldown));
 
 if (array_length(pending_ghosts) > 0 && mouse_check_button_pressed(mb_right)) {
 	if (point_in_rectangle(mouse_x, mouse_y, x-50, y-70, x+50, y+70)) {
 		clear_pending_ghosts(true);
+		is_ready = (charges > 0 && global.flame >= current_cost);
 		show_notice("已取消全部预放置", 60);
 		audio_play_sound(snd_button,0,0);
 	}
@@ -224,17 +235,16 @@ if (is_selected) {
         var can_plant = (can_place_at_position(logical_world.x, logical_world.y, card_data[? "plant_type"],card_data[? "feature_type"],card_data[? "target_card"]));
         
         if (can_plant && global.flame >= current_cost) {
-            if (cooldown_timer < cooldown && global.pre_place_on_cooldown) {
-                spawn_pending_ghost(cell, card_data);
-                deselect_slot_after_place();
-            }
-            else if (cooldown_timer >= cooldown) {
+            if (charges > 0) {
                 place_card_at(cell.col, cell.row, cell.shift_x, cell.shift_y, card_data, card_obj, current_cost, true, cell.platform);
-                cooldown_timer = 0;
-                is_ready = false;
+                consume_charge();
                 if array_get_index(cooldown_ignore_list,card_id) == -1{
                     global.prev_place_id = card_id
                 }
+                finish_direct_placement();
+            }
+            else if (cooldown_timer < cooldown && global.pre_place_on_cooldown) {
+                spawn_pending_ghost(cell, card_data);
                 deselect_slot_after_place();
             }
         }

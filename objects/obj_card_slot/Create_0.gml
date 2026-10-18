@@ -8,6 +8,11 @@ cost = 50
 current_cost = 0
 night = false
 cooldown_timer = 30000
+max_charges = 3
+charges = 1
+reloading = false
+startup_reload_pending = true
+loaded_charge = false
 description = "小火炉:生产火苗"
 slot_index = 0
 clevel = 0
@@ -110,6 +115,26 @@ function deselect_slot_after_place(){
 	}
 	selected_preview = noone;
 	global.selected_slot = noone;
+}
+
+function consume_charge(){
+	if (charges <= 0) {
+		return false;
+	}
+	charges--;
+	if (charges < max_charges && !reloading) {
+		reloading = true;
+		startup_reload_pending = false;
+		cooldown_timer = 0;
+	}
+	is_ready = (charges > 0 && global.flame >= current_cost);
+	return true;
+}
+
+function finish_direct_placement(){
+	if (charges <= 0 || global.flame < current_cost) {
+		deselect_slot_after_place();
+	}
 }
 
 function clear_pending_ghosts(refund){
@@ -236,17 +261,16 @@ function try_place_once(){
 	var can_plant = can_place_at_position(logical_world.x, logical_world.y, card_data[? "plant_type"],card_data[? "feature_type"],card_data[? "target_card"]);
 
 	if (can_plant && global.flame >= current_cost) {
-		if (cooldown_timer < cooldown && global.pre_place_on_cooldown) {
-			spawn_pending_ghost(cell, card_data);
-			deselect_slot_after_place();
-		}
-		else if (cooldown_timer >= cooldown) {
+		if (charges > 0) {
 			place_card_at(cell.col, cell.row, cell.shift_x, cell.shift_y, card_data, card_obj, current_cost, true, cell.platform);
-			cooldown_timer = 0;
-			is_ready = false;
+			consume_charge();
 			if array_get_index(cooldown_ignore_list,card_id) == -1{
 				global.prev_place_id = card_id
 			}
+			deselect_slot_after_place();
+		}
+		else if (cooldown_timer < cooldown && global.pre_place_on_cooldown) {
+			spawn_pending_ghost(cell, card_data);
 			deselect_slot_after_place();
 		}
 		else if global.quick_placement {
