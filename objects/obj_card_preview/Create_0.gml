@@ -7,6 +7,7 @@ logical_base_x = 0;
 logical_base_y = 0;
 platform_shift_x = 0;
 platform_shift_y = 0;
+is_phantom = false;  // 是否为冷却期间预放置的虚影
 
 // 设置深度
 depth = -9999999; // 确保在顶层显示

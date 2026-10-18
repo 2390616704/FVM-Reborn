@@ -47,3 +47,6 @@ else if (config_key == "lose_focus_pause"){
 else if (config_key == "overlap_planting"){
 	global.overlap_planting = state
 }
+else if (config_key == "pre_place_on_cooldown"){
+	global.pre_place_on_cooldown = state
+}

@@ -2,7 +2,6 @@
 if global.is_paused{
 	exit
 }
-
 if card_id != "magic_chicken"{
 	current_cost = cost
 	if ds_map_find_value(global.plus_card_map,card_id) != undefined{
@@ -36,6 +35,90 @@ if cooldown_timer < cooldown{
     }
 }
 
+// 更新所有预放置虚影的位置和深度
+var i = 0;
+while (i < array_length(pending_ghosts)) {
+	var rec = pending_ghosts[i];
+	if (!instance_exists(rec.ghost)) {
+		global.flame += rec.cost;
+		array_delete(pending_ghosts, i, 1);
+		continue;
+	}
+	if (instance_exists(rec.platform)) {
+		var is_axis_x = (variable_instance_exists(rec.platform, "move_axis") && rec.platform.move_axis == "x");
+		var c_off = is_axis_x ? rec.platform.current_offset : 0;
+		var r_off = (!is_axis_x) ? rec.platform.current_offset : 0;
+		rec.col = rec.platform.start_col + c_off + rec.offset_col;
+		rec.row = rec.platform.start_row + r_off + rec.offset_row;
+		rec.shift_x = is_axis_x ? rec.platform.visual_x_shift : 0;
+		rec.shift_y = (!is_axis_x) ? rec.platform.visual_y_shift : 0;
+
+		var rec_world = get_world_position_from_grid(rec.col, rec.row);
+		rec.ghost.x = rec_world.x + rec.shift_x;
+		rec.ghost.y = rec_world.y + rec.shift_y;
+		rec.ghost.depth = calculate_plant_depth(rec.col, rec.row, rec.card_data[? "plant_type"]) - 5;
+		pending_ghosts[i] = rec;
+	}
+	i++;
+}
+
+// 冷却完成后只实体化最前面的一个虚影
+if (cooldown_timer >= cooldown) {
+	while (array_length(pending_ghosts) > 0) {
+		var mat_rec = pending_ghosts[0];
+		if (!instance_exists(mat_rec.ghost)) {
+			global.flame += mat_rec.cost;
+			array_delete(pending_ghosts, 0, 1);
+			continue;
+		}
+		var mat_world = get_world_position_from_grid(mat_rec.col, mat_rec.row);
+		var can_materialize = can_place_at_position(mat_world.x, mat_world.y, mat_rec.card_data[? "plant_type"], mat_rec.card_data[? "feature_type"], mat_rec.card_data[? "target_card"]);
+		if (can_materialize) {
+			var prev_before = global.prev_place_id;
+			global.prev_place_id = mat_rec.prev_place_id;
+			place_card_at(mat_rec.col, mat_rec.row, mat_rec.shift_x, mat_rec.shift_y, mat_rec.card_data, mat_rec.card_obj, mat_rec.cost, false, mat_rec.platform);
+			if (mat_rec.card_id == "magic_chicken") {
+				global.prev_place_id = mat_rec.prev_place_id;
+			}
+			else if (array_get_index(cooldown_ignore_list, mat_rec.card_id) == -1) {
+				global.prev_place_id = mat_rec.card_id;
+			}
+			else {
+				global.prev_place_id = prev_before;
+			}
+			if (instance_exists(mat_rec.ghost)) {
+				instance_destroy(mat_rec.ghost);
+			}
+			array_delete(pending_ghosts, 0, 1);
+			cooldown_timer = 0;
+			is_ready = false;
+			break;
+		}
+		else {
+			global.flame += mat_rec.cost;
+			if (instance_exists(mat_rec.ghost)) {
+				instance_destroy(mat_rec.ghost);
+			}
+			array_delete(pending_ghosts, 0, 1);
+			show_notice("预放置失败，已退还火苗", 60);
+		}
+	}
+}
+
+if (cooldown_timer >= cooldown) {
+	is_ready = (global.flame >= current_cost);
+}
+
+var can_select = (global.flame >= current_cost) && (cooldown_timer >= cooldown || global.pre_place_on_cooldown);
+
+if (array_length(pending_ghosts) > 0 && mouse_check_button_pressed(mb_right)) {
+	if (point_in_rectangle(mouse_x, mouse_y, x-50, y-70, x+50, y+70)) {
+		clear_pending_ghosts(true);
+		show_notice("已取消全部预放置", 60);
+		audio_play_sound(snd_button,0,0);
+	}
+}
+
 // 检测鼠标悬停（用于显示提示）
 var mx = device_mouse_x_to_gui(0);
 var my = device_mouse_y_to_gui(0);
@@ -49,7 +132,7 @@ if (is_hovered) {
 }
 
 // 检测鼠标点击（选中卡槽）
-if (is_ready && mouse_check_button_pressed(mb_left)) {
+if (can_select && mouse_check_button_pressed(mb_left)) {
     mx = mouse_x;
     my = mouse_y;
     
@@ -72,7 +155,7 @@ if (is_ready && mouse_check_button_pressed(mb_left)) {
 
 var slot_key = global.keybind_map[? "卡槽" + string(slot_index)];
 
-if keyboard_check_pressed(slot_key) && is_ready{
+if keyboard_check_pressed(slot_key) && can_select{
         // 选中当前卡槽
 		if !is_selected{
 			select_slot()
@@ -135,132 +218,25 @@ if (is_selected) {
 			}
 		}
         
-        var found_plat = noone;
-        var platform_shift_x = 0;
-        var platform_shift_y = 0;
-        var logical_col = -1;
-        var logical_row = -1;
-        var grid_pos_visual = get_grid_position_from_world(mouse_x, mouse_y);
-        var direct_in_platform = false;
-
-        with (obj_platform) {
-            var is_axis_x = (variable_instance_exists(id, "move_axis") && move_axis == "x");
-            var shift_x = is_axis_x ? visual_x_shift : 0;
-            var shift_y = (!is_axis_x) ? visual_y_shift : 0;
-            var adj_x = mouse_x - shift_x;
-            var adj_y = mouse_y - shift_y;
-            var grid_pos_adj = get_grid_position_from_world(adj_x, adj_y);
-
-            var c_off = is_axis_x ? current_offset : 0;
-            var r_off = (!is_axis_x) ? current_offset : 0;
-            var p_start_c = start_col + c_off;
-            var p_start_r = start_row + r_off;
-
-            if (grid_pos_adj.col >= p_start_c && grid_pos_adj.col < p_start_c + width &&
-                grid_pos_adj.row >= p_start_r && grid_pos_adj.row < p_start_r + length) {
-                found_plat = id;
-                logical_col = grid_pos_adj.col;
-                logical_row = grid_pos_adj.row;
-                platform_shift_x = shift_x;
-                platform_shift_y = shift_y;
-                break;
-            }
-
-            // 记录鼠标视觉格子是否落在某平台逻辑范围内（用于检测移动方向外一格）
-            if (!direct_in_platform &&
-                grid_pos_visual.col >= p_start_c && grid_pos_visual.col < p_start_c + width &&
-                grid_pos_visual.row >= p_start_r && grid_pos_visual.row < p_start_r + length) {
-                direct_in_platform = true;
-            }
-        }
-
-        if (found_plat == noone) {
-            if (direct_in_platform) {
-                // 鼠标视觉在平台外但格子属于平台逻辑范围（平台移动方向外一格），禁止放置
-                logical_col = -1;
-                logical_row = -1;
-            } else {
-                logical_col = grid_pos_visual.col;
-                logical_row = grid_pos_visual.row;
-            }
-        }
-        
-        var logical_world = get_world_position_from_grid(logical_col, logical_row);
+        var cell = resolve_placement_cell(mouse_x, mouse_y);
+        var logical_world = get_world_position_from_grid(cell.col, cell.row);
 
         var can_plant = (can_place_at_position(logical_world.x, logical_world.y, card_data[? "plant_type"],card_data[? "feature_type"],card_data[? "target_card"]));
         
         if (can_plant && global.flame >= current_cost) {
-            // 创建植物实例
-			var plant_list = ds_grid_get(global.grid_plants, logical_col, logical_row);
-			var target_card_id = card_data[? "target_card"];
-			
-			// 如果有target_card，替换底座卡片
-			if card_data[? "feature_type"] == "upgrade"{
-				if (target_card_id != undefined && target_card_id != "none") {
-					// 销毁目标卡片
-					for (var i = 0; i < ds_list_size(plant_list); i++) {
-						var plant = ds_list_find_value(plant_list, i);
-						if (instance_exists(plant) && variable_instance_exists(plant, "plant_id") && plant.plant_id == target_card_id) {
-							card_destroyed(plant);
-							instance_destroy(plant);
-							break;
-						}
-					}
-				}
-			}
-			// 通用替换逻辑（替换同类植物或开启替换模式）
-			if global.replace_placement && !global.overlap_planting{
-				for (var i = 0; i < ds_list_size(plant_list); i++) {
-					var plant = ds_list_find_value(plant_list, i);
-					if (instance_exists(plant) && plant.plant_type == card_data[? "plant_type"] && plant.plant_id != "player" && plant.plant_type != "coffee"
-					&& !((card_data[? "feature_type"]=="bun" && plant.feature_type == "king_bun")||(card_data[? "feature_type"]=="king_bun" && plant.feature_type == "king_bun"))
-					&& !((card_data[? "feature_type"]=="tbun" && plant.feature_type == "king_tbun")||(card_data[? "feature_type"]=="king_tbun" && plant.feature_type == "king_tbun"))) {
-						card_destroyed(plant);
-						instance_destroy(plant);
-					}
-				}
-			}
-            var new_plant = instance_create_depth(logical_world.x + platform_shift_x, logical_world.y + platform_shift_y, 0,card_obj);
-			// 计算深度值
-			var depth_value = calculate_plant_depth(logical_col, logical_row, new_plant.plant_type);
-			card_created(new_plant, logical_col, logical_row);
-			new_plant.depth = depth_value
-			// 平台移动期间放置时锁定逻辑网格位置，防止视觉位置覆盖grid_col/grid_row
-			if (found_plat != noone && variable_instance_exists(found_plat, "state") && found_plat.state == "moving") {
-				new_plant.platform_grid_lock = true;
-			}
-			if global.grid_terrains[logical_row][logical_col].type == "normal"{
-				instance_create_depth(logical_world.x + platform_shift_x, logical_world.y + platform_shift_y,-2,obj_place_effect)
-			}
-			else if global.grid_terrains[logical_row][logical_col].type == "water"{
-				var inst = instance_create_depth(logical_world.x + platform_shift_x, logical_world.y + platform_shift_y + 20,-2500,obj_place_effect)
-				inst.sprite_index = spr_enter_water_effect
-			}
-            
-            // 扣除阳光
-            global.flame -= current_cost;
-			
-            
-            // 重置冷却计时器
-            cooldown_timer = 0;
-            is_ready = false;
-			if array_get_index(cooldown_ignore_list,card_id) == -1{
-				global.prev_place_id = card_id
-			}
-            
-			if global.grid_terrains[logical_row][logical_col].type == "normal"{
-				audio_play_sound(snd_place1,0,0)
-			}
-			else if global.grid_terrains[logical_row][logical_col].type == "water"{
-				audio_play_sound(snd_enter_water,0,0)
-			}
-            // 取消选择
-            is_selected = false;
-            if (selected_preview != noone && instance_exists(selected_preview)) {
-                instance_destroy(selected_preview);
+            if (cooldown_timer < cooldown && global.pre_place_on_cooldown) {
+                spawn_pending_ghost(cell, card_data);
+                deselect_slot_after_place();
             }
-            selected_preview = noone;
-            global.selected_slot = noone;
+            else if (cooldown_timer >= cooldown) {
+                place_card_at(cell.col, cell.row, cell.shift_x, cell.shift_y, card_data, card_obj, current_cost, true, cell.platform);
+                cooldown_timer = 0;
+                is_ready = false;
+                if array_get_index(cooldown_ignore_list,card_id) == -1{
+                    global.prev_place_id = card_id
+                }
+                deselect_slot_after_place();
+            }
         }
     }
 }

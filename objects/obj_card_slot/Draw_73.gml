@@ -22,7 +22,13 @@ if (hover_alpha > 0) {
 	}
 	else if (!is_ready &&  cooldown_timer < cooldown) {
 		box_height += text_height 
-		display_description = description + "\n正在冷却中" 
+		if (array_length(pending_ghosts) > 0) {
+			display_description = description + "\n已预放置" + string(array_length(pending_ghosts)) + "个，等待冷却"
+		} else if (global.pre_place_on_cooldown && global.flame >= current_cost) {
+			display_description = description + "\n冷却中，可预放置虚影"
+		} else {
+			display_description = description + "\n正在冷却中"
+		}
 	}
 	if slot_index <= 14{
 		var box_x = x;

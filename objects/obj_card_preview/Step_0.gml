@@ -1,4 +1,10 @@
 // obj_plant_preview STEP 事件
+if (is_phantom) {
+    if (parent_slot == noone || !instance_exists(parent_slot)) {
+        instance_destroy();
+    }
+    exit;
+}
 var found_plat = noone;
 platform_shift_x = 0;
 platform_shift_y = 0;

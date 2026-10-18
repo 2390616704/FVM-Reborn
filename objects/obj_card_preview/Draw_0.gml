@@ -1,4 +1,10 @@
 // obj_plant_preview DRAW 事件
+if (is_phantom) {
+    if not global.is_paused {
+        draw_sprite_ext(preview_sprite, 0, x, y, 1.8, 1.8, 0, c_white, 0.5);
+    }
+    exit;
+}
 
 if not global.is_paused{
     if (!variable_instance_exists(id, "logical_base_x")) {
