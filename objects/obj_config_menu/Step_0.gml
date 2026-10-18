@@ -119,14 +119,14 @@ function draw_games_page(){
 	    array_push(setting_buttons, btn4);
 
 		// 创建允许重叠种植开关
-	    var btn5 = instance_create_depth(x - 180, y + 140, depth-1, obj_setting_toggle);
+	    var btn5 = instance_create_depth(x - 180, y + 360, depth-1, obj_setting_toggle);
 	    btn5.config_key = "overlap_planting";
 	    btn5.state = global.overlap_planting;
 	    btn5.tooltip_text = "普通植物可以无视地形和占用，与已有植物重叠种植";
 	    array_push(setting_buttons, btn5);
 
 		// 创建冷却期间预放置开关
-	    var btn6 = instance_create_depth(x - 180, y + 220, depth-1, obj_setting_toggle);
+	    var btn6 = instance_create_depth(x - 180, y + 460, depth-1, obj_setting_toggle);
 	    btn6.config_key = "pre_place_on_cooldown";
 	    btn6.state = global.pre_place_on_cooldown;
 	    btn6.tooltip_text = "卡片冷却期间可以放置虚影，冷却结束后自动变成实体";

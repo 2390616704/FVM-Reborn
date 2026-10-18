@@ -36,6 +36,14 @@ switch (button_select) {
 		//draw_set_valign(fa_top);
 		draw_sprite(spr_option_menu_text,2,x-120,y+60)
 		draw_sprite_ext(spr_option_menu_difficulty,global.difficulty,x+15,y+102,0.2,0.2,0,c_white,1)
+		draw_set_font(font_yuan)
+		draw_set_color(c_white)
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_middle)
+		draw_text(x - 380, y + 360, "允许重叠种植")
+		draw_text(x - 380, y + 460, "冷却期间可预放置")
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_top)
 		break
     
     // 可以添加其他设置页面
