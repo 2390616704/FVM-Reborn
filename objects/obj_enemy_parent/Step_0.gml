@@ -164,7 +164,7 @@ switch(state) {
                     var tar_type = ds_list_find_value(global.eat_order, i);
                     
                     if (plant_type == tar_type) {
-                        plant_order_list[i] = id;
+                        var current_target = plant_order_list[i]; if (current_target == noone || !instance_exists(current_target) || (grid_col == current_target.grid_col && grid_row == current_target.grid_row && hp > current_target.hp)) { plant_order_list[i] = id; }
                         break;
                     }
                 }
@@ -271,7 +271,7 @@ switch(state) {
                     var tar_type = ds_list_find_value(global.eat_order, i);
                     
                     if (plant_type == tar_type) {
-                        plant_order_list[i] = id;
+                        var current_target = plant_order_list[i]; if (current_target == noone || !instance_exists(current_target) || (grid_col == current_target.grid_col && grid_row == current_target.grid_row && hp > current_target.hp)) { plant_order_list[i] = id; }
                         break;
                     }
                 }

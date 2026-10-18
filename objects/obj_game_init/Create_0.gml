@@ -105,6 +105,7 @@ if (!file_exists("config.ini")) {
 	ini_write_bool("settings", "borderless_window", true);
 	ini_write_real("settings", "save_slot", 0)
 	ini_write_bool("settings", "lose_focus_pause", true)
+	ini_write_bool("settings", "overlap_planting", false)
 	ini_open("config.ini");
     for (var i = 0; i < array_length(global.keybind_config); i++) {
         var kb = global.keybind_config[i];
@@ -137,6 +138,7 @@ global.ime_block = ini_read_bool("settings", "ime_block", true); // 输入法屏
 if (ini_read_string("settings", "ime_block", "") == "") {
     ini_write_bool("settings", "ime_block", true);
 }
+global.overlap_planting = ini_read_bool("settings", "overlap_planting", false);
 for (var i = 0; i < array_length(global.keybind_config); i++) {
 	    var kb = global.keybind_config[i];
 	    var key_val = ini_read_real("keybinds", kb.name, kb.default1);

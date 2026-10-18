@@ -19,6 +19,10 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 	if global.debug{
 		return true
 	}
+	if global.overlap_planting && plant_type == "normal" && feature_type != "upgrade"{
+		return true
+	}
+	var replace_enabled = global.replace_placement && !global.overlap_planting;
 	// 检查是否有障碍
 	if global.grid_terrains[row][col].type == "obstacle" && plant_type != "coffee"{
 		return false
@@ -34,7 +38,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 		for (var i = 0; i < ds_list_size(plant_list); i++) {
 		    var plant = ds_list_find_value(plant_list, i);
             if (!instance_exists(plant)) continue;
-			if (plant.plant_type == plant_type && !global.replace_placement && feature_type != "upgrade") {
+			if (plant.plant_type == plant_type && !replace_enabled && feature_type != "upgrade") {
 		        same = true
 		    }
 	                    
@@ -64,7 +68,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 	                for (var i = 0; i < ds_list_size(plant_list); i++) {
 	                    var plant = ds_list_find_value(plant_list, i);
                     	if (!instance_exists(plant)) continue;
-	                    if ((plant.plant_type == "lilypad" && !global.replace_placement) || (plant.plant_type != "lilypad" && plant.feature_type == "water")) {
+	                    if ((plant.plant_type == "lilypad" && !replace_enabled) || (plant.plant_type != "lilypad" && plant.feature_type == "water")) {
 	                        return false;
 	                    }
 	                }
@@ -81,7 +85,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 				return true
             } else {
                 // 检查是否有同类
-				if global.replace_placement{
+				if replace_enabled{
 						return true
 					}
                 for (var i = 0; i < ds_list_size(plant_list); i++) {
@@ -106,7 +110,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 					return true
 	            } else {
 	                // 检查是否有同类
-					if global.replace_placement{
+					if replace_enabled{
 						return true
 					}
 	                for (var i = 0; i < ds_list_size(plant_list); i++) {
@@ -129,7 +133,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 						for (var i = 0; i < ds_list_size(plant_list); i++) {
 		                    var plant = ds_list_find_value(plant_list, i);
                     		if (!instance_exists(plant)) continue;
-							if (plant.plant_type == "shield_outer" && !global.replace_placement) {
+							if (plant.plant_type == "shield_outer" && !replace_enabled) {
 		                        has_same = true
 		                    }
 	                    
@@ -147,7 +151,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 						for (var i = 0; i < ds_list_size(plant_list); i++) {
 		                    var plant = ds_list_find_value(plant_list, i);
                     		if (!instance_exists(plant)) continue;
-							if (plant.plant_type == "shield_outer" && !global.replace_placement) {
+							if (plant.plant_type == "shield_outer" && !replace_enabled) {
 		                        return false
 		                    }
 	                    
@@ -158,7 +162,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 		                for (var i = 0; i < ds_list_size(plant_list); i++) {
 		                    var plant = ds_list_find_value(plant_list, i);
                     		if (!instance_exists(plant)) continue;
-							if (plant.plant_type == "shield_outer" && !global.replace_placement) {
+							if (plant.plant_type == "shield_outer" && !replace_enabled) {
 		                        has_same = true
 		                    }
 	                    
@@ -195,7 +199,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 					return true
 	            } else {
 	                // 检查是否有同类
-					if global.replace_placement{
+					if replace_enabled{
 						return true
 					}
 	                for (var i = 0; i < ds_list_size(plant_list); i++) {
@@ -220,7 +224,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 						for (var i = 0; i < ds_list_size(plant_list); i++) {
 		                    var plant = ds_list_find_value(plant_list, i);
                     		if (!instance_exists(plant)) continue;
-							if (plant.plant_type == "normal" && !global.replace_placement) {
+							if (plant.plant_type == "normal" && !replace_enabled) {
 		                        has_same = true
 		                    }
 	                    
@@ -238,7 +242,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 						for (var i = 0; i < ds_list_size(plant_list); i++) {
 		                    var plant = ds_list_find_value(plant_list, i);
                     		if (!instance_exists(plant)) continue;
-							if (plant.plant_type == "normal" && !global.replace_placement) {
+							if (plant.plant_type == "normal" && !replace_enabled) {
 		                        return false
 		                    }
 	                    
@@ -249,7 +253,7 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 		                for (var i = 0; i < ds_list_size(plant_list); i++) {
 		                    var plant = ds_list_find_value(plant_list, i);
                     		if (!instance_exists(plant)) continue;
-							if (plant.plant_type == "normal" && !global.replace_placement
+							if (plant.plant_type == "normal" && !replace_enabled
 							&& !((feature_type=="bun"&&plant.feature_type=="king_bun")||(feature_type=="king_bun"&&plant.feature_type=="king_bun"))
 							&& !((feature_type=="tbun"&&plant.feature_type=="king_tbun")||(feature_type=="king_tbun"&&plant.feature_type=="king_tbun"))) {
 		                        has_same = true

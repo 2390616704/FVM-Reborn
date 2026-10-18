@@ -14,9 +14,6 @@ function card_created(plant_inst, col, row) {
     plant_inst.grid_col = col;
     plant_inst.grid_row = row;
     
-    // 更新植物的深度偏移（根据层级）
-    plant_inst.depth_offset = ds_list_size(plant_list) * 5;
-    
     // 更新所有植物的深度偏移
 	sort_plants_in_grid(col, row)
 }  

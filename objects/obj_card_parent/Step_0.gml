@@ -62,7 +62,7 @@ if !(variable_instance_exists(id, "platform_grid_lock") && platform_grid_lock) {
     grid_row = grid_pos.row
 }
 
-depth = calculate_plant_depth(grid_pos.col, grid_pos.row, plant_type)
+depth = calculate_plant_depth(grid_pos.col, grid_pos.row, plant_type) - depth_offset * 0.001
 if instance_exists(banding_star_obj){
 banding_star_obj.depth = depth - 1
 }

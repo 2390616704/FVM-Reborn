@@ -117,6 +117,13 @@ function draw_games_page(){
 	    btn4.state = global.lose_focus_pause;
 		btn4.tooltip_text = "切换窗口时，游戏自动暂停"
 	    array_push(setting_buttons, btn4);
+
+		// 创建允许重叠种植开关
+	    var btn5 = instance_create_depth(x - 180, y + 140, depth-1, obj_setting_toggle);
+	    btn5.config_key = "overlap_planting";
+	    btn5.state = global.overlap_planting;
+	    btn5.tooltip_text = "普通植物可以无视地形和占用，与已有植物重叠种植";
+	    array_push(setting_buttons, btn5);
     
 	    // 标记当前设置页面
 	    current_settings = id;

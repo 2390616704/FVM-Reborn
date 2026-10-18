@@ -209,7 +209,7 @@ if (is_selected) {
 				}
 			}
 			// 通用替换逻辑（替换同类植物或开启替换模式）
-			if global.replace_placement{
+			if global.replace_placement && !global.overlap_planting{
 				for (var i = 0; i < ds_list_size(plant_list); i++) {
 					var plant = ds_list_find_value(plant_list, i);
 					if (instance_exists(plant) && plant.plant_type == card_data[? "plant_type"] && plant.plant_id != "player" && plant.plant_type != "coffee"

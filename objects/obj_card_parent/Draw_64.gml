@@ -3,6 +3,39 @@ if global.is_paused{
 }
 // 植物血条绘制
 if (global.card_hpbar && hp > 0 && plant_type != "coffee") {
+	if (global.overlap_planting && grid_col >= 0 && grid_col < global.grid_cols && grid_row >= 0 && grid_row < global.grid_rows) {
+		var cell_list = ds_grid_get(global.grid_plants, grid_col, grid_row);
+		var display_target = noone;
+		for (var order_i = 0; order_i < ds_list_size(global.eat_order); order_i++) {
+			var target_type = ds_list_find_value(global.eat_order, order_i);
+			var best_plant = noone;
+			for (var i = 0; i < ds_list_size(cell_list); i++) {
+				var plant = ds_list_find_value(cell_list, i);
+				if (instance_exists(plant) && plant.plant_type == target_type && plant.plant_type != "coffee" && plant.hp > 0) {
+					if (best_plant == noone || plant.hp > best_plant.hp) {
+						best_plant = plant;
+					}
+				}
+			}
+			if (best_plant != noone) {
+				display_target = best_plant;
+				break;
+			}
+		}
+		if (display_target == noone) {
+			for (var i = 0; i < ds_list_size(cell_list); i++) {
+				var plant = ds_list_find_value(cell_list, i);
+				if (instance_exists(plant) && plant.plant_type != "coffee" && plant.hp > 0) {
+					if (display_target == noone || plant.hp > display_target.hp) {
+						display_target = plant;
+					}
+				}
+			}
+		}
+		if (display_target != noone && display_target != id) {
+			exit;
+		}
+	}
 	draw_set_alpha(0.5)
     // 血条位置（在植物上方）
     var bar_x = x;

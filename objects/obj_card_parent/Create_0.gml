@@ -34,6 +34,7 @@ awake_buff_timer = 0
 grid_col = -1
 grid_row = -1
 depth_value = 0
+depth_offset = 0
 depth_group = 0  // 0=前景, 1=中景, 2=背景
 
 // ========== 动画控制 ==========

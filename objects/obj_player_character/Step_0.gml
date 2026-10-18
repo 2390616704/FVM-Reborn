@@ -48,7 +48,7 @@ if is_placed{
 		break
 	}
 	if(have_platform==false){
-		depth = calculate_plant_depth(grid_col, grid_row, "normal")
+		depth = calculate_plant_depth(grid_col, grid_row, "normal") - depth_offset * 0.001
 	}
 }
 else{
