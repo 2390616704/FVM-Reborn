@@ -24,9 +24,9 @@ function slots_init(){
 	])
 	
 	register_card("mouse_clip",obj_mouse_clip,[
-	    {"shape":0, "sprite":spr_mouse_clip, "cost":25, "cooldown":30*60, "description":"老鼠夹子：准备完成后，接触地面敌人爆炸","plant_type":"normal","feature_type":"dwarf","target_card":"none"},
-	    {"shape":1, "sprite":spr_mouse_clip_1, "cost":25, "cooldown":30*60, "description":"多用老鼠夹子：准备完成后，接触敌人爆炸","plant_type":"normal","feature_type":"dwarf","target_card":"none"},
-		{"shape":2, "sprite":spr_mouse_clip_2, "cost":25, "cooldown":30*60, "description":"黑猫鼠夹：准备完成后，接触敌人产生3*4爆炸","plant_type":"normal","feature_type":"dwarf","target_card":"none"}
+	    {"shape":0, "sprite":spr_mouse_clip, "cost":25, "cooldown":7*60, "description":"老鼠夹子：准备完成后，接触地面敌人爆炸","plant_type":"normal","feature_type":"dwarf","target_card":"none"},
+	    {"shape":1, "sprite":spr_mouse_clip_1, "cost":25, "cooldown":7*60, "description":"多用老鼠夹子：准备完成后，接触敌人爆炸","plant_type":"normal","feature_type":"dwarf","target_card":"none"},
+		{"shape":2, "sprite":spr_mouse_clip_2, "cost":25, "cooldown":7*60, "description":"黑猫鼠夹：准备完成后，接触敌人产生3*4爆炸","plant_type":"normal","feature_type":"dwarf","target_card":"none"}
 	])
 	register_card("coke_bomb",obj_coke_bomb,[
 	    {"shape":0, "sprite":spr_coke_bomb, "cost":150, "cooldown":50*60, "description":"可乐炸弹：3*4范围爆炸","plant_type":"normal","feature_type":"normal","target_card":"none"},
