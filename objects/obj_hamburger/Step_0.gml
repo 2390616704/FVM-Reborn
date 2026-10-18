@@ -12,7 +12,7 @@ if is_slowdown{
 }
 
 var has_enemy = false
-var _range = 200
+var _range = 2*global.grid_cell_size_x + 20
 if shape >= 1{
 	_range = 3.5*global.grid_cell_size_x + 20
 }
@@ -33,18 +33,20 @@ if state == CARD_STATE.RELAX{
 	target_enemy = []
 	var eat_anim = 12
 	if shape >= 1 eat_anim = 10
+	var relax_duration = quick_digest ? quick_digest_duration : cycle
 	relax_timer ++
-	if relax_timer < cycle - 10 * current_flash_speed{
+	if relax_timer < relax_duration - 10 * current_flash_speed{
 		image_index = floor(relax_timer/current_flash_speed) mod eat_anim
 	}
 	else{
 		image_index = floor(relax_timer/current_flash_speed) mod 10 + eat_anim
 	}
-	if relax_timer >= cycle{
+	if relax_timer >= relax_duration{
 		state = CARD_STATE.IDLE
 		relax_timer = 0
 		timer = 0
 		attack_timer = 0
+		quick_digest = false
 		sprite_index = spr_hamburger
 		if shape == 1 sprite_index = spr_hamburger_1
 		if shape == 2 sprite_index = spr_hamburger_2
@@ -60,6 +62,13 @@ if state != CARD_STATE.SLEEP && state != CARD_STATE.RELAX{
 			state = CARD_STATE.ATTACK;
 	    }  else {
 			if enemy_hitted{
+				var used_quick_digest = false
+				if (instance_exists(parent_card_slot) && parent_card_slot.card_id == "hamburger" && parent_card_slot.charges > 0) {
+					if (parent_card_slot.consume_charge()) {
+						used_quick_digest = true
+					}
+				}
+				quick_digest = used_quick_digest
 				relax_timer = 0
 		        state = CARD_STATE.RELAX;
 				sprite_index = spr_hamburger_eat

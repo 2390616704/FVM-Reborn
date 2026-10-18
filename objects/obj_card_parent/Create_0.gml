@@ -54,4 +54,5 @@ awake_anim = 0
 // ========== 注册信息 ==========
 plant_id = ""  // 植物唯一标识符
 current_level = 0  // 当前等级
+parent_card_slot = noone
 

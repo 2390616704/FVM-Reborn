@@ -25,4 +25,6 @@ plant_type = "normal"
 is_slowdown = false
 target_instance = noone
 large_chocolate_count = 0
+large_chocolate_interval = 3
+force_butter = false
 target_type = "throw"

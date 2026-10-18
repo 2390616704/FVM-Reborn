@@ -29,3 +29,5 @@ target_enemy = []
 enemy_encounted = false
 enemy_hitted = false
 relax_timer = 0
+quick_digest = false
+quick_digest_duration = 30

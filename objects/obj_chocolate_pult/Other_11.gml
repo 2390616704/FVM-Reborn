@@ -1,4 +1,6 @@
 // 用户事件1 - 发射子弹
+var butter_shot = force_butter
+force_butter = false
 large_chocolate_count ++
 var inst = instance_create_depth(x-20, y-125, depth-500, obj_chocolatepult_bullet)
 audio_play_sound(snd_throw, 0, 0)
@@ -50,7 +52,7 @@ if (target_instance != noone && instance_exists(target_instance)) {
 inst.hit_enemy = false
 inst.splashed = false
 inst.shape = shape
-if large_chocolate_count == 3{
+if (butter_shot || large_chocolate_count >= large_chocolate_interval) {
 	inst.sprite_index = spr_chocolatepult_bullet_large
 	inst.damage *= 2
 	large_chocolate_count = 0

@@ -22,6 +22,7 @@ instance_create_depth(room_width-200,room_height-25,0,obj_level_progress_bar)
 
 global.selected_slot = noone;
 global.current_seed = noone;
+global.default_max_charges = 3
 global.grid_offset_x = 695
 global.grid_cell_size_x = 107
 global.grid_cell_size_y = 116

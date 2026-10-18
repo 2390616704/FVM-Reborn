@@ -49,7 +49,8 @@ if (target_instance != noone && instance_exists(target_instance)) {
 inst.hit_enemy = false
 inst.splashed = false
 inst.shape = shape
-if stinky_tofu_timer >= stinky_tofu_cooldown{
+if (force_stinky_tofu || stinky_tofu_timer >= stinky_tofu_cooldown) {
 	inst.sprite_index = spr_stinkytofupult_bullet_poison
 	stinky_tofu_timer = 0
+	force_stinky_tofu = false
 }

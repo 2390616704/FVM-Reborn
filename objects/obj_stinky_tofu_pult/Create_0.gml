@@ -24,6 +24,7 @@ flash_speed = 5
 plant_type = "normal"
 is_slowdown = false
 target_instance = noone
+force_stinky_tofu = false
 if shape < 2{
 	stinky_tofu_cooldown = 480
 	stinky_tofu_timer = 480

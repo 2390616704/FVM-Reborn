@@ -6,19 +6,30 @@ if is_slowdown{
 	current_flash_speed *= 2
 }
 if timer == current_flash_speed - 1{
-	if state == CARD_STATE.ATTACK && large_chocolate_count == 2{
+	if state == CARD_STATE.ATTACK && large_chocolate_count == large_chocolate_interval - 1{
 		image_index -= attack_anim
 	}
 }
 event_inherited(); 
 if timer == 0{
-	if state == CARD_STATE.ATTACK && large_chocolate_count == 2{
+	if state == CARD_STATE.ATTACK && large_chocolate_count == large_chocolate_interval - 1{
 		image_index += attack_anim
 	}
 }
 
 if is_frozen || state == CARD_STATE.SLEEP{
 	exit
+}
+
+if (global.selected_slot == noone && !(instance_exists(obj_shovel_slot) && obj_shovel_slot.is_selected)) {
+	if (mouse_check_button_pressed(mb_left) && mouse_y > 160 && point_in_rectangle(mouse_x, mouse_y, x-130, y-190, x+55, y+8)) {
+		if (!force_butter && instance_exists(parent_card_slot) && parent_card_slot.card_id == "chocolate_pult" && parent_card_slot.charges > 0) {
+			if (parent_card_slot.consume_charge()) {
+				force_butter = true
+				audio_play_sound(snd_button,0,0)
+			}
+		}
+	}
 }
 
 // 检测自身右方是否有敌人，并获取最近的敌人

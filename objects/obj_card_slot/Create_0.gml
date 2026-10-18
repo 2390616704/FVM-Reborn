@@ -8,7 +8,7 @@ cost = 50
 current_cost = 0
 night = false
 cooldown_timer = 30000
-max_charges = 3
+max_charges = global.default_max_charges
 charges = 1
 reloading = false
 startup_reload_pending = true
@@ -223,6 +223,7 @@ function place_card_at(col, row, shift_x, shift_y, card_data, plant_obj, cost, d
 	if (platform != noone && variable_instance_exists(platform, "state") && platform.state == "moving") {
 		new_plant.platform_grid_lock = true;
 	}
+	new_plant.parent_card_slot = id;
 	var depth_value = calculate_plant_depth(col, row, new_plant.plant_type);
 	card_created(new_plant, col, row);
 	new_plant.depth = depth_value - new_plant.depth_offset * 0.001;
