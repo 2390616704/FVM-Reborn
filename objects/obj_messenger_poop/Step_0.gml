@@ -35,10 +35,7 @@ else if state == "idle"{
 	if timer == 180{
 		with obj_card_parent{
 			if((abs(grid_col - other.grid_col) + abs(grid_row - other.grid_row)) <= 1 && plant_id != "player" &&  plant_type != "coffee"){
-				if hp >= max_hp{
-					obj_task_manager.card_loss++
-				}
-				instance_destroy()
+				plant_apply_boss_lethal(id)
 			}
 		}
 		hp = 0

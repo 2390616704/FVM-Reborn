@@ -67,10 +67,7 @@ switch state{
 		if timer == 6*5-1{
 			with obj_card_parent{
 				if grid_row == other.grid_row && grid_col == other.grid_col && plant_id != "player" && plant_type != "coffee" && plant_id != "cotton_candy"{
-					instance_destroy()
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
+					plant_apply_boss_lethal(id)
 				}
 			}
 		}
@@ -109,10 +106,7 @@ switch state{
 		if timer == 6*5{
 			with obj_card_parent{
 				if grid_col >= other.grid_col - 2 && grid_col <= other.grid_col && abs(grid_row-other.grid_row) <= 1 && plant_id != "player" && plant_type != "coffee" && plant_id != "cotton_candy"{
-					instance_destroy()
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
+					plant_apply_boss_lethal(id)
 				}
 			}
 		}
@@ -238,10 +232,7 @@ switch state{
 							with obj_card_parent{
 								if grid_row == i && grid_col == j && !invincible
 								&& plant_type != "coffee" && plant_id != "player" && plant_id != "cotton_candy"{
-									if hp >= max_hp{
-										obj_task_manager.card_loss++
-									}
-									instance_destroy()
+									plant_apply_boss_lethal(id)
 								}
 							}
 						}
@@ -305,10 +296,7 @@ switch state{
 							with obj_card_parent{
 								if grid_row == i && grid_col == j && !invincible
 								&& plant_type != "coffee" && plant_id != "player" && plant_id != "cotton_candy"{
-									if hp >= max_hp{
-										obj_task_manager.card_loss++
-									}
-									instance_destroy()
+									plant_apply_boss_lethal(id)
 								}
 							}
 						}

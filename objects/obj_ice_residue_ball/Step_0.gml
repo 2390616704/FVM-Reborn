@@ -60,10 +60,7 @@ with (obj_card_parent) {
     // 检查是否在攻击范围内
     if (is_in_front && zombie_grid.row == grid_row && !invincible && plant_type != "coffee") {
 		if plant_id != "player"{
-			if hp >= max_hp{
-				obj_task_manager.card_loss++
-			}
-	        instance_destroy()
+	        plant_apply_boss_lethal(id)
 		}
 		else{
 			hp = 10

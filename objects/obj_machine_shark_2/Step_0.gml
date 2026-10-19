@@ -224,10 +224,7 @@ switch state{
 		if (timer >=18 * 5 && timer <= 70 + 18 * 5) || (timer >=70 + 30 * 5 && timer <= 140 + 30 * 5) || (timer >=140 + 42 * 5 && timer <= 210 + 42 * 5){
 			with obj_card_parent{
 				if grid_col == other.grid_col && grid_row == other.grid_row && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-					instance_destroy()
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
+					plant_apply_boss_lethal(id)
 				}
 			}
 		}

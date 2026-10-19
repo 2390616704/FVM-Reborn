@@ -9,3 +9,7 @@ attack_anim = 0;
 plant_type = "normal"
 flash_speed = 6
 lethal_blocks = 8
+lethal_blocks_max = 8
+lethal_restore_full = false
+lethal_guard = true
+lethal_guard_depth = 3

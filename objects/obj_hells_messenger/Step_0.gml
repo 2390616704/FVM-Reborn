@@ -184,10 +184,7 @@ switch state{
 			instance_create_depth(x+90,y,-800,obj_messenger_poop)
 			with obj_card_parent{
 				if(grid_col == other.t_pos.col && grid_row == other.t_pos.row && plant_id != "player" && plant_type != "coffee"){
-					if hp >= max_hp{
-						obj_task_manager.card_loss ++
-					}
-					instance_destroy()
+					plant_apply_boss_lethal(id)
 				}
 			}
 		}
@@ -248,10 +245,7 @@ switch state{
 						inst.y_move = (other.y-75-y)/120
 						inst.sprite_index = sprite_index
 						inst.image_index = image_index
-						if hp >= max_hp{
-							obj_task_manager.card_loss++
-						}
-						instance_destroy()
+						plant_apply_boss_lethal(id)
 					}
 				}
 				ds_list_delete(avaliable_pos,pos_choose)

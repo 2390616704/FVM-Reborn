@@ -23,12 +23,9 @@ if timer == 57*5+2 || timer == 87*5+2 || timer == 120*5+2 || timer == 154*5+2{
 	with obj_card_parent{
 		if grid_col == erase_grid.col && grid_row == erase_grid.row &&
 		plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-			if hp >= max_hp{
-				obj_task_manager.card_loss++
-			}
 			var effect_inst = instance_create_depth(x,y-30,-800,obj_coke_bomb_explode)
 			effect_inst.sprite_index = spr_iron_man_mouse_laser
-			instance_destroy()
+			plant_apply_boss_lethal(id)
 		}
 	}
 	jump_times++

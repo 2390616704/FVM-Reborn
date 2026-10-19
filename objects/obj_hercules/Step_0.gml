@@ -40,10 +40,7 @@ switch state{
 		with obj_card_parent{
 			if grid_col == other.grid_col && grid_row == other.grid_row &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				if hp >= max_hp{
-					obj_task_manager.card_loss++
-				}
-				instance_destroy()
+				plant_apply_boss_lethal(id)
 			}
 		}
 		if timer >= wait_time{
@@ -243,8 +240,6 @@ grid_col = zombie_grid.col;
 grid_row = zombie_grid.row;
 
 if x < global.grid_offset_x-150 && hp > 0{
-	global.is_paused = true
-	global.game_over = true
-	instance_create_depth(room_width/2,room_height/2,-3001,obj_game_over)
-	audio_play_sound(snd_lose,0,0)
+	enemy_enter_house()
+	exit
 }

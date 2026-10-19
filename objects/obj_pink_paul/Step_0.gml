@@ -75,10 +75,7 @@ switch state{
 		if timer == 1{
 			with obj_card_parent{
 				if grid_row == other.grid_row && grid_col == other.grid_col && plant_id != "player" && plant_type != "coffee"{
-					instance_destroy()
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
+					plant_apply_boss_lethal(id)
 				}
 			}
 		}
@@ -145,10 +142,7 @@ switch state{
 			with obj_card_parent{
 				if abs(grid_col-other.grid_col)+abs(grid_row-other.grid_row) <= 1{
 					if plant_id != "player" && plant_type != "coffee" && plant_type != "lilypad"{
-						instance_destroy()
-						if hp >= max_hp{
-							obj_task_manager.card_loss++
-						}
+						plant_apply_boss_lethal(id)
 					}
 				}
 			}

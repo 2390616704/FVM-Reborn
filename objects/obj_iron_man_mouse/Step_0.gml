@@ -95,10 +95,7 @@ switch state{
 				with obj_card_parent{
 					if grid_col == 6 && grid_row == (6 - other.jump_times) &&
 					plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-						if hp >= max_hp{
-							obj_task_manager.card_loss++
-						}
-						instance_destroy()
+						plant_apply_boss_lethal(id)
 					}
 				}
 				var effect_pos = get_world_position_from_grid(6,6-jump_times)
@@ -113,10 +110,7 @@ switch state{
 				with obj_card_parent{
 					if grid_col == 3 && grid_row == (other.jump_times) &&
 					plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-						if hp >= max_hp{
-							obj_task_manager.card_loss++
-						}
-						instance_destroy()
+						plant_apply_boss_lethal(id)
 					}
 				}
 				var effect_pos = get_world_position_from_grid(3,jump_times)

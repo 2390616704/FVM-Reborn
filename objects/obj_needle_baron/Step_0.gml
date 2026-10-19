@@ -135,10 +135,7 @@ switch state{
 					var inst = instance_create_depth(other.x,other.y,-800,obj_card_heal_effect)
 					inst.sprite_index = spr_mouse_heal_effect
 					if plant_id != "player"{
-						if hp >= max_hp{
-							obj_task_manager.card_loss++
-						}
-						instance_destroy()
+						plant_apply_boss_lethal(id)
 					}
 					else{
 						hp = 10

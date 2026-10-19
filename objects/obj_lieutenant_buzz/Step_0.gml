@@ -242,10 +242,7 @@ switch state{
 			if timer mod 23 == 0{
 				with obj_card_parent{
 					if grid_row == other.grid_row && grid_col == 5 - other.jump_times && !invincible && plant_id != "player" && plant_type != "coffee" && plant_id != "cotton_candy"{
-						if hp >= max_hp{
-							obj_task_manager.card_loss ++
-						}
-						instance_destroy()
+						plant_apply_boss_lethal(id)
 					}
 				}
 				var effect_pos = get_world_position_from_grid(6-jump_times,grid_row)

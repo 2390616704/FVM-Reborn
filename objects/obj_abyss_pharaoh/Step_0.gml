@@ -104,10 +104,7 @@ switch state{
 			var erase_row = coord[1]
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
-					instance_destroy()
+					plant_apply_boss_lethal(id)
 				}
 			}
 			jump_times++
@@ -174,10 +171,7 @@ switch state{
 			var erase_row = coord[1]
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
-					instance_destroy()
+					plant_apply_boss_lethal(id)
 				}
 			}
 			jump_times++
@@ -217,10 +211,7 @@ switch state{
 			var hole_pos = get_world_position_from_grid(hole_col,hole_row)
 			with obj_card_parent{
 				if grid_row == hole_row && grid_col == hole_col && plant_id != "player" && !invincible{
-					if hp >= max_hp{
-						obj_task_manager.card_loss++
-					}
-					instance_destroy()
+					plant_apply_boss_lethal(id)
 				}
 			}
 			instance_create_depth(hole_pos.x,hole_pos.y,-5,obj_pharaoh_hole)

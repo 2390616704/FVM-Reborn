@@ -299,15 +299,17 @@ switch(state) {
         attack_timer++;
         if (attack_timer >= current_atk_cycle) {
             // 对目标植物造成伤害
-            with (target_plant) {
-				if !invincible{
-					hp -= other.atk;
-				}
-                event_user(2)
-                // 播放受击效果
-                if (instance_exists(other)) {
-                    //instance_create_depth(x, y, depth - 1, obj_plant_hit);
-                }
+            if (global.overlap_planting) {
+                plant_apply_overlap_attack(target_plant, atk)
+            }
+            else {
+                with (target_plant) {
+					plant_apply_normal_damage(id, other.atk)
+	                // 播放受击效果
+	                if (instance_exists(other)) {
+	                    //instance_create_depth(x, y, depth - 1, obj_plant_hit);
+	                }
+	            }
             }
 			
             //播放音效
@@ -362,10 +364,8 @@ var base_depth = -10 - (zombie_grid.row * 45) - (9 * 5);
 depth = base_depth; // 僵尸比植物稍微靠后一点（在护罩外侧和咖啡豆之间）
 
 if x < global.grid_offset_x-150 && hp > 0 && not place_meeting(x,y,obj_cat) && array_get_index(block_mouse_id_list,mouse_id) == -1{
-	global.is_paused = true
-	global.game_over = true
-	instance_create_depth(room_width/2,room_height/2,-3001,obj_game_over)
-	audio_play_sound(snd_lose,0,0)
+	enemy_enter_house()
+	exit
 }
 
 //破冰动画

@@ -32,11 +32,7 @@ if state == "appear"{
 	with obj_card_parent{
 		if grid_col == other.grid_col && grid_row == other.grid_row &&
 		plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy" && plant_id != "soda_bubble"{
-			if hp >= max_hp{
-				obj_task_manager.card_loss++
-			}
-			other.hp = 0
-			instance_destroy()
+			plant_apply_boss_lethal(id)
 		}
 	}
 }

@@ -23,3 +23,7 @@ plant_type = "normal"
 is_slowdown = false
 attack_timer = 0
 lethal_blocks = 8
+lethal_blocks_max = 8
+lethal_restore_full = false
+lethal_guard = true
+lethal_guard_depth = 3

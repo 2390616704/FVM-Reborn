@@ -1,3 +1,15 @@
+function enemy_enter_house(){
+	if (global.flame >= 2000){
+		global.flame -= 2000
+		hp = 0
+		return
+	}
+	global.is_paused = true
+	global.game_over = true
+	instance_create_depth(room_width/2,room_height/2,-3001,obj_game_over)
+	audio_play_sound(snd_lose,0,0)
+}
+
 function enemy_init(){
 	enemy_registry_init()
 	register_enemy("normal_mouse",{"name":"平民鼠","_obj":obj_normal_mouse,"hp":100,"shield":0,"description":"平民鼠：很普通的老鼠，无特殊能力","speed":0.30,"atk":10,"cycle":36,"range":90,"ash_proof":false,"spr":spr_normal_mouse,"feature":"land"})

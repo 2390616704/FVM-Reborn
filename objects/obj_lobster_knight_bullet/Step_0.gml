@@ -9,10 +9,7 @@ var target_pos = get_world_position_from_grid(target_col,target_row)
 if y >= target_pos.y + 15{
 	with obj_card_parent{
 		if grid_row == other.target_row && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-			instance_destroy()
-			if hp >= max_hp{
-				obj_task_manager.card_loss++
-			}
+			plant_apply_boss_lethal(id)
 		}
 	}
 	var inst = instance_create_depth(target_pos.x,target_pos.y,-800,obj_coke_bomb_explode)
