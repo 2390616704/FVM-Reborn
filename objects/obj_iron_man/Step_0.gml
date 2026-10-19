@@ -25,7 +25,7 @@ if timer == 57*5+2 || timer == 87*5+2 || timer == 120*5+2 || timer == 154*5+2{
 		plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
 			var effect_inst = instance_create_depth(x,y-30,-800,obj_coke_bomb_explode)
 			effect_inst.sprite_index = spr_iron_man_mouse_laser
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 	jump_times++

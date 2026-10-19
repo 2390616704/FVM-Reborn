@@ -9,7 +9,7 @@ var target_pos = get_world_position_from_grid(target_col,target_row)
 if y >= target_pos.y + 15{
 	with obj_card_parent{
 		if grid_row == other.target_row && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 	var inst = instance_create_depth(target_pos.x,target_pos.y,-800,obj_coke_bomb_explode)

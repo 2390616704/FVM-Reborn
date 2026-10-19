@@ -24,7 +24,7 @@ if state == "appear"{
 		with obj_card_parent{
 			if abs(grid_col - other.grid_col) <= 1 && abs(grid_row - other.grid_row) <= 1 &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				plant_apply_boss_lethal(id)
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 		

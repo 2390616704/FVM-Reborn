@@ -30,7 +30,7 @@ if state == "appear"{
 		var erase_col = pos_list[floor(timer/5)].col
 		with obj_card_parent{
 			if grid_col == erase_col && grid_row == erase_row && plant_id != "player" && plant_type != "coffee"{
-				plant_apply_boss_lethal(id)
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 	}

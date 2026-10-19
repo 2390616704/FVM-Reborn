@@ -73,7 +73,7 @@ switch state{
 			instance_create_depth(x-150,y-120,-800,obj_rumble_laser)
 			with obj_card_parent{
 				if grid_row == other.grid_row &&plant_id != "player" && plant_type !="lilypad"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 			
@@ -164,7 +164,7 @@ switch state{
 				if grid_row <= other.target_pos.row && grid_row >= other.target_pos.row-1
 				&& grid_col <= other.target_pos.col && grid_col >= other.target_pos.col-1
 				&& !invincible &&plant_id != "player"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			
 			}

@@ -69,7 +69,7 @@ switch state{
 			var erase_row = grid_row
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 			cave = instance_create_depth(cave_pos.x+8,cave_pos.y+15,depth,obj_mario_cave)
@@ -87,7 +87,7 @@ switch state{
 			var erase_row = pipeline_row
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 			pipeline = instance_create_depth(pipeline_pos.x+8,pipeline_pos.y+15,depth,obj_mario_pipeline)
@@ -122,7 +122,7 @@ switch state{
 			var erase_row = grid_row
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}

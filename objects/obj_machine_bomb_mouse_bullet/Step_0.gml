@@ -7,7 +7,7 @@ y += 5
 if y >= target_pos.y{
 	with obj_card_parent{
 		if (abs(grid_col - other.target_col) <= 0 && grid_row == other.target_row) &&plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 	var effect = instance_create_depth(x,y-25,-200,obj_coke_bomb_explode)

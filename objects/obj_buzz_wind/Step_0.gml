@@ -30,7 +30,7 @@ if state == "idle"{
 	
 		with obj_card_parent{
 			if plant_id != "player" && plant_type != "coffee" && plant_id != "cotton_candy" && !invincible && grid_col == erase_col && grid_row == erase_row{
-				plant_apply_boss_lethal(id)
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 	}

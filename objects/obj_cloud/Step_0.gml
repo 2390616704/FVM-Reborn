@@ -29,7 +29,7 @@ if is_hole && col > 1{
 			var inst = instance_create_depth(x,y,depth,obj_drop_death_effect)
 			inst.sprite_index = sprite_index
 			inst.image_index = image_index
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 	with obj_enemy_parent{

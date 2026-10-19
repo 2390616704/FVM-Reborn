@@ -106,7 +106,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col == other.grid_col-2 && grid_row == other.grid_row
 				&& plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -114,7 +114,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col == other.grid_col-3 && grid_row == other.grid_row
 				&& plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -122,7 +122,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col == other.grid_col-4 && grid_row == other.grid_row
 				&& plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -130,7 +130,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col == other.grid_col-5 && grid_row == other.grid_row
 				&& plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -232,7 +232,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col == other.grid_col && grid_row >= other.grid_row && grid_row <= other.grid_row + 2
 				&& plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}

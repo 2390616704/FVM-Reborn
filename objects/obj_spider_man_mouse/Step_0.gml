@@ -190,7 +190,7 @@ switch state{
 					var effect_inst = instance_create_depth(x,y,-800,obj_card_stolen)
 					effect_inst.sprite_index = sprite_index
 					effect_inst.image_index = image_index
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 			skill_timer = 0

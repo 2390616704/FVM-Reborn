@@ -23,7 +23,7 @@ if x >= target_x - 10 && x <= target_x + 10{
 	with obj_card_parent{
 		if abs(grid_col - erase_col) <= 1 && abs(grid_row - erase_row) <= 1 &&
 		plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy" && plant_id != "soda_bubble"{
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 	

@@ -19,7 +19,7 @@ if timer == 13*5-1{
 	with obj_card_parent{
 		if grid_col == other.grid_col && grid_row == other.grid_row &&
 		plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 }

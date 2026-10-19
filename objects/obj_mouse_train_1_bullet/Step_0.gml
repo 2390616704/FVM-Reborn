@@ -9,7 +9,7 @@ with obj_card_parent{
 		inst.sprite_index = spr_mouse_train_1_bullet_effect
 		instance_destroy(other)
 		if plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 }

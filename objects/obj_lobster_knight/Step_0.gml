@@ -134,7 +134,7 @@ switch state{
 				var t_wpos = get_world_position_from_grid(t_pos.col,t_pos.row)
 				with obj_card_parent{
 					if plant_id == "soda_bubble" && grid_row == t_pos.row && grid_col == t_pos.col{
-						plant_apply_boss_lethal(id)
+						plant_apply_boss_lethal(id, other)
 						var inst = instance_create_depth(x,y,-800,obj_coke_bomb_explode)
 						inst.sprite_index = spr_lobster_knight_bubble_destroy
 					}
@@ -182,7 +182,7 @@ switch state{
 				if grid_col == other.grid_col && grid_row == other.grid_row && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble" && !invincible{
 					var effect_inst = instance_create_depth(x,y-30,-800,obj_coke_bomb_explode)
 					effect_inst.sprite_index = spr_lobster_knight_destroy_effect
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}

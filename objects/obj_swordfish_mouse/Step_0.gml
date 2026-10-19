@@ -51,7 +51,7 @@ if hp > 0 && state != ENEMY_STATE.DEAD{
 			if grid_col == other.grid_col && grid_row == other.grid_row &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy" && plant_id != "soda_bubble"{
 				if array_get_index(other.block_list,plant_id)  == -1{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 				else{
 					hp -= 300

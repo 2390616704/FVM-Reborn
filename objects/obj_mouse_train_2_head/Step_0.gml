@@ -240,7 +240,7 @@ switch state{
 					with obj_card_parent{
 						if grid_col == (i*2+1) && grid_row != 0 && grid_row != global.grid_rows-1 &&
 						plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-							plant_apply_boss_lethal(id)
+							plant_apply_boss_lethal(id, other)
 						}
 					}
 				}

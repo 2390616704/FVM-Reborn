@@ -63,7 +63,7 @@ switch state{
 		if timer == 1{
 			with obj_card_parent{
 				if grid_row == other.grid_row && grid_col == other.grid_col && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -110,7 +110,7 @@ switch state{
 		if timer == 20*jump_times + 1 && target_col < 4{
 			with obj_card_parent{
 				if grid_col == target_col && grid_row == other.grid_row && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 			jump_times++

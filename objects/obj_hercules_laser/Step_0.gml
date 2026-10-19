@@ -37,6 +37,6 @@ if state == "start"{
 with obj_card_parent{
 	if grid_col == other.target_col && grid_row == other.target_row && plant_type != "lilypad" &&
 	plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-		plant_apply_boss_lethal(id)
+		plant_apply_boss_lethal(id, other)
 	}
 }

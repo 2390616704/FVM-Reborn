@@ -35,7 +35,7 @@ if state == "appear"{
 		state = "anim"
 		with obj_card_parent{
 			if plant_id != "player" && plant_id != "soda_bubble" && plant_type != "coffee" && grid_row == other.grid_row && grid_col == other.grid_col{
-				plant_apply_boss_lethal(id)
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 	}

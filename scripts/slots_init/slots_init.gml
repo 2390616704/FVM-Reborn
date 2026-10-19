@@ -62,8 +62,8 @@ function slots_init(){
 		{"shape":2, "sprite":spr_coffee_pot_icon_2, "cost":75, "cooldown":7*60, "description":"红温咖啡喷壶：穿透攻击一行敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_coffee_pot_2}
 	]);
 	register_card("chocolate_bread",obj_chocolate_bread,[
-		{"shape":0,"sprite":spr_chocolate_bread,"cost":125,"cooldown":30*60,"description":"巧克力面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列）","plant_type":"normal","feature_type":"normal","target_card":"none"},
-		{"shape":1,"sprite":spr_chocolate_bread_icon_1,"cost":125,"cooldown":30*60,"description":"德芙面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列）","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_bread_1}
+		{"shape":0,"sprite":spr_chocolate_bread,"cost":125,"cooldown":30*60,"description":"巧克力面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列），成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none"},
+		{"shape":1,"sprite":spr_chocolate_bread_icon_1,"cost":125,"cooldown":30*60,"description":"德芙面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列），成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_bread_1}
 	])
 	register_card("water_tea_cup",obj_water_tea_cup,[
 		{"shape":0,"sprite":spr_water_tea_cup,"cost":0,"cooldown":7*60,"description":"水上茶杯：在水上攻击三格内敌人，白天睡觉","plant_type":"normal","feature_type":"water","target_card":"none"}
@@ -256,9 +256,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_dragon_fruit_2_icon, "cost":375, "cooldown":60*60, "description":"九天皓日火龙果：灼烧5*5范围敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_dragon_fruit_2}
 	])
 	register_card("pineapple_explosive_bread",obj_pineapple_explosive_bread,[
-	    {"shape":0, "sprite":spr_pineapple_explosive_bread_0_0, "cost":150, "cooldown":50*60, "description":"菠萝爆炸面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列）","plant_type":"normal","feature_type":"normal","target_card":"none"},
-	    {"shape":1, "sprite":spr_pineapple_explosive_bread_1_icon, "cost":150, "cooldown":50*60, "description":"独角菠萝面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列）","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_1_0},
-		{"shape":2, "sprite":spr_pineapple_explosive_bread_2_icon, "cost":150, "cooldown":50*60, "description":"皇冠菠萝面包：死亡后产生5*5范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列）","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_2_0}
+	    {"shape":0, "sprite":spr_pineapple_explosive_bread_0_0, "cost":150, "cooldown":50*60, "description":"菠萝爆炸面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列），成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_pineapple_explosive_bread_1_icon, "cost":150, "cooldown":50*60, "description":"独角菠萝面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列），成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_1_0},
+		{"shape":2, "sprite":spr_pineapple_explosive_bread_2_icon, "cost":150, "cooldown":50*60, "description":"皇冠菠萝面包：死亡后产生5*5范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为身后3×3承担伤害（不含自身列），成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_2_0}
 	])
 	register_card("ice_cream",obj_ice_cream,[
 	    {"shape":0, "sprite":spr_ice_cream_icon, "cost":100, "cooldown":60*60, "description":"冰激凌：本格卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"},

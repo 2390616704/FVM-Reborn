@@ -95,7 +95,7 @@ switch state{
 				with obj_card_parent{
 					if grid_col == 6 && grid_row == (6 - other.jump_times) &&
 					plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-						plant_apply_boss_lethal(id)
+						plant_apply_boss_lethal(id, other)
 					}
 				}
 				var effect_pos = get_world_position_from_grid(6,6-jump_times)
@@ -110,7 +110,7 @@ switch state{
 				with obj_card_parent{
 					if grid_col == 3 && grid_row == (other.jump_times) &&
 					plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-						plant_apply_boss_lethal(id)
+						plant_apply_boss_lethal(id, other)
 					}
 				}
 				var effect_pos = get_world_position_from_grid(3,jump_times)

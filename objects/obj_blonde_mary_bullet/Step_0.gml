@@ -14,7 +14,7 @@ if timer mod 9 == 0{
 	var erase_row = erase_pos[floor(timer/9)].row
 	with obj_card_parent{
 		if grid_col == erase_col && grid_row == erase_row && plant_id != "player" && plant_type != "coffee" && plant_id != "soda_bubble"{
-			plant_apply_boss_lethal(id)
+			plant_apply_boss_lethal(id, other)
 		}
 	}
 }

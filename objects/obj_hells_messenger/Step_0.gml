@@ -184,7 +184,7 @@ switch state{
 			instance_create_depth(x+90,y,-800,obj_messenger_poop)
 			with obj_card_parent{
 				if(grid_col == other.t_pos.col && grid_row == other.t_pos.row && plant_id != "player" && plant_type != "coffee"){
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -245,7 +245,7 @@ switch state{
 						inst.y_move = (other.y-75-y)/120
 						inst.sprite_index = sprite_index
 						inst.image_index = image_index
-						plant_apply_boss_lethal(id)
+						plant_apply_boss_lethal(id, other)
 					}
 				}
 				ds_list_delete(avaliable_pos,pos_choose)

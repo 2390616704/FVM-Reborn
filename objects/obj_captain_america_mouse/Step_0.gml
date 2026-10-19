@@ -265,7 +265,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col <= other.grid_col-1 && grid_col >= other.grid_col-2 && grid_row == other.grid_row &&
 				plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 			var effect = instance_create_depth(x-140,y-180,-800,obj_coke_bomb_explode)

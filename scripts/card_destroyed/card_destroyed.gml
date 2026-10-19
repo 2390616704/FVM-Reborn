@@ -80,15 +80,27 @@ function plant_apply_overlap_attack(target, damage) {
     }
 }
 
-function plant_apply_boss_lethal(plant) {
+function plant_apply_boss_lethal(plant, attacker) {
     if (!instance_exists(plant)) return;
     if (variable_instance_exists(plant, "invincible") && plant.invincible) return;
 
     var guard = plant_find_guard(plant, true);
-    if (guard != noone && plant_consume_lethal_block(guard)) return;
-    if (plant_consume_lethal_block(plant)) return;
+    if (guard != noone && plant_consume_lethal_block(guard)) {
+        if (guard.hp > 0) plant_push_attacker(attacker);
+        return;
+    }
+    if (plant_consume_lethal_block(plant)) {
+        if (plant.hp > 0) plant_push_attacker(attacker);
+        return;
+    }
 
     plant.hp -= 9999999;
+}
+
+function plant_push_attacker(attacker) {
+    if (!instance_exists(attacker)) return;
+    attacker.x += global.grid_cell_size_x;
+    if (variable_instance_exists(attacker, "grid_col")) attacker.grid_col += 1;
 }
 
 /// @function plant_destroyed(plant_inst)

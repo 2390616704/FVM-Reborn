@@ -10,7 +10,7 @@ function skill_init(){
 	register_card_skill("ice_long_bao","cycle",[1.3*60,1.25*60,1.2*60,1.15*60,1.1*60,1.05*60,1*60,0.95*60,0.9*60])
 	register_card_skill("goblet_lamp","flame_produce",[25,27,29,31,34,37,40,44,48])
 	register_card_skill("coffee_cup","cycle",[1.3*60,1.25*60,1.2*60,1.15*60,1.1*60,1.05*60,1*60,0.95*60,0.9*60])
-	register_card_skill("salad_pult","cycle",[3*60,2.9*60,2.8*60,2.7*60,2.6*60,2.4*60,2.2*60,2*60,1.8*60])
+	register_card_skill("salad_pult","cycle",[1*60,1*60,1*60,1*60,1*60,1*60,1*60,1*60,1*60])
 	register_card_skill("coffee_pot","cycle",[1.3*60,1.25*60,1.2*60,1.15*60,1.1*60,1.05*60,1*60,0.95*60,0.9*60])
 	register_card_skill("chocolate_bread","cooldown",[30*60,28*60,26*60,24*60,22*60,20*60,18*60,15*60,12*60])
 	register_card_skill("water_tea_cup","cycle",[1.3*60,1.25*60,1.2*60,1.15*60,1.1*60,1.05*60,1*60,0.95*60,0.9*60])

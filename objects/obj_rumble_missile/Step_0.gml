@@ -19,7 +19,7 @@ if state == "drop"{
 	if y >= target_pos.y{
 		with obj_card_parent{
 			if grid_col == other.target_col &&grid_row == other.target_row &&plant_id != "player"{
-				plant_apply_boss_lethal(id)
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 		instance_create_depth(x,y,-200,obj_arno_bullet_effect)

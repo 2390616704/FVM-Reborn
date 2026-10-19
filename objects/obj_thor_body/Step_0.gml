@@ -53,7 +53,7 @@ switch state{
 		with obj_card_parent{
 			if grid_col == other.grid_col && grid_row == other.grid_row &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				plant_apply_boss_lethal(id)
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 		if timer >= wait_time{
@@ -125,7 +125,7 @@ switch state{
 			with obj_card_parent{
 				if grid_row == other.grid_row - 1 && grid_col <= other.grid_col &&
 				plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
@@ -154,7 +154,7 @@ switch state{
 			with obj_card_parent{
 				if grid_col== other.grid_col &&
 				plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}

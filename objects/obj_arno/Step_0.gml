@@ -131,7 +131,7 @@ switch state{
 			var erase_row = grid_row
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
-					plant_apply_boss_lethal(id)
+					plant_apply_boss_lethal(id, other)
 				}
 			}
 		}
