@@ -132,7 +132,7 @@ function consume_charge(){
 }
 
 function finish_direct_placement(){
-	if (charges <= 0 || global.flame < current_cost) {
+	if (global.flame < current_cost || (charges <= 0 && (!global.pre_place_on_cooldown || !reloading))) {
 		deselect_slot_after_place();
 	}
 }

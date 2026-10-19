@@ -245,7 +245,6 @@ if (is_selected) {
             }
             else if (cooldown_timer < cooldown && global.pre_place_on_cooldown) {
                 spawn_pending_ghost(cell, card_data);
-                deselect_slot_after_place();
             }
         }
     }
