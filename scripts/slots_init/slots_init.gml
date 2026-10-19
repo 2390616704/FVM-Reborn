@@ -220,10 +220,10 @@ function slots_init(){
 		{"shape":2, "sprite":spr_tar_sprayer_2, "cost":150, "cooldown":7*60, "description":"祝融喷壶：穿透攻击六格内敌人","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	]);
 	register_card("triple_long_bao", obj_triple_long_bao, [
-	    {"shape":0, "sprite":spr_triple_long_bao, "cost":125, "cooldown":7*60, "description":"三向小笼包：向三个方向发射包子","plant_type":"normal","feature_type":"tbun","target_card":"none"}
+	    {"shape":0, "sprite":spr_triple_long_bao, "cost":125, "cooldown":7*60, "description":"三向小笼包：向最靠左的至多三行敌人发射包子，不足三行时用上下垂直包子补位","plant_type":"normal","feature_type":"tbun","target_card":"none"}
 	]);
 	register_card("triple_ice_long_bao", obj_triple_ice_long_bao, [
-	    {"shape":0, "sprite":spr_triple_ice_long_bao, "cost":225, "cooldown":7*60, "description":"三向冰冻小笼包：向三个方向发射冰包子","plant_type":"normal","feature_type":"tbun","target_card":"none"}
+	    {"shape":0, "sprite":spr_triple_ice_long_bao, "cost":225, "cooldown":7*60, "description":"三向冰冻小笼包：向最靠左的至多三行敌人发射冰包子，不足三行时用上下垂直包子补位","plant_type":"normal","feature_type":"tbun","target_card":"none"}
 	]);
 	register_card("hotdog_cannon", obj_hotdog_cannon, [
 	    {"shape":0, "sprite":spr_hotdog_cannon, "cost":225, "cooldown":7*60, "description":"热狗大炮：发射冰弹攻击空中和地面敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
@@ -289,9 +289,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_king_long_bao_2_0, "cost":125, "cooldown":5*60, "description":"黑心国王小笼包：发射包子，可填充5张包子类卡片","plant_type":"normal","feature_type":"king_bun","target_card":"none"}
 	])
 	register_card("king_triple_long_bao",obj_king_triple_long_bao,[
-	    {"shape":0, "sprite":spr_king_triple_long_bao_0_0, "cost":175, "cooldown":5*60, "description":"三向国王小笼包：向三个方向发射包子，可填充2张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"},
-	    {"shape":1, "sprite":spr_king_triple_long_bao_1_0, "cost":175, "cooldown":5*60, "description":"红心三向国王小笼包：向三个方向发射包子，可填充3张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"},
-		{"shape":2, "sprite":spr_king_triple_long_bao_2_0, "cost":175, "cooldown":5*60, "description":"黑心三向国王小笼包：向三个方向发射包子，可填充5张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"}
+	    {"shape":0, "sprite":spr_king_triple_long_bao_0_0, "cost":175, "cooldown":5*60, "description":"三向国王小笼包：向最靠左的至多三行敌人发射包子，前三发优先攻击不同行，多余包子集中攻击最左行，可填充2张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"},
+	    {"shape":1, "sprite":spr_king_triple_long_bao_1_0, "cost":175, "cooldown":5*60, "description":"红心三向国王小笼包：向最靠左的至多三行敌人发射包子，前三发优先攻击不同行，多余包子集中攻击最左行，可填充3张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"},
+		{"shape":2, "sprite":spr_king_triple_long_bao_2_0, "cost":175, "cooldown":5*60, "description":"黑心三向国王小笼包：向最靠左的至多三行敌人发射包子，前三发优先攻击不同行，多余包子集中攻击最左行，可填充5张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"}
 	])
 	register_card("chili_powder",obj_chili_powder,[
 	    {"shape":0, "sprite":spr_chili_powder, "cost":10, "cooldown":30*60, "description":"辣椒粉：接触敌人后产生十字范围爆炸并产生2朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},

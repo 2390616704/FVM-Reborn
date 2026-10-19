@@ -66,14 +66,9 @@ with obj_card_parent{
 if state == CARD_STATE.GROW{
 	exit
 }
-//检测自身右方是否有敌人
-var has_enemy = false
-with(obj_enemy_parent){
-	if (((grid_row == other.grid_row && grid_col >= other.grid_col && grid_col <= (global.grid_cols + 1)) || abs(x - other.x) <= 100)&& can_target_on(other.target_type,target_type)){
-		has_enemy = true
-		break
-	}
-}
+//检测右方敌人，按每行最左敌人排序
+target_rows = get_leftmost_target_rows(id)
+var has_enemy = array_length(target_rows) > 0
 //攻击逻辑
 if (has_enemy) {
     if (attack_timer <= cycle - attack_anim * current_flash_speed) {

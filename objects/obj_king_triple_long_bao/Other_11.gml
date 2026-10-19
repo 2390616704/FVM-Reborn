@@ -1,23 +1,22 @@
-for(var i = 0 ; i < (bun_count+1) ; i++){
-	var inst = instance_create_depth(x+20*i,y-80,depth-500,bullet_list[i].bullet_type)
-	inst.damage = bullet_list[i].damage
-	inst.move_speed = 8
-	inst.row = grid_row
-	
-	var v_bullet = obj_xiaolongbao_bullet_vertical
-	if bullet_list[i].bullet_type == obj_icelongbao_bullet{
-		v_bullet = obj_icelongbao_bullet_vertical
-	}
-	
-	var inst2 = instance_create_depth(x,y-95+20*i,depth-500,v_bullet)
-	inst2.damage = bullet_list[i].damage
-	inst2.move_speed = 8
-	inst2.col = grid_col
-	inst2.image_angle = -90
+var _target_rows = target_rows;
+var _row_count = array_length(_target_rows);
+if (_row_count <= 0) exit;
 
-	var inst3 = instance_create_depth(x,y-95-20*i,depth-500,v_bullet)
-	inst3.damage = bullet_list[i].damage
-	inst3.move_speed = -8
-	inst3.col = grid_col
-	inst3.image_angle = 90
+var _bullet_index = 0;
+var _target_row = 0;
+var _inst = noone;
+for(var i = 0 ; i < array_length(bullet_list) ; i++){
+	for(var j = 0 ; j < 3 ; j++){
+		_target_row = _target_rows[0];
+		if (_bullet_index < 3 && _bullet_index < _row_count) {
+			_target_row = _target_rows[_bullet_index];
+		}
+		_inst = instance_create_depth(x + 20*i + 12*j,y-80,depth-500,bullet_list[i].bullet_type);
+		_inst.damage = bullet_list[i].damage;
+		_inst.move_speed = 8;
+		_inst.row = grid_row;
+		_inst.start_y = y-80;
+		_inst.target_row = _target_row;
+		_bullet_index++;
+	}
 }

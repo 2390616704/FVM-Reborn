@@ -19,6 +19,7 @@ feature_type = "king_tbun"
 is_slowdown = false
 bun_count = 0
 max_bun = 2
+target_rows = []
 
 normal_spr_list = [spr_king_triple_long_bao_0_0,spr_king_triple_long_bao_0_1,spr_king_triple_long_bao_0_2]
 upgrade_spr_list = [spr_king_triple_long_bao_0_upgrade_1,spr_king_triple_long_bao_0_upgrade_2]

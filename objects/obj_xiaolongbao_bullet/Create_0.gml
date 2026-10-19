@@ -6,5 +6,7 @@ target_type = "normal"
 burnt = 0
 bounced = false
 brazier_list = ds_list_create()
+target_row = -1
+start_y = 0
 image_xscale = 1.8
 image_yscale = 1.8
