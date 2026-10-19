@@ -8,3 +8,4 @@ if shape == 1 {sprite_index = spr_chocolate_bread_1}
 attack_anim = 0;
 plant_type = "normal"
 flash_speed = 6
+lethal_blocks = 8

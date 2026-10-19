@@ -1,5 +1,5 @@
 with obj_enemy_parent{
-		if place_meeting(x,y,other) && hp > 0  && grid_row == other.grid_row && can_hit(other.target_type,target_type){
+		if (hp > 0 && can_hit(other.target_type,target_type) && abs(grid_col - other.grid_col) <= 1 && abs(grid_row - other.grid_row) <= 1){
 			hp -= other.atk
 			event_user(0)
 			audio_play_sound(snd_hit1,0,0)

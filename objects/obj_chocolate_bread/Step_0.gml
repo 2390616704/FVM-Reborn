@@ -2,6 +2,11 @@
 if global.is_paused{
 	exit
 }
+if hp <= 0 && lethal_blocks > 0{
+	lethal_blocks--
+	hp = max_hp * (lethal_blocks / 8)
+	flash_value = 150
+}
 var current_flash_speed = flash_speed
 if is_slowdown{
 	current_flash_speed *= 2

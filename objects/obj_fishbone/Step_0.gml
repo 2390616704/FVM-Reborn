@@ -1,6 +1,11 @@
 if global.is_paused{
 	exit
 }
+if hp <= 0 && lethal_blocks > 0{
+	lethal_blocks--
+	hp = max_hp
+	flash_value = 150
+}
 event_inherited(); 
 if is_frozen || state == CARD_STATE.SLEEP{
 	exit

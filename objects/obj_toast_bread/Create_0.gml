@@ -7,3 +7,4 @@ event_user(0)
 // ========== 特定属性默认值 ==========
 attack_anim = 0;
 plant_type = "normal"
+lethal_blocks = 8

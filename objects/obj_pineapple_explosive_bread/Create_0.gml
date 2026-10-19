@@ -22,3 +22,4 @@ flash_speed = 5
 plant_type = "normal"
 is_slowdown = false
 attack_timer = 0
+lethal_blocks = 8
