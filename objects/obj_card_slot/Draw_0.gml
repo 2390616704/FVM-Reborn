@@ -110,8 +110,9 @@ draw_set_color(c_black);
 draw_set_font(font_song);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_sprite_ext(spr_hotkey_prompt,0,x+33,y-46,1,1,0,c_white,1)
-draw_text(x+33,y-48,keyboard_get_string(slot_key))
+var hotkey_y = y + slot_height/2 + sprite_get_height(spr_hotkey_prompt)/2 + 2;
+draw_sprite_ext(spr_hotkey_prompt,0,x,hotkey_y,1,1,0,c_white,1)
+draw_text(x,hotkey_y-2,keyboard_get_string(slot_key))
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 
