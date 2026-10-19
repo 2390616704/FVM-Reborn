@@ -261,9 +261,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_pineapple_explosive_bread_2_icon, "cost":150, "cooldown":50*60, "description":"皇冠菠萝面包：死亡后产生5*5范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值）","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_2_0}
 	])
 	register_card("ice_cream",obj_ice_cream,[
-	    {"shape":0, "sprite":spr_ice_cream_icon, "cost":100, "cooldown":60*60, "description":"冰激凌：冷却本格卡片","plant_type":"coffee","feature_type":"normal","target_card":"none"},
-	    {"shape":1, "sprite":spr_ice_cream_icon_1, "cost":150, "cooldown":60*60, "description":"果蔬冰激凌：冷却3*3范围卡片","plant_type":"coffee","feature_type":"normal","target_card":"none"},
-		{"shape":2, "sprite":spr_ice_cream_icon_2, "cost":350, "cooldown":60*60, "description":"极寒冰沙：冷却全体卡片","plant_type":"coffee","feature_type":"normal","target_card":"none"}
+	    {"shape":0, "sprite":spr_ice_cream_icon, "cost":100, "cooldown":60*60, "description":"冰激凌：本格卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_ice_cream_icon_1, "cost":150, "cooldown":60*60, "description":"果蔬冰激凌：3*3范围内卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"},
+		{"shape":2, "sprite":spr_ice_cream_icon_2, "cost":350, "cooldown":60*60, "description":"极寒冰沙：全体卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"}
 	])
 	register_card("lightning_baguette",obj_lightning_baguette,[
 	    {"shape":0, "sprite":spr_lightning_baguette_icon, "cost":225, "cooldown":60*60, "description":"雷电长棍面包：同列的两根面包间会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette},

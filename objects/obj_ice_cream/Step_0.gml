@@ -20,7 +20,11 @@ if attack_timer == 1{
 					if array_get_index(other.ignore_list,plant_id) == -1{
 						with obj_card_slot{
 							if card_id == other.plant_id{
-								cooldown_timer = cooldown
+								max_charges++
+								if (charges < max_charges && !reloading) {
+									reloading = true
+									cooldown_timer = 0
+								}
 							}
 						}
 					}
@@ -31,7 +35,11 @@ if attack_timer == 1{
 	else{
 		with obj_card_slot{
 			if array_get_index(other.ignore_list,card_id) == -1{
-				cooldown_timer = cooldown
+				max_charges++
+				if (charges < max_charges && !reloading) {
+					reloading = true
+					cooldown_timer = 0
+				}
 			}
 		}
 	}
