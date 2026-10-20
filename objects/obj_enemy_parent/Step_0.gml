@@ -307,6 +307,7 @@ switch(state) {
 				{
 					var plant_inst = ds_list_find_value(_list, _item);
 					if (!instance_exists(plant_inst)) continue;
+					if (plant_is_hidden(plant_inst)) continue;
 
 					var dx = plant_inst.x - x;
 					var dy = plant_inst.y - y;
@@ -460,6 +461,7 @@ switch(state) {
 				{
 					var plant_inst = ds_list_find_value(_list, _item);
 					if (!instance_exists(plant_inst)) continue;
+					if (plant_is_hidden(plant_inst)) continue;
 
 					var dx = plant_inst.x - x;
 					var dy = plant_inst.y - y;

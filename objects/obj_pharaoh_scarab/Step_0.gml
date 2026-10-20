@@ -17,10 +17,7 @@ if state == ENEMY_STATE.ACTING{
 	if instance_exists(target_plant){
 		with target_plant{
 			if plant_id != "player"{
-				if !invincible{
-					hp -= 2000
-					event_user(2)
-				}
+				plant_apply_normal_damage(id, 2000, other)
 			}
 			else{
 				hp = 10

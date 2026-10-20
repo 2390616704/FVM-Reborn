@@ -23,6 +23,18 @@ function can_place_at_position(x, y, plant_type,feature_type,target_card) {
 		return true
 	}
 	var replace_enabled = global.replace_placement && !global.overlap_planting;
+	if (plant_type == "shield_outer") {
+		var shield_list = ds_grid_get(global.grid_plants, col, row);
+		if (!replace_enabled) {
+			for (var si = 0; si < ds_list_size(shield_list); si++) {
+				var shield_plant = ds_list_find_value(shield_list, si);
+				if (instance_exists(shield_plant) && shield_plant.plant_type == "shield_outer") {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	// 检查是否有障碍
 	if global.grid_terrains[row][col].type == "obstacle" && plant_type != "coffee"{
 		return false

@@ -18,13 +18,9 @@ if state == "attack"{
 			if plant_id != "cotton_candy" && plant_type != "coffee" && plant_id != "soda_bubble"{
 				var inst = instance_create_depth(other.x,other.y,other.depth,obj_coke_bomb_explode)
 				inst.sprite_index = spr_conch_mouse_bullet_effect
-				instance_destroy(other)
 			}
 			if plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"  && plant_id != "soda_bubble"{
-				if (!melon_shield_handle_damage(id, 20, noone)) {
-					hp -= 20
-					event_user(2)
-				}
+				plant_apply_normal_damage(id, 20, noone)
 			}
 		}
 	}

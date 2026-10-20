@@ -34,7 +34,14 @@ function plant_find_guard(target, require_lethal_block) {
 
         var row_distance = abs(grid_row - target.grid_row);
         var col_distance = abs(grid_col - target.grid_col);
-        if (row_distance > lethal_guard_radius || col_distance > lethal_guard_radius) continue;
+        var col_radius = lethal_guard_radius;
+        if (variable_instance_exists(id, "lethal_guard_col_radius")) col_radius = lethal_guard_col_radius;
+        if (col_distance > col_radius) continue;
+        if (!(variable_instance_exists(id, "lethal_guard_all_rows") && lethal_guard_all_rows)) {
+            var row_radius = lethal_guard_radius;
+            if (variable_instance_exists(id, "lethal_guard_row_radius")) row_radius = lethal_guard_row_radius;
+            if (row_distance > row_radius) continue;
+        }
 
         var distance = max(row_distance, col_distance);
         if (best_guard == noone || hp < best_hp || (hp == best_hp && distance < best_distance)) {
@@ -98,7 +105,7 @@ function melon_stealth_apply(plant) {
         plant.stealth_original_invincible = plant.invincible;
         plant.is_hidden = true;
     }
-    plant.image_alpha = 0.9;
+    plant.image_alpha = 0.75;
     plant.invincible = true;
 }
 
@@ -137,7 +144,7 @@ function melon_stealth_update() {
             global.stealth_timers[grid_row][grid_col] > 0;
         if (active) {
             if (variable_instance_exists(id, "is_hidden") && is_hidden) {
-                image_alpha = 0.9;
+                image_alpha = 0.75;
                 invincible = true;
             } else {
                 melon_stealth_apply(id);
@@ -148,30 +155,80 @@ function melon_stealth_update() {
     }
 }
 
+function plant_damage_attacker(attacker, amount) {
+    if (attacker == noone || !instance_exists(attacker) || amount <= 0) return;
+    if (!variable_instance_exists(attacker, "hp") || attacker.hp <= 0) return;
+    if (!variable_instance_exists(attacker, "damage_amount")) return;
+    attacker.damage_amount = amount;
+    attacker.damage_type = "normal";
+    with (attacker) event_user(0);
+}
+
+function melon_permanent_hide_apply(plant) {
+    if (!instance_exists(plant)) return;
+    if (!variable_instance_exists(plant, "is_hidden")) return;
+    plant.is_hidden = true;
+    plant.image_alpha = 0.75;
+}
+
+function melon_permanent_hide_cell(col, row) {
+    if (!variable_global_exists("perma_hidden")) return;
+    if (col < 0 || col >= global.grid_cols || row < 0 || row >= global.grid_rows) return;
+    global.perma_hidden[row][col] = true;
+    with (obj_card_parent) {
+        if (grid_col == col && grid_row == row) {
+            melon_permanent_hide_apply(id);
+        }
+    }
+}
+
+function melon_shield_ash_destroy(melon) {
+    if (!instance_exists(melon)) return;
+    var _x = melon.x;
+    var _y = melon.y;
+    var _depth = melon.depth;
+    var _sprite = melon.sprite_index;
+    var _image = melon.image_index;
+    var inst = instance_create_depth(_x, _y - 20, _depth, obj_mouse_ash_death);
+    inst.sprite_index = _sprite;
+    inst.image_index = _image;
+    inst.special_ash = true;
+    melon.bleed_damage = 0;
+    melon.hp = 0;
+    instance_destroy(melon);
+}
+
 function melon_shield_handle_damage(plant, damage, attacker) {
     if (!instance_exists(plant) || damage <= 0) return false;
     if (variable_instance_exists(plant, "invincible") && plant.invincible) return true;
 
     var melon = melon_shield_find_at(plant.grid_col, plant.grid_row);
     if (melon == noone) return false;
-    if (plant_is_hidden(melon) || melon.invincible) return true;
+    if (melon.invincible) return true;
 
-    var original_damage = damage;
-    var applied_damage = min(original_damage, 100);
-    melon.hp -= applied_damage;
-    with (melon) event_user(2);
+    if (false) {
+        var original_damage = damage;
+        var applied_damage = min(original_damage, 100);
+        melon.hp -= applied_damage;
+        with (melon) event_user(2);
 
-    if (original_damage > 100 && attacker != noone && instance_exists(attacker) && variable_instance_exists(attacker, "target_plant")) {
-        plant_push_attacker(attacker);
+        if (original_damage > 100 && attacker != noone && instance_exists(attacker) && variable_instance_exists(attacker, "target_plant")) {
+            plant_push_attacker(attacker);
+        }
+
+        plant_damage_attacker(attacker, applied_damage);
+
+        var survived = melon.hp > 0;
+        melon_stealth_trigger(melon.grid_col, melon.grid_row);
+
+        if (survived) {
+            if (melon.shape >= 1) melon_shield_reflect(melon, original_damage);
+            if (melon.shape >= 2) melon_shield_create_flame(melon, original_damage);
+        }
     }
 
-    var survived = melon.hp > 0;
-    melon_stealth_trigger(melon.grid_col, melon.grid_row);
-
-    if (survived) {
-        if (melon.shape >= 1) melon_shield_reflect(melon, original_damage);
-        if (melon.shape >= 2) melon_shield_create_flame(melon, original_damage);
-    }
+    melon_permanent_hide_cell(melon.grid_col, melon.grid_row);
+    melon_shield_ash_destroy(melon);
     return true;
 }
 
@@ -181,8 +238,16 @@ function plant_apply_normal_damage(plant, damage, attacker = noone) {
 
     var guard = plant_find_guard(plant, false);
     var receiver = (guard != noone) ? guard : plant;
-    receiver.hp -= damage;
+    var applied_damage = damage;
+    if (receiver.plant_type == "shield_outer" && receiver.plant_id != "melon_shield") {
+        applied_damage = min(damage, receiver.max_hp / 8);
+    }
+    receiver.hp -= applied_damage;
     with (receiver) event_user(2);
+
+    if (receiver.plant_type == "shield_outer" && receiver.plant_id != "melon_shield") {
+        plant_damage_attacker(attacker, applied_damage);
+    }
 }
 
 function plant_apply_overlap_attack(target, damage, attacker = noone) {
@@ -223,9 +288,19 @@ function plant_apply_boss_lethal(plant, attacker) {
     if (variable_instance_exists(plant, "invincible") && plant.invincible) return;
     if (melon_shield_handle_damage(plant, 9999999, attacker)) return;
 
-    var guard = plant_find_guard(plant, true);
+    var guard = plant_find_guard(plant, false);
+    if (guard != noone && guard.plant_type == "shield_outer" && guard.plant_id != "melon_shield") {
+        plant_apply_normal_damage(guard, 9999999, attacker);
+        if (guard.hp > 0) plant_push_attacker(attacker);
+        return;
+    }
     if (guard != noone && plant_consume_lethal_block(guard)) {
         if (guard.hp > 0) plant_push_attacker(attacker);
+        return;
+    }
+    if (plant.plant_type == "shield_outer" && plant.plant_id != "melon_shield") {
+        plant_apply_normal_damage(plant, 9999999, attacker);
+        if (plant.hp > 0) plant_push_attacker(attacker);
         return;
     }
     if (plant_consume_lethal_block(plant)) {

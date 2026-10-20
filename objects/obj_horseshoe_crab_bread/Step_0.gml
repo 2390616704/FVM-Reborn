@@ -1,11 +1,6 @@
 if global.is_paused{
 	exit
 }
-if hp <= 0 && lethal_blocks > 0{
-	lethal_blocks--
-	hp = max_hp * (lethal_blocks / 8)
-	flash_value = 150
-}
 
 if shape < 1{
 	drown_timer ++
@@ -24,10 +19,7 @@ if shape < 1{
 			}
 		}
 		if !has_bubble && !has_seawater{
-			if (!melon_shield_handle_damage(id, 0.05*max_hp, noone)) {
-				hp -= 0.05*max_hp
-				event_user(2)
-			}
+			plant_apply_normal_damage(id, 0.05*max_hp, noone)
 		}
 	}
 }

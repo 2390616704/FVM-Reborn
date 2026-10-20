@@ -32,10 +32,7 @@ if x >= target_x - 10 && x <= target_x + 10{
         if(abs(grid_col-erase_col) <= 1 && abs(grid_row-erase_row) <= 1) {
             if !invincible && plant_type != "coffee"{
 				if plant_id != "player"{
-					if (!melon_shield_handle_damage(id, 900, noone)) {
-						hp -= 900
-						event_user(2)
-					}
+					plant_apply_normal_damage(id, 900, noone)
 				}
 				else{
 					hp -= 300

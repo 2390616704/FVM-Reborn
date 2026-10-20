@@ -11,13 +11,9 @@ if b_type == 0{
 			if plant_id != "cotton_candy" && plant_type != "coffee"{
 				var inst = instance_create_depth(x,y-35,-800,obj_arno_bullet_effect)
 				inst.sprite_index = spr_mouse_train_1_bullet_effect
-				instance_destroy(other)
 			}
 			if plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				if (!melon_shield_handle_damage(id, 0.5 * max_hp, noone)) {
-					hp -= 0.5 * max_hp
-					event_user(2)
-				}
+				plant_apply_normal_damage(id, 0.5 * max_hp, noone)
 			}
 		}
 	}
@@ -29,13 +25,9 @@ else if b_type == 1{
 			if plant_id != "cotton_candy" && plant_type != "coffee"{
 				var inst = instance_create_depth(x,y-35,-800,obj_arno_bullet_effect)
 				inst.sprite_index = spr_mouse_train_1_bullet_effect
-				instance_destroy(other)
 			}
 			if plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				if (!melon_shield_handle_damage(id, 0.5 * max_hp, noone)) {
-					hp -= 0.5 * max_hp
-					event_user(2)
-				}
+				plant_apply_normal_damage(id, 0.5 * max_hp, noone)
 			}
 		}
 	}
@@ -48,13 +40,9 @@ else if b_type == 2{
 			if plant_id != "cotton_candy" && plant_type != "coffee"{
 				var inst = instance_create_depth(x,y-35,-800,obj_arno_bullet_effect)
 				inst.sprite_index = spr_mouse_train_1_bullet_effect
-				instance_destroy(other)
 			}
 			if plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				if (!melon_shield_handle_damage(id, 0.5 * max_hp, noone)) {
-					hp -= 0.5 * max_hp
-					event_user(2)
-				}
+				plant_apply_normal_damage(id, 0.5 * max_hp, noone)
 			}
 		}
 	}

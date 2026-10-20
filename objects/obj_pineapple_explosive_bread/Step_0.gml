@@ -1,11 +1,6 @@
 if global.is_paused{
 	exit
 }
-if hp <= 0 && lethal_blocks > 0{
-	lethal_blocks--
-	hp = max_hp * (lethal_blocks / 8)
-	flash_value = 150
-}
 
 
 

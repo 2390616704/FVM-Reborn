@@ -226,10 +226,7 @@ switch(state) {
 	            // 对目标植物造成伤害
 	            with (target_plant) {
 					if !invincible{
-						if (!melon_shield_handle_damage(id, other.atk, other)) {
-							hp -= other.atk;
-							event_user(2)
-						}
+					plant_apply_normal_damage(id, other.atk, other)
 					}
 	                // 播放受击效果
 	                if (instance_exists(other)) {

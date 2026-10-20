@@ -83,8 +83,10 @@ ds_list_add(global.eat_order,"shield","shield_outer","normal","lilypad");
 // 网格植物存储数据结构
 global.grid_plants = ds_grid_create(global.grid_cols, global.grid_rows);
 global.stealth_timers = array_create(global.grid_rows, 0)
+global.perma_hidden = array_create(global.grid_rows, 0)
 for (var _sr = 0; _sr < global.grid_rows; _sr++) {
 	global.stealth_timers[_sr] = array_create(global.grid_cols, 0)
+	global.perma_hidden[_sr] = array_create(global.grid_cols, false)
 }
 
 //重置任务进度

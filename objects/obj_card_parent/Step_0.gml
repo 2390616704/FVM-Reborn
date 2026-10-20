@@ -61,6 +61,10 @@ if !(variable_instance_exists(id, "platform_grid_lock") && platform_grid_lock) {
     grid_col = clamp(grid_pos.col,0,global.grid_cols-1)
     grid_row = clamp(grid_pos.row,0,global.grid_rows-1)
 }
+if (variable_global_exists("perma_hidden") &&
+    global.perma_hidden[grid_row][grid_col]) {
+    melon_permanent_hide_apply(id);
+}
 
 depth = calculate_plant_depth(grid_pos.col, grid_pos.row, plant_type) - depth_offset * 0.001
 if instance_exists(banding_star_obj){

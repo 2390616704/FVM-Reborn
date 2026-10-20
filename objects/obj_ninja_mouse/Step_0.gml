@@ -30,10 +30,7 @@ if dash && (state == ENEMY_STATE.ATTACK or timer > 4.5*60){
 	
 	if target_plant != noone{
 		with (target_plant) {
-			if !invincible{
-				hp -= 10;
-			}
-	        event_user(2)
+			plant_apply_normal_damage(id, 10, other)
 	        // 播放受击效果
 
 	        //播放音效

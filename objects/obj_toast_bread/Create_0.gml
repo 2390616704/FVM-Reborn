@@ -7,8 +7,5 @@ event_user(0)
 // ========== 特定属性默认值 ==========
 attack_anim = 0;
 plant_type = "shield_outer"
-lethal_blocks = 8
-lethal_blocks_max = 8
-lethal_restore_full = false
 lethal_guard = true
 lethal_guard_radius = 1

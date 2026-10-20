@@ -55,10 +55,7 @@ if hp > 0 && state != ENEMY_STATE.DEAD{
 					plant_apply_boss_lethal(id, other)
 				}
 				else{
-					if (!melon_shield_handle_damage(id, 300, other)) {
-						hp -= 300
-						event_user(2)
-					}
+					plant_apply_normal_damage(id, 300, other)
 					other.timer = 0
 					other.state = ENEMY_STATE.DIG
 					sprite_index = spr_swordfish_mouse_stun

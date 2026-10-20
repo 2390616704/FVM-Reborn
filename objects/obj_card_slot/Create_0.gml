@@ -387,6 +387,9 @@ function place_card_at(col, row, shift_x, shift_y, card_data, plant_obj, cost, d
 	if (variable_global_exists("stealth_timers") && global.stealth_timers[row][col] > 0) {
 		melon_stealth_apply(new_plant);
 	}
+	if (variable_global_exists("perma_hidden") && global.perma_hidden[row][col]) {
+		melon_permanent_hide_apply(new_plant);
+	}
 	new_plant.depth = depth_value - new_plant.depth_offset * 0.001;
 
 	var terrain_type = global.grid_terrains[row][col].type;

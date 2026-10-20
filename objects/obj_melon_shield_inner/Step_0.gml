@@ -1,6 +1,6 @@
 if instance_exists(parent_plant){
 	if variable_instance_exists(parent_plant, "is_hidden") && parent_plant.is_hidden {
-		image_alpha = 0.9
+		image_alpha = 0.75
 	}
 	else {
 		image_alpha = 1

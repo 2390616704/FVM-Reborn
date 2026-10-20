@@ -26,10 +26,7 @@ else if state == "anim"{
 		with obj_card_parent{
 			if grid_col == other.grid_col && grid_row == other.grid_row &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				if hp >= max_hp{
-					obj_task_manager.card_loss++
-				}
-				instance_destroy()
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 	}
@@ -51,10 +48,7 @@ else if state == "act"{
 		with obj_card_parent{
 			if grid_col == other.grid_col &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
-				if hp >= max_hp{
-					obj_task_manager.card_loss++
-				}
-				instance_destroy()
+				plant_apply_boss_lethal(id, other)
 			}
 		}
 		var inst = instance_create_depth(x,y,-800,obj_coke_bomb_explode)

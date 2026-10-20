@@ -8,8 +8,7 @@ if shape == 1 {sprite_index = spr_chocolate_bread_1}
 attack_anim = 0;
 plant_type = "shield_outer"
 flash_speed = 6
-lethal_blocks = 8
-lethal_blocks_max = 8
-lethal_restore_full = false
 lethal_guard = true
 lethal_guard_radius = 2
+lethal_guard_col_radius = 1
+lethal_guard_all_rows = true
