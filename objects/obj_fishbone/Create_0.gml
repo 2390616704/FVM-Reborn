@@ -19,8 +19,4 @@ plant_type = "normal"
 is_slowdown = false
 feature_type = "dwarf"
 target_type = "pierce"
-lethal_blocks = 4
-lethal_blocks_max = 4
-lethal_restore_full = true
-
-kill_list = ["engineering_vehicle_mouse","garbage_track_mouse","landmine_vehicle_mouse","hazelnut_cannon_mouse","snail_mouse"]
+is_used = false

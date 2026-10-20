@@ -151,7 +151,7 @@ function slots_init(){
 	    {"shape":0, "sprite":spr_sausage_land, "cost":125, "cooldown":7*60, "description":"香肠：发射香肠攻击空中和地面敌人","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	]);
 	register_card("fishbone",obj_fishbone,[
-	    {"shape":0, "sprite":spr_fishbone, "cost":100, "cooldown":7*60, "description":"鱼刺：攻击踩上它的敌人，可抵挡4次致命攻击，并卡坏车辆","plant_type":"normal","feature_type":"dwarf","target_card":"none"}
+	    {"shape":0, "sprite":spr_fishbone, "cost":100, "cooldown":7*60, "description":"鱼刺：攻击时使3*3范围内的敌人定身5秒，随后消失","plant_type":"normal","feature_type":"dwarf","target_card":"none"}
 	])
 	register_card("hamburger",obj_hamburger,[
 	    {"shape":0, "sprite":spr_hamburger, "cost":150, "cooldown":7*60, "description":"汉堡包：吃掉老鼠","plant_type":"normal","feature_type":"normal","target_card":"none"},
@@ -266,9 +266,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_ice_cream_icon_2, "cost":350, "cooldown":60*60, "description":"极寒冰沙：全体卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"}
 	])
 	register_card("lightning_baguette",obj_lightning_baguette,[
-	    {"shape":0, "sprite":spr_lightning_baguette_icon, "cost":225, "cooldown":60*60, "description":"雷电长棍面包：同列的两根面包间会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette},
-	    {"shape":1, "sprite":spr_lightning_baguette_1_icon, "cost":175, "cooldown":60*60, "description":"节能面包：同列的两根面包间会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette_1},
-		{"shape":2, "sprite":spr_lightning_baguette_2_icon, "cost":175, "cooldown":60*60, "description":"负离子面包：同列的两根面包间会产生两次电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette_2}
+	    {"shape":0, "sprite":spr_lightning_baguette_icon, "cost":225, "cooldown":60*60, "description":"雷电长棍面包：同列的两根面包右侧两列处会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette},
+	    {"shape":1, "sprite":spr_lightning_baguette_1_icon, "cost":175, "cooldown":60*60, "description":"节能面包：同列的两根面包右侧两列处会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette_1},
+		{"shape":2, "sprite":spr_lightning_baguette_2_icon, "cost":175, "cooldown":60*60, "description":"负离子面包：同列的两根面包右侧两列处会产生两次电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette_2}
 	])
 	register_card("bull_firework",obj_bull_firework,[
 	    {"shape":0, "sprite":spr_bull_firework, "cost":325, "cooldown":50*60, "description":"金牛烟花：召唤1只烟花牛冲撞敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},

@@ -1,5 +1,5 @@
 with obj_enemy_parent{
-	if (abs(x - other.x) <= 100 && grid_row >= other.grid_row && grid_row <= other.banding_bread.grid_row) {
+	if (abs(x - (other.x + 2 * global.grid_cell_size_x)) <= 100 && grid_row >= other.grid_row && grid_row <= other.banding_bread.grid_row) {
 			if array_get_index(other.can_mouse_list,mouse_id) != -1 && !can_dropped{
 				into_act()
 			}
@@ -29,5 +29,5 @@ with obj_enemy_parent{
 	}
 }
 for(var i = 0 ; i < banding_bread.grid_row - grid_row ; i++){
-	instance_create_depth(x,y+global.grid_cell_size_y*(i-0.5),-800,obj_lightning_baguette_thunder)
+	instance_create_depth(x + 2 * global.grid_cell_size_x,y+global.grid_cell_size_y*(i-0.5),-800,obj_lightning_baguette_thunder)
 }

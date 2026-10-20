@@ -24,6 +24,8 @@ if (hover_alpha > 0) {
 		box_height += text_height 
 		if (array_length(pending_ghosts) > 0) {
 			display_description = description + "\n已预放置" + string(array_length(pending_ghosts)) + "个，等待冷却"
+		} else if (array_length(pending_auto_replants) > 0) {
+			display_description = description + "\n自动补种准备中" + string(array_length(pending_auto_replants)) + "个"
 		} else if (reloading && global.pre_place_on_cooldown) {
 			display_description = description + "\n冷却中，可预放置虚影"
 		} else {

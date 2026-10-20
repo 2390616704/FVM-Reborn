@@ -10,6 +10,7 @@ if bun_count >= max_bun{
 	feature_type = "normal"
 }
 event_inherited(); 
+if (hp <= 0 || !instance_exists(id)) exit;
 
 if is_frozen || state == CARD_STATE.SLEEP{
 	exit

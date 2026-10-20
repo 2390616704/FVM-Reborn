@@ -298,8 +298,12 @@ switch(state) {
         // 攻击处理
         attack_timer++;
         if (attack_timer >= current_atk_cycle) {
+            var _lethal_attack = variable_instance_exists(id, "lethal_attack") && lethal_attack;
             // 对目标植物造成伤害
-            if (global.overlap_planting) {
+            if (_lethal_attack) {
+                plant_apply_boss_lethal(target_plant, id)
+            }
+            else if (global.overlap_planting) {
                 plant_apply_overlap_attack(target_plant, atk)
             }
             else {
@@ -310,6 +314,10 @@ switch(state) {
 	                    //instance_create_depth(x, y, depth - 1, obj_plant_hit);
 	                }
 	            }
+            }
+
+            if (!_lethal_attack && instance_exists(target_plant) && target_plant.hp > 0) {
+                plant_push_attacker_light(id);
             }
 			
             //播放音效

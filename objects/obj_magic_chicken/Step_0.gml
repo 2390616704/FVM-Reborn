@@ -66,6 +66,8 @@ if attack_timer == 15 * current_flash_speed - 1{
 		var logical_world = get_world_position_from_grid(logical_col, logical_row);
 		var new_card = instance_create_depth(logical_world.x + platform_shift_x, logical_world.y + platform_shift_y, 0, card_slot_data[? "obj"])
 		card_created(new_card, logical_col, logical_row)
+		new_card.parent_card_slot = parent_card_slot
+		new_card.parent_platform = found_plat
 		// 平台移动期间放置时锁定逻辑网格位置，防止视觉位置覆盖grid_col/grid_row
 		if (found_plat != noone && variable_instance_exists(found_plat, "state") && found_plat.state == "moving") {
 			new_card.platform_grid_lock = true;

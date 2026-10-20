@@ -2,6 +2,7 @@ if global.is_paused{
 	exit
 }
 event_inherited(); 
+if (hp <= 0 || !instance_exists(id)) exit;
 if is_frozen || state == CARD_STATE.SLEEP{
 	exit
 }

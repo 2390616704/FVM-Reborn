@@ -12,6 +12,7 @@ attack_anim = 1
 death_anim = 14
 special_ash = true
 immune_to_ash = true
+lethal_attack = true
 attack_range = 120
 
 state = ENEMY_STATE.APPEAR

@@ -41,6 +41,7 @@ function can_hit(bullet_target_type,enemy_target_type){
 
 function get_leftmost_target_rows(_plant) {
 	var _rows = [];
+	if (!instance_exists(_plant)) return _rows;
 	var _row_cols = array_create(global.grid_rows, 999999);
 	var _plant_col = _plant.grid_col;
 	var _plant_row = _plant.grid_row;

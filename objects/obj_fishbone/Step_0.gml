@@ -1,12 +1,13 @@
 if global.is_paused{
 	exit
 }
-if hp <= 0 && lethal_blocks > 0{
-	lethal_blocks--
-	hp = max_hp
-	flash_value = 150
-}
 event_inherited(); 
+if (!instance_exists(id)) exit;
+if (is_used) {
+	attack_timer++;
+	if (attack_timer >= cycle) instance_destroy();
+	exit;
+}
 if is_frozen || state == CARD_STATE.SLEEP{
 	exit
 }
@@ -18,12 +19,8 @@ if is_slowdown{
 var has_enemy = false
 if shape < 2{	
 	with obj_enemy_parent{
-		if place_meeting(x,y,other)  && grid_row == other.grid_row && can_target_on(other.target_type,target_type){
+		if (hp > 0 && place_meeting(x,y,other) && grid_row == other.grid_row) {
 			has_enemy = true
-			if array_get_index(other.kill_list,mouse_id) != -1  && hp > 0{
-				hp -= maxhp
-				other.hp -= 900
-			}
 		}
 	}
 }

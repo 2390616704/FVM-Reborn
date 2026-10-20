@@ -38,6 +38,7 @@ giant_type = false
 target_type = "normal"
 is_boss = false
 can_dropped = false
+lethal_attack = false
 
 // =======猫驱赶相关=======
 is_scare = false

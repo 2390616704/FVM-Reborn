@@ -5,10 +5,9 @@ function plant_consume_lethal_block(plant) {
     plant.lethal_blocks--;
     if (variable_instance_exists(plant, "lethal_restore_full") && plant.lethal_restore_full) {
         plant.hp = plant.max_hp;
-    } else if (variable_instance_exists(plant, "lethal_blocks_max") && plant.lethal_blocks_max > 0) {
-        plant.hp = plant.max_hp * (plant.lethal_blocks / plant.lethal_blocks_max);
     } else {
-        plant.hp = plant.max_hp;
+        var lethal_damage_cap = plant.max_hp / 8;
+        plant.hp = max(1, plant.hp - lethal_damage_cap);
     }
     plant.flash_value = 150;
     return true;
@@ -99,8 +98,17 @@ function plant_apply_boss_lethal(plant, attacker) {
 
 function plant_push_attacker(attacker) {
     if (!instance_exists(attacker)) return;
-    attacker.x += global.grid_cell_size_x;
-    if (variable_instance_exists(attacker, "grid_col")) attacker.grid_col += 1;
+    var max_x = global.grid_offset_x + (global.grid_cols - 1) * global.grid_cell_size_x + global.grid_cell_size_x / 2;
+    attacker.x = min(attacker.x + global.grid_cell_size_x, max_x);
+    if (variable_instance_exists(attacker, "grid_col")) {
+        attacker.grid_col = min(attacker.grid_col + 1, global.grid_cols - 1);
+    }
+}
+
+function plant_push_attacker_light(attacker) {
+    if (!instance_exists(attacker)) return;
+    var max_x = global.grid_offset_x + (global.grid_cols - 1) * global.grid_cell_size_x + global.grid_cell_size_x / 2;
+    attacker.x = min(attacker.x + global.grid_cell_size_x * 0.05, max_x);
 }
 
 /// @function plant_destroyed(plant_inst)

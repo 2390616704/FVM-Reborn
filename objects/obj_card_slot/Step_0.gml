@@ -87,12 +87,17 @@ if (loaded_charge && array_length(pending_ghosts) > 0 && charges > 0) {
 			continue;
 		}
 		var mat_world = get_world_position_from_grid(mat_rec.col, mat_rec.row);
-		var can_materialize = can_place_at_position(mat_world.x, mat_world.y, mat_rec.card_data[? "plant_type"], mat_rec.card_data[? "feature_type"], mat_rec.card_data[? "target_card"]);
+		var is_auto = variable_struct_exists(mat_rec, "is_auto") && mat_rec.is_auto;
+		var auto_blocked = is_auto && cell_blocks_auto_plant(mat_rec.col, mat_rec.row, mat_rec.card_data[? "plant_type"], mat_rec.card_data[? "feature_type"]);
+		var can_materialize = !auto_blocked && can_place_at_position(mat_world.x, mat_world.y, mat_rec.card_data[? "plant_type"], mat_rec.card_data[? "feature_type"], mat_rec.card_data[? "target_card"]);
 		if (can_materialize) {
 			var prev_before = global.prev_place_id;
 			global.prev_place_id = mat_rec.prev_place_id;
 			place_card_at(mat_rec.col, mat_rec.row, mat_rec.shift_x, mat_rec.shift_y, mat_rec.card_data, mat_rec.card_obj, mat_rec.cost, false, mat_rec.platform);
-			if (mat_rec.card_id == "magic_chicken") {
+			if (is_auto) {
+				global.prev_place_id = prev_before;
+			}
+			else if (mat_rec.card_id == "magic_chicken") {
 				global.prev_place_id = mat_rec.prev_place_id;
 			}
 			else if (array_get_index(cooldown_ignore_list, mat_rec.card_id) == -1) {
@@ -119,9 +124,11 @@ if (loaded_charge && array_length(pending_ghosts) > 0 && charges > 0) {
 	}
 }
 
+process_auto_replants();
+
 var can_select = (global.flame >= current_cost) && (charges > 0 || (reloading && global.pre_place_on_cooldown));
 
-if (array_length(pending_ghosts) > 0 && mouse_check_button_pressed(mb_right)) {
+if ((array_length(pending_ghosts) > 0 || array_length(pending_auto_replants) > 0) && mouse_check_button_pressed(mb_right)) {
 	if (point_in_rectangle(mouse_x, mouse_y, x-50, y-70, x+50, y+70)) {
 		clear_pending_ghosts(true);
 		is_ready = (charges > 0 && global.flame >= current_cost);
