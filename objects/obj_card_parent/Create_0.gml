@@ -60,3 +60,6 @@ is_hidden = false
 stealth_original_alpha = 1
 stealth_original_invincible = false
 
+// ========= 是否有梯子 ========
+have_loder = false
+

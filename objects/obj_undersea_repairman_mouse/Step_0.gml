@@ -61,6 +61,9 @@ if not placed && state = ENEMY_STATE.ACTING{
 	if timer >= flash_speed * 6 or hp <= 0{
 		if hp > 0 && instance_exists(target_plant){
 			var inst = instance_create_depth(x-50,y-37,depth,obj_ladder)
+			// 梯子的宿主反查按**放置者所在格**（不能按梯子自己的坐标算：它在 y-37，靠行下沿会算到上一行）
+			inst.spawn_row = grid_row
+			inst.spawn_col = grid_col
 			if shield_hp > shield_max_hp * hurt_rate{
 				inst.sprite_index = spr_undersea_repairman_ladder
 			}
