@@ -31,10 +31,7 @@ if state == ENEMY_STATE.ACTING{
 	if timer == 10 * flash_speed{
 		if instance_exists(target_plant){
 			with target_plant{
-				if !invincible{
-					hp -= 900
-					event_user(2)
-				}
+				plant_apply_normal_damage(id, other.atk, other.id)
 			}
 		}
 	}
