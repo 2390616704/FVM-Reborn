@@ -176,6 +176,10 @@ if (ini_read_string("settings", "ime_block", "") == "") {
 }
 global.overlap_planting = ini_read_bool("settings", "overlap_planting", false);
 global.pre_place_on_cooldown = ini_read_bool("settings", "pre_place_on_cooldown", true);
+global.mouse_limit_hz = ini_read_real("settings", "mouse_limit_hz", 500);
+if (ini_read_string("settings", "mouse_limit_hz", "") == "") {
+    ini_write_real("settings", "mouse_limit_hz", 500);
+}
 for (var i = 0; i < array_length(global.keybind_config); i++) {
 	    var kb = global.keybind_config[i];
 	    var key_val = ini_read_real("keybinds", kb.name, kb.default1);

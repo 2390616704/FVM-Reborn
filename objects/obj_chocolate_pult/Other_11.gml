@@ -2,6 +2,8 @@
 var butter_shot = force_butter
 force_butter = false
 large_chocolate_count ++
+var control_shot = butter_shot || large_chocolate_count >= large_chocolate_interval
+if (control_shot) large_chocolate_count = 0
 var inst = instance_create_depth(x-20, y-125, depth-500, obj_chocolatepult_bullet)
 global.audio.play(snd_throw, 0, 0)
 
@@ -52,8 +54,34 @@ if (target_instance != noone && instance_exists(target_instance)) {
 inst.hit_enemy = false
 inst.splashed = false
 inst.shape = shape
-if (butter_shot || large_chocolate_count >= large_chocolate_interval) {
-	inst.sprite_index = spr_chocolatepult_bullet_large
-	inst.damage *= 2
-	large_chocolate_count = 0
+
+if (control_shot) {
+	var _stun_time = (shape >= 1) ? 420 : 240;
+	var _current = target_instance;
+	while (instance_exists(_current) && _current.hp > 0) {
+		if (variable_instance_exists(_current, "stun_timer") && _current.stun_timer < _stun_time) {
+			_current.stun_timer = _stun_time;
+		}
+		if (variable_instance_exists(_current, "stun_sprite")) {
+			_current.stun_sprite = spr_mouse_stick;
+		}
+		if (_current.hp >= _current.maxhp * 0.5) break;
+
+		var _current_id = _current.id;
+		var _current_row = _current.grid_row;
+		var _current_col = _current.grid_col;
+		var _card_target_type = target_type;
+		var _next = noone;
+		var _next_col = 999999;
+		with (obj_enemy_parent) {
+			if (id == _current_id) continue;
+			if (hp <= 0 || grid_row != _current_row || grid_col <= _current_col) continue;
+			if (!can_target_on(_card_target_type, target_type)) continue;
+			if (grid_col < _next_col) {
+				_next_col = grid_col;
+				_next = id;
+			}
+		}
+		_current = _next;
+	}
 }

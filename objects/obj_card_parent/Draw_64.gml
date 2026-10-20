@@ -2,7 +2,7 @@ if global.is_paused{
 	exit
 }
 // 植物血条绘制
-if (global.card_hpbar && hp > 0 && plant_type != "coffee") {
+if (global.card_hpbar && hp > 0 && hp != 50 && plant_type != "coffee") {
 	if (global.overlap_planting && grid_col >= 0 && grid_col < global.grid_cols && grid_row >= 0 && grid_row < global.grid_rows) {
 		var cell_list = ds_grid_get(global.grid_plants, grid_col, grid_row);
 		var display_target = noone;

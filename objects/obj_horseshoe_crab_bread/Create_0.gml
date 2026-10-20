@@ -16,10 +16,12 @@ if shape == 1{
 sprite_index = sprite_list[0]
 idle_anim = 12
 flash_speed = 5
-plant_type = "normal"
+plant_type = "shield_outer"
 is_slowdown = false
 attack_timer = 0
 drown_timer = 0
 lethal_blocks = 8
 lethal_blocks_max = 8
 lethal_restore_full = false
+lethal_guard = true
+lethal_guard_radius = 0

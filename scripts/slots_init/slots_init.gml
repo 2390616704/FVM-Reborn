@@ -10,7 +10,7 @@ function slots_init(){
 	]);
 	
 	register_card("toast_bread",obj_toast_bread,[
-		{"shape":0,"sprite":spr_toast_bread,"cost":50,"cooldown":30*60,"description":"土司面包：阻挡敌人前进，可抵挡8次致命攻击（每次损失1/8最大生命值），并为自身3×3中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none"}
+		{"shape":0,"sprite":spr_toast_bread,"cost":50,"cooldown":30*60,"description":"土司面包：阻挡敌人前进，可抵挡8次致命攻击（每次损失1/8最大生命值），作为所在格外层，并为自身3×3中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none"}
 	])
 	
 	register_card("flour_sack",obj_flour_sack,[
@@ -62,8 +62,8 @@ function slots_init(){
 		{"shape":2, "sprite":spr_coffee_pot_icon_2, "cost":75, "cooldown":7*60, "description":"红温咖啡喷壶：穿透攻击一行敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_coffee_pot_2}
 	]);
 	register_card("chocolate_bread",obj_chocolate_bread,[
-		{"shape":0,"sprite":spr_chocolate_bread,"cost":125,"cooldown":30*60,"description":"巧克力面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none"},
-		{"shape":1,"sprite":spr_chocolate_bread_icon_1,"cost":125,"cooldown":30*60,"description":"德芙面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_bread_1}
+		{"shape":0,"sprite":spr_chocolate_bread,"cost":125,"cooldown":30*60,"description":"巧克力面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），作为所在格外层，并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none"},
+		{"shape":1,"sprite":spr_chocolate_bread_icon_1,"cost":125,"cooldown":30*60,"description":"德芙面包：阻挡敌人翻越，可抵挡8次致命攻击（每次损失1/8最大生命值），作为所在格外层，并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_bread_1}
 	])
 	register_card("water_tea_cup",obj_water_tea_cup,[
 		{"shape":0,"sprite":spr_water_tea_cup,"cost":0,"cooldown":7*60,"description":"水上茶杯：在水上攻击三格内敌人，白天睡觉","plant_type":"normal","feature_type":"water","target_card":"none"}
@@ -178,9 +178,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_ice_egg_boiler_pult_icon_2, "cost":200, "cooldown":50*60, "description":"冰河煮蛋器：投掷减速冰鸡蛋","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_ice_egg_boiler_pult_2}
 	]);
 	register_card("chocolate_pult", obj_chocolate_pult, [
-	    {"shape":0, "sprite":spr_chocolate_pult_icon, "cost":125, "cooldown":7*60, "description":"巧克力投手：投掷能定住敌人的巧克力","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_pult},
-	    {"shape":1, "sprite":spr_chocolate_pult_icon_1, "cost":125, "cooldown":7*60, "description":"浓情巧克力投手：投掷能定住敌人的巧克力","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_pult_1},
-		{"shape":2, "sprite":spr_chocolate_pult_icon_2, "cost":125, "cooldown":7*60, "description":"脆心巧克力投手：投掷两块能定住敌人的巧克力","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_pult_2}
+	    {"shape":0, "sprite":spr_chocolate_pult_icon, "cost":125, "cooldown":7*60, "description":"巧克力投手：普通巧克力豆；每第三次投掷直接定身目标，若目标生命低于50%，继续定身其身后敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_pult},
+	    {"shape":1, "sprite":spr_chocolate_pult_icon_1, "cost":125, "cooldown":7*60, "description":"浓情巧克力投手：普通巧克力豆；每第三次投掷直接定身目标，若目标生命低于50%，继续定身其身后敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_pult_1},
+		{"shape":2, "sprite":spr_chocolate_pult_icon_2, "cost":125, "cooldown":7*60, "description":"脆心巧克力投手：每次投掷两块普通巧克力豆；每第三次投掷直接定身目标，若目标生命低于50%，继续定身其身后敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_chocolate_pult_2}
 	]);
 	register_card("chocolate_cannon", obj_chocolate_cannon, [
 	    {"shape":0, "sprite":spr_chocolate_cannon, "cost":300, "cooldown":50*60, "description":"巧克力大炮：发射3*3范围爆炸的巧克力球","plant_type":"normal","feature_type":"upgrade","target_card":"chocolate_pult"},
@@ -204,7 +204,7 @@ function slots_init(){
 		{"shape":2, "sprite":spr_cherry_pudding_2, "cost":75, "cooldown":7*60, "description":"热量反弹布丁：反弹子弹并附加伤害","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	])
 	register_card("skewer_bomb",obj_skewer_bomb,[
-	    {"shape":0, "sprite":spr_skewer_bomb_icon, "cost":50, "cooldown":30*60, "description":"麻辣串炸弹：炸死单格范围空军","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_skewer_bomb}
+	    {"shape":0, "sprite":spr_skewer_bomb_icon, "cost":50, "cooldown":30*60, "description":"麻辣串炸弹：炸死5×5范围空军","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_skewer_bomb}
 	])
 	register_card("gatlin_ice_long_bao",obj_gatlin_ice_long_bao,[
 	    {"shape":0, "sprite":spr_gatlin_ice_long_bao, "cost":300, "cooldown":50*60, "description":"机枪冰冻小笼包：发射四发冰包子","plant_type":"normal","feature_type":"upgrade","target_card":"double_ice_long_bao"}
@@ -256,9 +256,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_dragon_fruit_2_icon, "cost":375, "cooldown":60*60, "description":"九天皓日火龙果：灼烧5*5范围敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_dragon_fruit_2}
 	])
 	register_card("pineapple_explosive_bread",obj_pineapple_explosive_bread,[
-	    {"shape":0, "sprite":spr_pineapple_explosive_bread_0_0, "cost":150, "cooldown":50*60, "description":"菠萝爆炸面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none"},
-	    {"shape":1, "sprite":spr_pineapple_explosive_bread_1_icon, "cost":150, "cooldown":50*60, "description":"独角菠萝面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_1_0},
-		{"shape":2, "sprite":spr_pineapple_explosive_bread_2_icon, "cost":150, "cooldown":50*60, "description":"皇冠菠萝面包：死亡后产生5*5范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_2_0}
+	    {"shape":0, "sprite":spr_pineapple_explosive_bread_0_0, "cost":150, "cooldown":50*60, "description":"菠萝爆炸面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），作为所在格外层，并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_pineapple_explosive_bread_1_icon, "cost":150, "cooldown":50*60, "description":"独角菠萝面包：死亡后产生3*3范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），作为所在格外层，并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_1_0},
+		{"shape":2, "sprite":spr_pineapple_explosive_bread_2_icon, "cost":150, "cooldown":50*60, "description":"皇冠菠萝面包：死亡后产生5*5范围爆炸，可抵挡8次致命攻击（每次损失1/8最大生命值），作为所在格外层，并为自身5×5中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none","place_preview":spr_pineapple_explosive_bread_2_0}
 	])
 	register_card("ice_cream",obj_ice_cream,[
 	    {"shape":0, "sprite":spr_ice_cream_icon, "cost":100, "cooldown":60*60, "description":"冰激凌：本格卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"},
@@ -328,8 +328,8 @@ function slots_init(){
 		{"shape":2, "sprite":spr_coal_starfish_2_icon, "cost":225, "cooldown":7*60, "description":"芥末海星刺身：向五个方向发射两颗星星","plant_type":"normal","feature_type":"amphi","target_card":"none","place_preview":spr_coal_starfish_2}
 	]);
 	register_card("horseshoe_crab_bread",obj_horseshoe_crab_bread,[
-		{"shape":0,"sprite":spr_horseshoe_crab_bread_0_0,"cost":150,"cooldown":30*60,"description":"老虎蟹面包：阻挡剑鱼鼠冲刺，可抵挡8次致命攻击（每次损失1/8最大生命值）","plant_type":"normal","feature_type":"normal","target_card":"none"},
-		{"shape":1,"sprite":spr_horseshoe_crab_bread_1_0,"cost":150,"cooldown":30*60,"description":"帝王蟹面包：阻挡剑鱼鼠冲刺，可抵挡8次致命攻击（每次损失1/8最大生命值）","plant_type":"normal","feature_type":"normal","target_card":"none"}
+		{"shape":0,"sprite":spr_horseshoe_crab_bread_0_0,"cost":150,"cooldown":30*60,"description":"老虎蟹面包：作为所在格外层为植物承担普通和致命伤害，阻挡剑鱼鼠冲刺，可抵挡8次致命攻击（每次损失1/8最大生命值）","plant_type":"shield_outer","feature_type":"normal","target_card":"none"},
+		{"shape":1,"sprite":spr_horseshoe_crab_bread_1_0,"cost":150,"cooldown":30*60,"description":"帝王蟹面包：作为所在格外层为植物承担普通和致命伤害，阻挡剑鱼鼠冲刺，可抵挡8次致命攻击（每次损失1/8最大生命值）","plant_type":"shield_outer","feature_type":"normal","target_card":"none"}
 	])
 	register_card("curry_lobster_cannon", obj_curry_lobster_cannon, [
 	    {"shape":0, "sprite":spr_curry_lobster_cannon_icon, "cost":275, "cooldown":20*60, "description":"咖喱龙虾炮：发射两个追踪咖喱炮弹，陆地窒息","plant_type":"normal","feature_type":"amphi","target_card":"none","place_preview":spr_curry_lobster_cannon},

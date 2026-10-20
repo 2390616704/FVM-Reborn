@@ -19,7 +19,7 @@ if shape == 2{
 sprite_index = sprite_list[0]
 idle_anim = 12
 flash_speed = 5
-plant_type = "normal"
+plant_type = "shield_outer"
 is_slowdown = false
 attack_timer = 0
 lethal_blocks = 8
