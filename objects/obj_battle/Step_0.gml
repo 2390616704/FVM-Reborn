@@ -9,6 +9,7 @@ if global.lose_focus_pause{
 }
 
 battle_time ++
+melon_stealth_update()
 // obj_controller STEP 事件
 if global.debug{
 	if keyboard_check_pressed(ord("M")){

@@ -21,8 +21,10 @@ if state == "attack"{
 				instance_destroy(other)
 			}
 			if plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"  && plant_id != "soda_bubble"{
-				hp -= 20
-				event_user(2)
+				if (!melon_shield_handle_damage(id, 20, noone)) {
+					hp -= 20
+					event_user(2)
+				}
 			}
 		}
 	}

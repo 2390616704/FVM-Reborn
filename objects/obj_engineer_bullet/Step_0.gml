@@ -28,11 +28,12 @@ if x >= target_x - 10 && x <= target_x + 10{
     // 使用碰撞检测查找攻击范围内的植物
     with (obj_card_parent) {
 				
+        if(variable_instance_exists(id, "is_hidden") && is_hidden) continue;
         // 检查是否在攻击范围内
         if(grid_col == erase_col && grid_row == erase_row) {
-            // 按铲除顺序优先选择
-            for (var i = 0; i < ds_list_size(global.shovel_order); i++) {
-                var target_type = ds_list_find_value(global.shovel_order, i);
+            // 按常规承伤顺序优先选择
+            for (var i = 0; i < ds_list_size(global.eat_order); i++) {
+                var target_type = ds_list_find_value(global.eat_order, i);
                     
                 if (plant_type == target_type) {
                     var current_target = plant_order_list[i]; if (current_target == noone || !instance_exists(current_target) || (grid_col == current_target.grid_col && grid_row == current_target.grid_row && hp > current_target.hp)) { plant_order_list[i] = id; }
@@ -47,8 +48,7 @@ if x >= target_x - 10 && x <= target_x + 10{
 	for(var i = 0 ; i < array_length(plant_order_list) ; i++){
 		if plant_order_list[i] != noone && instance_exists(plant_order_list[i]){
 			with plant_order_list[i]{
-				hp -= other.damage
-				event_user(2)
+				plant_apply_normal_damage(id, other.damage)
 			}
 			break
 		}

@@ -13,33 +13,171 @@ function plant_consume_lethal_block(plant) {
     return true;
 }
 
+function plant_is_hidden(plant) {
+    return instance_exists(plant) &&
+        variable_instance_exists(plant, "is_hidden") &&
+        plant.is_hidden;
+}
+
 function plant_find_guard(target, require_lethal_block) {
     if (!instance_exists(target)) return noone;
 
     var best_guard = noone;
-    var best_distance = 99999;
+    var best_hp = 999999999;
+    var best_distance = 999999999;
     with (obj_card_parent) {
         if (id == target.id) continue;
         if (!variable_instance_exists(id, "lethal_guard") || !lethal_guard) continue;
-        if (!variable_instance_exists(id, "lethal_guard_depth")) continue;
+        if (hp <= 0 || plant_is_hidden(id)) continue;
         if (require_lethal_block && lethal_blocks <= 0) continue;
-        if (!require_lethal_block && hp <= 0) continue;
-        if (target.hp > hp) continue;
-        if (grid_row < target.grid_row - 1 || grid_row > target.grid_row + 1) continue;
+        if (!variable_instance_exists(id, "lethal_guard_radius")) continue;
 
-        if (target.grid_col >= grid_col - lethal_guard_depth && target.grid_col <= grid_col - 1) {
-            var distance = grid_col - target.grid_col;
-            if (distance < best_distance) {
-                best_distance = distance;
-                best_guard = id;
-            }
+        var row_distance = abs(grid_row - target.grid_row);
+        var col_distance = abs(grid_col - target.grid_col);
+        if (row_distance > lethal_guard_radius || col_distance > lethal_guard_radius) continue;
+
+        var distance = max(row_distance, col_distance);
+        if (best_guard == noone || hp < best_hp || (hp == best_hp && distance < best_distance)) {
+            best_hp = hp;
+            best_distance = distance;
+            best_guard = id;
         }
     }
     return best_guard;
 }
 
-function plant_apply_normal_damage(plant, damage) {
+function melon_shield_find_at(col, row) {
+    var melon = noone;
+    with (obj_melon_shield) {
+        if (hp > 0 && grid_col == col && grid_row == row) {
+            melon = id;
+        }
+    }
+    return melon;
+}
+
+function melon_shield_reflect(melon, original_damage) {
+    var _x = melon.x;
+    var _y = melon.y;
+    var _range = 250;
+    var _enemies = [];
+    with (obj_enemy_parent) {
+        if (hp > 0 &&
+            point_distance(x, y, _x, _y) < _range &&
+            grid_row >= melon.grid_row - 1 &&
+            grid_row <= melon.grid_row + 1) {
+            array_push(_enemies, id);
+        }
+    }
+    if (array_length(_enemies) == 0) return;
+
+    var _total = min(original_damage, 1000);
+    if (_total <= 0) return;
+    var _share = _total / array_length(_enemies);
+    for (var i = 0; i < array_length(_enemies); i++) {
+        var _enemy = _enemies[i];
+        if (!instance_exists(_enemy)) continue;
+        _enemy.damage_amount = _share;
+        _enemy.damage_type = "normal";
+        with (_enemy) event_user(0);
+    }
+}
+
+function melon_shield_create_flame(melon, original_damage) {
+    var _value = min(original_damage * 0.5, 1000);
+    if (_value <= 0) return;
+    var inst = instance_create_depth(melon.x, melon.y - 60, melon.depth - 1000, obj_flame);
+    inst.value = _value;
+}
+
+function melon_stealth_apply(plant) {
+    if (!instance_exists(plant)) return;
+    if (!variable_instance_exists(plant, "is_hidden")) return;
+    if (!plant.is_hidden) {
+        plant.stealth_original_alpha = plant.image_alpha;
+        plant.stealth_original_invincible = plant.invincible;
+        plant.is_hidden = true;
+    }
+    plant.image_alpha = 0.9;
+    plant.invincible = true;
+}
+
+function melon_stealth_restore(plant) {
+    if (!instance_exists(plant) || !variable_instance_exists(plant, "is_hidden") || !plant.is_hidden) return;
+    plant.image_alpha = variable_instance_exists(plant, "stealth_original_alpha") ? plant.stealth_original_alpha : 1;
+    plant.invincible = variable_instance_exists(plant, "stealth_original_invincible") ? plant.stealth_original_invincible : false;
+    plant.is_hidden = false;
+}
+
+function melon_stealth_trigger(col, row) {
+    if (!variable_global_exists("stealth_timers")) return;
+    if (col < 0 || col >= global.grid_cols || row < 0 || row >= global.grid_rows) return;
+    global.stealth_timers[row][col] = 300;
+    with (obj_card_parent) {
+        if (grid_col == col && grid_row == row) {
+            melon_stealth_apply(id);
+        }
+    }
+}
+
+function melon_stealth_update() {
+    if (!variable_global_exists("stealth_timers")) return;
+
+    for (var r = 0; r < global.grid_rows; r++) {
+        for (var c = 0; c < global.grid_cols; c++) {
+            if (global.stealth_timers[r][c] > 0) {
+                global.stealth_timers[r][c]--;
+            }
+        }
+    }
+
+    with (obj_card_parent) {
+        var active = grid_col >= 0 && grid_col < global.grid_cols &&
+            grid_row >= 0 && grid_row < global.grid_rows &&
+            global.stealth_timers[grid_row][grid_col] > 0;
+        if (active) {
+            if (variable_instance_exists(id, "is_hidden") && is_hidden) {
+                image_alpha = 0.9;
+                invincible = true;
+            } else {
+                melon_stealth_apply(id);
+            }
+        } else if (variable_instance_exists(id, "is_hidden") && is_hidden) {
+            melon_stealth_restore(id);
+        }
+    }
+}
+
+function melon_shield_handle_damage(plant, damage, attacker) {
+    if (!instance_exists(plant) || damage <= 0) return false;
+    if (variable_instance_exists(plant, "invincible") && plant.invincible) return true;
+
+    var melon = melon_shield_find_at(plant.grid_col, plant.grid_row);
+    if (melon == noone) return false;
+    if (plant_is_hidden(melon) || melon.invincible) return true;
+
+    var original_damage = damage;
+    var applied_damage = min(original_damage, 100);
+    melon.hp -= applied_damage;
+    with (melon) event_user(2);
+
+    if (original_damage > 100 && attacker != noone && instance_exists(attacker) && variable_instance_exists(attacker, "target_plant")) {
+        plant_push_attacker(attacker);
+    }
+
+    var survived = melon.hp > 0;
+    melon_stealth_trigger(melon.grid_col, melon.grid_row);
+
+    if (survived) {
+        if (melon.shape >= 1) melon_shield_reflect(melon, original_damage);
+        if (melon.shape >= 2) melon_shield_create_flame(melon, original_damage);
+    }
+    return true;
+}
+
+function plant_apply_normal_damage(plant, damage, attacker = noone) {
     if (!instance_exists(plant) || plant.invincible) return;
+    if (melon_shield_handle_damage(plant, damage, attacker)) return;
 
     var guard = plant_find_guard(plant, false);
     var receiver = (guard != noone) ? guard : plant;
@@ -47,7 +185,7 @@ function plant_apply_normal_damage(plant, damage) {
     with (receiver) event_user(2);
 }
 
-function plant_apply_overlap_attack(target, damage) {
+function plant_apply_overlap_attack(target, damage, attacker = noone) {
     if (!instance_exists(target)) return;
 
     var col = target.grid_col;
@@ -66,8 +204,9 @@ function plant_apply_overlap_attack(target, damage) {
         }
     }
     if (main_plant == noone) return;
+    if (melon_shield_handle_damage(main_plant, damage, attacker)) return;
 
-    plant_apply_normal_damage(main_plant, damage);
+    plant_apply_normal_damage(main_plant, damage, attacker);
 
     for (var i = 0; i < ds_list_size(cell_plants); i++) {
         var plant = ds_list_find_value(cell_plants, i);
@@ -82,6 +221,7 @@ function plant_apply_overlap_attack(target, damage) {
 function plant_apply_boss_lethal(plant, attacker) {
     if (!instance_exists(plant)) return;
     if (variable_instance_exists(plant, "invincible") && plant.invincible) return;
+    if (melon_shield_handle_damage(plant, 9999999, attacker)) return;
 
     var guard = plant_find_guard(plant, true);
     if (guard != noone && plant_consume_lethal_block(guard)) {

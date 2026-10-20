@@ -10,3 +10,5 @@ plant_type = "normal"
 lethal_blocks = 8
 lethal_blocks_max = 8
 lethal_restore_full = false
+lethal_guard = true
+lethal_guard_radius = 1

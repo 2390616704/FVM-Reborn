@@ -48,8 +48,10 @@ if x >= target_x - 10 && x <= target_x + 10{
 		if plant_order_list[i] != noone && instance_exists(plant_order_list[i]){
 			with plant_order_list[i]{
 				if plant_id != "player"{
-					hp -= other.damage
-					event_user(2)
+					if (!melon_shield_handle_damage(id, other.damage, noone)) {
+						hp -= other.damage
+						event_user(2)
+					}
 				}
 			}
 			break

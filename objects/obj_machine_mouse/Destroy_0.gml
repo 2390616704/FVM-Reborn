@@ -11,7 +11,9 @@ if can_explode{
 			if (point_distance(x, y, _x, _y) < _range && grid_row >= other.grid_row-1&&grid_row <= other.grid_row+1) {
 		       
 		            // 直接摧毁卡片
-					hp -= 900
+					if (!melon_shield_handle_damage(id, 900, other)) {
+						hp -= 900
+					}
 		            //instance_destroy();
 		            
 		        

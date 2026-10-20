@@ -31,7 +31,7 @@ if state != ENEMY_STATE.DEAD && state != ENEMY_STATE.ACTING && state != ENEMY_ST
 			for(var j = 0 ; j < ds_list_size(plant_list);j++){
 				var plant_inst = plant_list[| j]
 				if instance_exists(plant_inst){
-					if(plant_inst.plant_type != "coffee" && plant_inst.feature_type != "dwarf"){
+					if(plant_inst.plant_type != "coffee" && plant_inst.feature_type != "dwarf" && !(variable_instance_exists(plant_inst, "is_hidden") && plant_inst.is_hidden)){
 						target_col = i
 						attack_timer = 0
 						state = ENEMY_STATE.ACTING
@@ -81,7 +81,7 @@ if state == ENEMY_STATE.ACTING{
 			for(var j = 0 ; j < ds_list_size(plant_list);j++){
 				var plant_inst = plant_list[| j]
 				if instance_exists(plant_inst){
-					if(plant_inst.plant_type != "coffee" && plant_inst.feature_type != "dwarf"){
+					if(plant_inst.plant_type != "coffee" && plant_inst.feature_type != "dwarf" && !(variable_instance_exists(plant_inst, "is_hidden") && plant_inst.is_hidden)){
 						target_col = i
 						state = ENEMY_STATE.ACTING
 						break

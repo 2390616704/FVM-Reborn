@@ -28,8 +28,10 @@ with obj_card_parent{
 		if (plant_type != "coffee" && !invincible && array_get_index(other.ignore_list,plant_id) == -1 && !(plant_id == "player" && hp <= 0.05*max_hp)){
 			other.non_undersea_card = true
 			if !other.has_bubble && other.timer mod 60 == 0{ 
-				hp -= 0.05*max_hp
-				event_user(2)
+				if (!melon_shield_handle_damage(id, 0.05*max_hp, noone)) {
+					hp -= 0.05*max_hp
+					event_user(2)
+				}
 			}
 		}
 	}

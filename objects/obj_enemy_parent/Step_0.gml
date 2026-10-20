@@ -74,8 +74,8 @@ if is_frozen || is_scare || is_stun{
 timer++;
 
 // 状态处理前，先检查目标植物是否存在
-if (instance_exists(target_plant) && target_plant.hp <= 0) {
-    target_plant = noone;  // 目标已被消灭
+if (instance_exists(target_plant) && (target_plant.hp <= 0 || plant_is_hidden(target_plant))) {
+    target_plant = noone;
 }
 
 // 状态机
@@ -147,6 +147,7 @@ switch(state) {
 		
         // 使用碰撞检测查找攻击范围内的植物
         with (obj_card_parent) {
+			if (plant_is_hidden(id)) continue;
 			var dx = x - other.x;
 			var dy = y - other.y;
 			var is_in_front = false
@@ -254,6 +255,7 @@ switch(state) {
 		
         // 使用碰撞检测查找攻击范围内的植物
         with (obj_card_parent) {
+			if (plant_is_hidden(id)) continue;
 			var dx = x - other.x;
 			var dy = y - other.y;
 			var is_in_front = false
@@ -304,11 +306,11 @@ switch(state) {
                 plant_apply_boss_lethal(target_plant, id)
             }
             else if (global.overlap_planting) {
-                plant_apply_overlap_attack(target_plant, atk)
+                plant_apply_overlap_attack(target_plant, atk, id)
             }
             else {
                 with (target_plant) {
-					plant_apply_normal_damage(id, other.atk)
+					plant_apply_normal_damage(id, other.atk, other.id)
 	                // 播放受击效果
 	                if (instance_exists(other)) {
 	                    //instance_create_depth(x, y, depth - 1, obj_plant_hit);

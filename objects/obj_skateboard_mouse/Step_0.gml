@@ -105,6 +105,7 @@ switch(state) {
 		
         // 使用碰撞检测查找攻击范围内的植物
         with (obj_card_parent) {
+			if (plant_is_hidden(id)) continue;
 			var dx = x - other.x;
 			var dy = y - other.y;
 			var is_in_front = false
@@ -182,6 +183,7 @@ switch(state) {
 		
 	        // 使用碰撞检测查找攻击范围内的植物
 	        with (obj_card_parent) {
+			if (plant_is_hidden(id)) continue;
 				var dx = x - other.x;
 				var dy = y - other.y;
 				var is_in_front = false
@@ -224,9 +226,11 @@ switch(state) {
 	            // 对目标植物造成伤害
 	            with (target_plant) {
 					if !invincible{
-						hp -= other.atk;
+						if (!melon_shield_handle_damage(id, other.atk, other)) {
+							hp -= other.atk;
+							event_user(2)
+						}
 					}
-	                event_user(2)
 	                // 播放受击效果
 	                if (instance_exists(other)) {
 	                    //instance_create_depth(x, y, depth - 1, obj_plant_hit);

@@ -20,8 +20,10 @@ if shape < 1{
 			}
 		}
 		if !has_bubble && !has_seawater{
-			hp -= 0.05*max_hp
-			event_user(2)
+			if (!melon_shield_handle_damage(id, 0.05*max_hp, noone)) {
+				hp -= 0.05*max_hp
+				event_user(2)
+			}
 		}
 	}
 }

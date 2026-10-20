@@ -48,14 +48,17 @@ if hp > 0 && state != ENEMY_STATE.DEAD{
 			x -= 1.8
 		}
 		with obj_card_parent{
+			if (plant_is_hidden(id)) continue;
 			if grid_col == other.grid_col && grid_row == other.grid_row &&
 			plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy" && plant_id != "soda_bubble"{
 				if array_get_index(other.block_list,plant_id)  == -1{
 					plant_apply_boss_lethal(id, other)
 				}
 				else{
-					hp -= 300
-					event_user(2)
+					if (!melon_shield_handle_damage(id, 300, other)) {
+						hp -= 300
+						event_user(2)
+					}
 					other.timer = 0
 					other.state = ENEMY_STATE.DIG
 					sprite_index = spr_swordfish_mouse_stun

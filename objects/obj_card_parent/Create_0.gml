@@ -56,4 +56,7 @@ plant_id = ""  // 植物唯一标识符
 current_level = 0  // 当前等级
 parent_card_slot = noone
 parent_platform = noone
+is_hidden = false
+stealth_original_alpha = 1
+stealth_original_invincible = false
 

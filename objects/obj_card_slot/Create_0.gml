@@ -384,6 +384,9 @@ function place_card_at(col, row, shift_x, shift_y, card_data, plant_obj, cost, d
 	new_plant.parent_platform = platform;
 	var depth_value = calculate_plant_depth(col, row, new_plant.plant_type);
 	card_created(new_plant, col, row);
+	if (variable_global_exists("stealth_timers") && global.stealth_timers[row][col] > 0) {
+		melon_stealth_apply(new_plant);
+	}
 	new_plant.depth = depth_value - new_plant.depth_offset * 0.001;
 
 	var terrain_type = global.grid_terrains[row][col].type;
