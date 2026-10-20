@@ -58,6 +58,7 @@ grid_row = 99
 
 damage_amount = 0
 damage_type = ""
+ghost_transfer_damage = false
 
 hit_sound = snd_hit1
 
