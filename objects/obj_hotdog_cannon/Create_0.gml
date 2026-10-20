@@ -27,3 +27,4 @@ is_slowdown = false
 
 target_type = "air"
 has_air = false
+target_row = grid_row

@@ -9,17 +9,25 @@ var current_flash_speed = flash_speed
 if is_slowdown{
 	current_flash_speed *= 2
 }
-//检测自身右方是否有敌人
+//检测自身三行内右方是否有敌人
 var has_enemy = false
+var target_enemy = noone
+var min_distance = 10000
 has_air = false
+target_row = grid_row
 with(obj_enemy_parent){
-	if (grid_row == other.grid_row && grid_col >= other.grid_col && grid_col <= (global.grid_cols + 1) && can_target_on(other.target_type,target_type)){
-		has_enemy = true
-		if target_type == "air"{
-			other.has_air = true
-			break
+	if (abs(grid_row - other.grid_row) <= 1 && grid_col >= other.grid_col && grid_col <= (global.grid_cols + 1) && can_target_on(other.target_type,target_type)){
+		var distance = grid_col - other.grid_col
+		if (distance < min_distance) {
+			min_distance = distance
+			target_enemy = id
+			has_enemy = true
 		}
 	}
+}
+if (has_enemy) {
+	target_row = target_enemy.grid_row
+	has_air = (target_enemy.target_type == "air")
 }
 //攻击逻辑
 if (has_enemy) {
