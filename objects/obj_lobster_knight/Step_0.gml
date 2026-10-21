@@ -9,7 +9,7 @@ if flash_value > 0 {
 if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
-	enemy_pos = get_world_position_from_grid(9,3)
+	enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
 	image_alpha = 1
@@ -84,9 +84,9 @@ switch state{
 		
 		if timer == 34 * 5 + 2{
 			var t_row1 = irandom_range(0,global.grid_rows-1)
-			var bullet_pos1 = get_world_position_from_grid(4,t_row1)
+			var bullet_pos1 = get_world_position_from_grid(global.grid_extra_left + 4,t_row1)
 			var missle1 = instance_create_depth(bullet_pos1.x,bullet_pos1.y-180,-800,obj_lobster_knight_bullet)
-			missle1.target_col = 4
+			missle1.target_col = 12
 			missle1.target_row = t_row1
 			missle1.y_move_speed = 15
 			//var t_row2 = irandom_range(0,global.grid_rows-1)
@@ -96,9 +96,9 @@ switch state{
 			//	}
 			//	t_row2 = irandom_range(0,global.grid_rows-1)
 			//}
-			//var bullet_pos2 = get_world_position_from_grid(4,t_row2)
+			//var bullet_pos2 = get_world_position_from_grid(global.grid_extra_left + 4,t_row2)
 			//var missle2 = instance_create_depth(bullet_pos2.x,bullet_pos2.y-180,-800,obj_lobster_knight_bullet)
-			//missle2.target_col = 4
+			//missle2.target_col = 12
 			//missle2.target_row = t_row2
 			//missle2.y_move_speed = 15
 		}
@@ -162,16 +162,16 @@ switch state{
 		
 		if timer == 1{
 			skill_3_type = irandom_range(0,1)
-			var enemy_pos = get_world_position_from_grid(2,0)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 2,0)
 			if skill_3_type == 0{
-				enemy_pos = get_world_position_from_grid(2,global.grid_rows-1)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 2,global.grid_rows-1)
 			}
 			x_move_speed = (enemy_pos.x - 90 - x)/70
 			y_move_speed = (enemy_pos.y + 30 - y)/70
 		}
 		if timer == 28 * 5{
 			image_xscale = -1.8
-			var enemy_pos = get_world_position_from_grid(9,3)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 			x_move_speed = (enemy_pos.x - 90 - x)/70
 			y_move_speed = (enemy_pos.y + 30 - y)/70
 		}
@@ -207,10 +207,10 @@ switch state{
 		//	var enemy_row = irandom_range(0,global.grid_rows-1)
 		//	var enemy_pos = {}
 		//	if skill_count == 0{
-		//		enemy_pos = get_world_position_from_grid(10,3)
+		//		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,3)
 		//	}
 		//	else if skill_count == 2{
-		//		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		//		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 		//	}
 		//	else if skill_count == 1{
 		//		enemy_row = irandom_range(1,global.grid_rows-2)

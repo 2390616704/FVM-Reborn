@@ -21,7 +21,7 @@ if global.debug{
 	}
 	if keyboard_check_pressed(ord("N")){
 		var enemy_row = irandom_range(0,global.grid_rows-1)
-		var enemy_pos = get_world_position_from_grid(10,enemy_row)
+		var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 		instance_create_depth(enemy_pos.x-80,enemy_pos.y+33,-200,obj_beverage_machine)
 		boss_count++
 		//var grid_pos = get_grid_position_from_world(mouse_x,mouse_y)
@@ -140,10 +140,10 @@ else{
 	wave_data = global.level_file.waves[current_wave-1]
 }
 
-if wave_data.boss_wave && level_stage != "boss" && global.save_data.unlocked_items.elite_unlocked && wave_timer == 1{
+if wave_data.boss_wave && level_stage != "boss" && (global.random_challenge_active || global.save_data.unlocked_items.elite_unlocked) && wave_timer == 1{
 	level_stage = "boss"
 	var enemy_row = irandom_range(0,global.grid_rows-1)
-	var enemy_pos = get_world_position_from_grid(10,enemy_row)
+	var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	var boss_inst = instance_create_depth(enemy_pos.x-80,enemy_pos.y+30,-200,global.enemy_map[? wave_data.boss]._obj)
 	boss_count ++
 	if is_real(global.level_file.version){
@@ -151,7 +151,7 @@ if wave_data.boss_wave && level_stage != "boss" && global.save_data.unlocked_ite
 		boss_inst.maxhp *= wave_data.boss_1_hp_modify
 		if wave_data.boss2 != ""{
 			var enemy_row_2 = irandom_range(0,global.grid_rows-1)
-			var enemy_pos_2 = get_world_position_from_grid(10,enemy_row_2)
+			var enemy_pos_2 = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row_2)
 			var boss_2_inst = instance_create_depth(enemy_pos_2.x-80,enemy_pos_2.y+30,-200,global.enemy_map[? wave_data.boss2]._obj)
 			boss_2_inst.hp *= wave_data.boss_2_hp_modify
 			boss_2_inst.maxhp *= wave_data.boss_2_hp_modify
@@ -164,7 +164,7 @@ if wave_data.boss_wave && level_stage != "boss" && global.save_data.unlocked_ite
 	}
 }
 if wave_timer <= 0 && level_stage == "pre"{
-	if(global.save_data.unlocked_items.elite_unlocked) || !global.save_data.unlocked_items.elite_unlocked && current_wave < global.level_file.elite_wave{
+	if (global.random_challenge_active || global.save_data.unlocked_items.elite_unlocked || current_wave < global.level_file.elite_wave) {
 		if current_wave < total_wave{
 			enemy_subwave_summon()
 		}

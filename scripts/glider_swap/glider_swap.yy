@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"glider_swap",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"glider_swap",
+  "parent":{
+    "name":"assistant",
+    "path":"folders/脚本/assistant.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

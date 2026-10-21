@@ -61,6 +61,17 @@ function load_file(file_slot) {
 				global.save_data.version = 1.9
 			}
 		}
+		if !variable_struct_exists(global.save_data, "random_challenge"){
+			global.save_data.random_challenge = { current: {}, template: {} }
+		}
+		else{
+			if !variable_struct_exists(global.save_data.random_challenge, "current"){
+				global.save_data.random_challenge.current = {}
+			}
+			if !variable_struct_exists(global.save_data.random_challenge, "template"){
+				global.save_data.random_challenge.template = {}
+			}
+		}
         return true;
     } catch(e) {
         show_debug_message("存档解析错误: " + string(e));
@@ -154,7 +165,8 @@ function reset_file(file_slot){
 			],
 			"completed_tasks":[],
 			"attires":[],
-			"equipped_cookbook":[[],[],[]]
+			"equipped_cookbook":[[],[],[]],
+			"random_challenge":{"current":{},"template":{}}
         };
 	save_file(file_slot)
 }

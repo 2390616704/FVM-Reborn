@@ -13,7 +13,7 @@ if state == "start"{
 if state == "corner"{
 	x -= 8
 	image_index = floor(timer/5) mod 8 + 9
-	if x <= get_world_position_from_grid(0,0).x{
+	if x <= get_world_position_from_grid(global.grid_extra_left + 0,0).x{
 		image_alpha -= 0.1
 		if image_alpha <= 0{
 			instance_destroy()

@@ -114,7 +114,7 @@ switch state{
 			skill_cycle += 1
 			timer = 0
 			move_target_row = irandom_range(0,global.grid_rows-1)
-			var land_pos = get_world_position_from_grid(10,move_target_row)
+			var land_pos = get_world_position_from_grid(global.grid_extra_left + 10,move_target_row)
 			y_move_speed = (land_pos.y+33 - y)/180
 			state = BOSS_STATE.MOVE
 			jump_times = 0
@@ -182,7 +182,7 @@ switch state{
 			jump_times = 0
 			timer = 0
 			move_target_row = irandom_range(0,global.grid_rows-1)
-			var land_pos = get_world_position_from_grid(10,move_target_row)
+			var land_pos = get_world_position_from_grid(global.grid_extra_left + 10,move_target_row)
 			y_move_speed = (land_pos.y+33 - y)/180
 			state = BOSS_STATE.MOVE
 		}
@@ -221,7 +221,7 @@ switch state{
 			skill_cycle += 1
 			timer = 0
 			move_target_row = irandom_range(0,global.grid_rows-1)
-			var land_pos = get_world_position_from_grid(10,move_target_row)
+			var land_pos = get_world_position_from_grid(global.grid_extra_left + 10,move_target_row)
 			y_move_speed = (land_pos.y+33 - y)/180
 			state = BOSS_STATE.MOVE
 			jump_times = 0
@@ -242,7 +242,7 @@ switch state{
 		//}
 		//if timer == 360{
 		//	var enemy_row = irandom_range(0,global.grid_rows-1)
-		//	var enemy_pos = get_world_position_from_grid(10,enemy_row)
+		//	var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 		//	x = enemy_pos.x - 50
 		//	y = enemy_pos.y + 30
 		//	image_alpha = 1

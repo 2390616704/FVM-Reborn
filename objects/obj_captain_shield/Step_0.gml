@@ -6,19 +6,19 @@ image_index = timer/5 mod 18
 
 if state == "start"{
 	x -= 8
-	if x <= get_world_position_from_grid(0,0).x{
+	if x <= get_world_position_from_grid(global.grid_extra_left + 0,0).x{
 		state = "corner"
 	}
 }
 if state == "corner"{
 	y -= 8
-	if y <= get_world_position_from_grid(0,0).y{
+	if y <= get_world_position_from_grid(global.grid_extra_left + 0,0).y{
 		state = "return"
 	}
 }
 if state == "return"{
 	x += 8
-	if x >= (get_world_position_from_grid(7,0).x +50){
+	if x >= (get_world_position_from_grid(global.grid_extra_left + 7,0).x +50){
 		instance_destroy()
 	}
 }

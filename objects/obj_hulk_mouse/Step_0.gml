@@ -7,11 +7,11 @@ if flash_value > 0 {
 }
 
 if !appear{
-	var enemy_pos = get_world_position_from_grid(12,3)
+	var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 12,3)
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
 	image_alpha = 1
-	var target_x = get_world_position_from_grid(8,3).x
+	var target_x = get_world_position_from_grid(global.grid_extra_left + 8,3).x
 	x_move_speed = (target_x-x)/120
 	timer = 0
 	state = BOSS_STATE.APPEAR
@@ -41,7 +41,7 @@ switch state{
 		else{
 			image_index = floor(timer/5) mod 9 + 9
 		}
-		
+
 		if timer == 1{
 			prev_hp = hp
 			damage_take = 0
@@ -51,7 +51,7 @@ switch state{
 		else{
 			damage_take = prev_hp - hp
 		}
-		
+
 		if timer >= wait_time{
 			if damage_take >= 0.1 * maxhp{
 				skill_dropped = true
@@ -67,9 +67,9 @@ switch state{
 				state = BOSS_STATE.SKILL3
 			}
 		}
-		
+
 		break
-		
+
 	case BOSS_STATE.APPEAR:
 		sprite_index = spr_hulk_mouse_appear
 		if timer <= 120{
@@ -94,7 +94,7 @@ switch state{
 			state = BOSS_STATE.DISAPPEAR
 		}
 		break
-	
+
 	case BOSS_STATE.SKILL1:
 		if timer <= 8 * 5 - 1{
 			sprite_index = spr_hulk_mouse_skill_1_ready
@@ -161,8 +161,8 @@ switch state{
 				image_index = 16 - (floor((timer-290) /5) mod 8)
 			}
 		}
-		
-		if sprite_index == spr_hulk_mouse_skill_1 && grid_col <= 5 && (!skill_dropped || (skill_dropped && grid_col >= 5)){
+
+		if sprite_index == spr_hulk_mouse_skill_1 && grid_col <= 9 && (!skill_dropped || (skill_dropped && grid_col >= 9)){
 			with obj_card_parent{
 				if grid_col >= other.grid_col-1 && grid_col <= other.grid_col && grid_row >= other.grid_row-1 && grid_row <= other.grid_row &&
 				plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
@@ -170,9 +170,9 @@ switch state{
 				}
 			}
 		}
-		
+
 		if timer == 95 + 12 * 5 - 1{
-			var enemy_pos = get_world_position_from_grid(7,skill_1_row[1])
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,skill_1_row[1])
 			x_move_speed = (enemy_pos.x - 90 - x)/20
 			y_move_speed = (enemy_pos.y + 30 - y)/20
 		}
@@ -180,17 +180,17 @@ switch state{
 			x += x_move_speed
 			y += y_move_speed
 		}
-		
+
 		if timer >= 150 + 36 * 5 - 1{
 			jump_times = 0
 			timer = 0
 			state = BOSS_STATE.DISAPPEAR
 		}
 		break
-	
-		
+
+
 	case BOSS_STATE.SKILL2:
-		
+
 		sprite_index = spr_hulk_mouse_skill_2
 		if hp > maxhp * hurt_rate{
 			image_index = floor(timer /5) mod 23
@@ -198,7 +198,7 @@ switch state{
 		else{
 			image_index = floor(timer /5) mod 23 + 23
 		}
-		
+
 		if timer == 9 * 5 + 2{
 			for(var i = 0 ; i < 5 ; i++){
 				var erase_col = skill_2_erase_pos[i][0]
@@ -214,7 +214,7 @@ switch state{
 				}
 			}
 		}
-		
+
 		if timer >= 23*5-1{
 			jump_times = 0
 			timer = 0
@@ -222,7 +222,7 @@ switch state{
 		}
 		break
 	case BOSS_STATE.SKILL3:
-		
+
 		if timer <= 49 * 5 - 1{
 			sprite_index = spr_hulk_mouse_skill_3
 			if hp > maxhp * hurt_rate{
@@ -250,9 +250,9 @@ switch state{
 				image_index = floor((timer-61*5) /5) mod 49 + 49
 			}
 		}
-		
+
 		if timer == 49 * 5 + 4 * 5 - 1{
-			var enemy_pos = get_world_position_from_grid(9,global.grid_rows-1)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,global.grid_rows-1)
 			x_move_speed = (enemy_pos.x - 90 - x)/20
 			y_move_speed = (enemy_pos.y + 30 - y)/20
 		}
@@ -261,13 +261,13 @@ switch state{
 			y += y_move_speed
 		}
 		if timer == 23 * 5 + 2 || timer == 61*5 + 23 * 5 + 2{
-			var effect_pos = get_world_position_from_grid(6,grid_row)
+			var effect_pos = get_world_position_from_grid(global.grid_extra_left + 6,grid_row)
 			var effect_inst = instance_create_depth(effect_pos.x,effect_pos.y,-800,obj_hulk_destroy_effect)
 			effect_inst.target_row = grid_row
-			effect_inst.target_col = 6
+			effect_inst.target_col = 10
 			effect_inst.skill_dropped = skill_dropped
 		}
-		
+
 		if timer >= 110*5-1{
 			jump_times = 0
 			skill_timer = 0
@@ -275,7 +275,7 @@ switch state{
 			state = BOSS_STATE.DISAPPEAR
 		}
 		break
-		
+
 	case BOSS_STATE.DISAPPEAR:
 		sprite_index = spr_hulk_mouse_move_slow
 		if hp > maxhp * hurt_rate{
@@ -300,39 +300,39 @@ switch state{
 			}
 			if skill_choose == 2{
 				enemy_row = 2
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 0{
 				skill_1_row[0] = irandom_range(1,2)
 				skill_1_row[1] = irandom_range(4,global.grid_rows-1)
-				enemy_pos = get_world_position_from_grid(7,skill_1_row[0]) 
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,skill_1_row[0])
 			}
 			else{
 				enemy_row = 3
-				enemy_pos = get_world_position_from_grid(7,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,enemy_row)
 			}
 			x_move_speed = (enemy_pos.x - 90 - x)/30
 			y_move_speed = (enemy_pos.y + 30 - y)/30
 		}
-		
+
 		if timer > 5 * 5 - 1 && timer <= 11 * 5 - 1{
 			x += x_move_speed
 			y += y_move_speed
 		}
-		
+
 		if timer == 15*5-1{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_choose == 2{
 				enemy_row = 2
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 0{
-				enemy_pos = get_world_position_from_grid(7,skill_1_row[0]) 
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,skill_1_row[0])
 			}
 			else{
 				enemy_row = 3
-				enemy_pos = get_world_position_from_grid(7,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,enemy_row)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30
@@ -340,7 +340,7 @@ switch state{
 			state = BOSS_STATE.IDLE
 		}
 		break
-	
+
 	case BOSS_STATE.DEATH:
 		sprite_index = spr_hulk_mouse_death
 		image_index = floor(timer/5) mod image_number

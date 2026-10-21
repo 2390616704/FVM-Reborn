@@ -138,7 +138,7 @@ switch state{
 		}
 		if timer == 210{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 50
 			y = enemy_pos.y + 30
 			image_alpha = 1
@@ -218,7 +218,7 @@ switch state{
 			}
 			else{
 				target_pos.row = irandom_range(1,global.grid_rows-1)
-				target_pos.col = 10
+				target_pos.col = 14
 				var land_pos = get_world_position_from_grid(target_pos.col,target_pos.row)
 				x_move_speed = (land_pos.x-80 - x)/180
 				y_move_speed = (land_pos.y+33 - y)/180

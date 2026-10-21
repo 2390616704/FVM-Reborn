@@ -38,7 +38,7 @@ if state == ENEMY_STATE.APPEAR{
 		anim_timer++
 		x -= current_move_speed
 		image_index = floor(anim_timer/flash_speed) mod 6
-		if x <= get_world_position_from_grid(9,grid_row).x{
+		if x <= get_world_position_from_grid(global.grid_extra_left + 9,grid_row).x{
 			anim_timer = 0
 			sprite_index = spr_magician_mouse
 			state = ENEMY_STATE.ACTING

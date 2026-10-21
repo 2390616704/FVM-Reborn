@@ -10,13 +10,13 @@ if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
 	if skill_count == 2{
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	else if skill_count == 0{
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	x = enemy_pos.x - 80
 	y = enemy_pos.y + 30
@@ -126,7 +126,7 @@ switch state{
 		if timer == 1{
 			for(var i = 0;i < 5 ; i++){
 				var tg_row = irandom_range(0,global.grid_rows-1)
-				var tg_y = get_world_position_from_grid(9,tg_row).y + 33
+				var tg_y = get_world_position_from_grid(global.grid_extra_left + 9,tg_row).y + 33
 				var inst = instance_create_depth(x-20+10*i,y,-800,obj_messenger_ignis_fatuus)
 				inst.y_move = (tg_y-y)/120
 			}
@@ -270,7 +270,7 @@ switch state{
 		
 		if timer == 7 * 5 - 2{
 			var inst = instance_create_depth(x-75,y-45,-800,obj_messenger_mace)
-			var target_pos = get_world_position_from_grid(4,3)
+			var target_pos = get_world_position_from_grid(global.grid_extra_left + 4,3)
 			inst.x_speed = (target_pos.x-inst.x)/120
 			inst.y_speed = (target_pos.y-inst.y)/120
 			inst.maxhp *= (1 + ((maxhp-30000)/30000)*0.5)
@@ -301,13 +301,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			else if skill_count == 0{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30

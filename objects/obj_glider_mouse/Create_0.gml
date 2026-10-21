@@ -16,3 +16,5 @@ state = ENEMY_STATE.APPEAR
 sprite_index = spr_glider_mouse_air
 special_ash = true
 anim_timer = 0
+
+glider_airborne = true

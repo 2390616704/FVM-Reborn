@@ -46,6 +46,10 @@ if (first_frame) {
     }
 }
 
+if (!movement_enabled) {
+    exit;
+}
+
 if (global.is_paused) { 
     exit; 
 }
@@ -312,9 +316,11 @@ with (obj_card_parent) {
 		
 		// 植物格子坐标跟随真实x,y来，保证游戏中的视觉正确性和敌人索敌的正确性，可能会操作和格子注册不一致的问题，目前感觉问题不大
 		// 植物的格子坐标会注册坐标慢半个单位的节奏
-		var grid_pos = get_grid_position_from_world(x, y)
-        grid_col = grid_pos.col
-        grid_row = grid_pos.row
+        if (!(variable_instance_exists(id, "platform_grid_lock") && platform_grid_lock)) {
+            var grid_pos = get_grid_position_from_world(x, y)
+            grid_col = grid_pos.col
+            grid_row = grid_pos.row
+        }
 		
         var _type = plant_type
         if (object_index == obj_cotton_candy) _type = "lilypad"
@@ -322,7 +328,9 @@ with (obj_card_parent) {
 			if(card_equipped_attire_id(plant_id) != "bubble_maltose")_type = "coffee"
 			else _type = "lilypad"
 		}
-        depth = calculate_plant_depth(grid_col, grid_row, _type)
+        var _depth_col = clamp(grid_col, 0, global.grid_cols - 1)
+        var _depth_row = clamp(grid_row, 0, global.grid_rows - 1)
+        depth = calculate_plant_depth(_depth_col, _depth_row, _type)
     }
 }
 

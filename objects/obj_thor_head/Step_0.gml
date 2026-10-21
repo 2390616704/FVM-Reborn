@@ -7,7 +7,7 @@ if flash_value > 0 {
 }
 
 if !appear{
-	var ap_pos = get_world_position_from_grid(10,1)
+	var ap_pos = get_world_position_from_grid(global.grid_extra_left + 10,1)
 	x = ap_pos.x-90
 	y = ap_pos.y+30
 	image_alpha = 1
@@ -31,16 +31,16 @@ if (hp <= 0 && state != BOSS_STATE.DEATH) {
 }
 
 //移动阶段处理
-if move_stage == 0 && x <= get_world_position_from_grid(5,1).x{
+if move_stage == 0 && x <= get_world_position_from_grid(global.grid_extra_left + 5,1).x{
 	move_stage = 1
 }
-if move_stage == 1 && y >= get_world_position_from_grid(5,3).y + 30{
+if move_stage == 1 && y >= get_world_position_from_grid(global.grid_extra_left + 5,3).y + 30{
 	move_stage = 2
 }
-if move_stage == 2 && x <= get_world_position_from_grid(2,3).x{
+if move_stage == 2 && x <= get_world_position_from_grid(global.grid_extra_left + 2,3).x{
 	move_stage = 3
 }
-if move_stage == 3 && y >= get_world_position_from_grid(2,6).y + 30{
+if move_stage == 3 && y >= get_world_position_from_grid(global.grid_extra_left + 2,6).y + 30{
 	move_stage = 4
 }
 summon_timer ++
@@ -206,7 +206,7 @@ switch state{
 		}
 		if timer == 210{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30
 			image_alpha = 1

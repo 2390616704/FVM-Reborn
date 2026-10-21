@@ -93,12 +93,12 @@ switch state{
 		if timer >= 100 && timer <= 280 && jump_times < 7{
 			if (timer-100) mod 20 == 1{
 				with obj_card_parent{
-					if grid_col == 6 && grid_row == (6 - other.jump_times) &&
+					if grid_col == 10 && grid_row == (6 - other.jump_times) &&
 					plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
 						plant_apply_boss_lethal(id, other)
 					}
 				}
-				var effect_pos = get_world_position_from_grid(6,6-jump_times)
+				var effect_pos = get_world_position_from_grid(global.grid_extra_left + 6,6-jump_times)
 				var effect_inst = instance_create_depth(effect_pos.x,effect_pos.y-30,-800,obj_coke_bomb_explode)
 				effect_inst.sprite_index = spr_iron_man_mouse_effect
 				jump_times ++
@@ -108,12 +108,12 @@ switch state{
 		if timer >= 315 && timer <= 460 && jump_times < 7{
 			if (timer-315) mod 20 == 1{
 				with obj_card_parent{
-					if grid_col == 3 && grid_row == (other.jump_times) &&
+					if grid_col == 7 && grid_row == (other.jump_times) &&
 					plant_id != "player" && plant_type != "coffee" && !invincible && plant_id != "cotton_candy"{
 						plant_apply_boss_lethal(id, other)
 					}
 				}
-				var effect_pos = get_world_position_from_grid(3,jump_times)
+				var effect_pos = get_world_position_from_grid(global.grid_extra_left + 3,jump_times)
 				var effect_inst = instance_create_depth(effect_pos.x,effect_pos.y-30,-800,obj_coke_bomb_explode)
 				effect_inst.sprite_index = spr_iron_man_mouse_effect
 				jump_times ++
@@ -122,7 +122,7 @@ switch state{
 		}
 		
 		if timer == 280{
-			x = get_world_position_from_grid(4,0).x
+			x = get_world_position_from_grid(global.grid_extra_left + 4,0).x
 			jump_times = 0
 		}
 		
@@ -165,7 +165,7 @@ switch state{
 			}
 		}
 		if timer == 47 * 5{
-			var iron_man_pos = get_world_position_from_grid(4,grid_row)
+			var iron_man_pos = get_world_position_from_grid(global.grid_extra_left + 4,grid_row)
 			var iron_man_inst = instance_create_depth(iron_man_pos.x,iron_man_pos.y+30,-800,obj_iron_man)
 			iron_man_inst.train_head = id
 			iron_man_inst.maxhp = maxhp
@@ -275,7 +275,7 @@ switch state{
 		}
 		if timer == 180{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 50
 			y = enemy_pos.y + 30
 			image_alpha = 1
@@ -337,7 +337,7 @@ switch state{
 			}
 			if skill_choose == 0{
 				target_pos.row = global.grid_rows-1
-				target_pos.col = 7
+				target_pos.col = 11
 				var land_pos = get_world_position_from_grid(target_pos.col,target_pos.row)
 				x_move_speed = (land_pos.x - x)/180
 				y_move_speed = (land_pos.y+30 - y)/180
@@ -346,7 +346,7 @@ switch state{
 			}
 			else if skill_choose == 2{
 				target_pos.row = irandom_range(1,global.grid_rows-1)
-				target_pos.col = 9
+				target_pos.col = 13
 				var land_pos = get_world_position_from_grid(target_pos.col,target_pos.row)
 				x_move_speed = (land_pos.x-90 - x)/180
 				y_move_speed = (land_pos.y+30 - y)/180
@@ -355,7 +355,7 @@ switch state{
 			}
 			else{
 				target_pos.row = 3
-				target_pos.col = 9
+				target_pos.col = 13
 				var land_pos = get_world_position_from_grid(target_pos.col,target_pos.row)
 				x_move_speed = (land_pos.x-90 - x)/180
 				y_move_speed = (land_pos.y+30 - y)/180

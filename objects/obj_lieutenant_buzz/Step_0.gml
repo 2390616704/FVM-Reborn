@@ -10,13 +10,13 @@ if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
 	if skill_count == 2{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_count == 0{
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	x = enemy_pos.x - 80
 	y = enemy_pos.y + 30
@@ -171,13 +171,13 @@ switch state{
 		
 		if timer == 1{
 			
-			t_pos = get_world_position_from_grid(2,1)
+			t_pos = get_world_position_from_grid(global.grid_extra_left + 2,1)
 			
 			y_move_speed = (t_pos.y+33-y)/120
 			x_move = (t_pos.x-90-x)/120
 		}
 		if timer == 240{
-			t_pos = get_world_position_from_grid(10,irandom_range(0,global.grid_rows-1))
+			t_pos = get_world_position_from_grid(global.grid_extra_left + 10,irandom_range(0,global.grid_rows-1))
 			
 			y_move_speed = (t_pos.y+33-y)/120
 			x_move = (t_pos.x-90-x)/120
@@ -227,13 +227,13 @@ switch state{
 		
 		if timer == 1{
 			
-			t_pos = get_world_position_from_grid(2,grid_row)
+			t_pos = get_world_position_from_grid(global.grid_extra_left + 2,grid_row)
 			
 			y_move_speed = (t_pos.y+33-y)/120
 			x_move = (t_pos.x-90-x)/120
 		}
 		if timer == 240{
-			t_pos = get_world_position_from_grid(10,irandom_range(0,global.grid_rows-1))
+			t_pos = get_world_position_from_grid(global.grid_extra_left + 10,irandom_range(0,global.grid_rows-1))
 			
 			y_move_speed = (t_pos.y+33-y)/120
 			x_move = (t_pos.x-90-x)/120
@@ -241,11 +241,11 @@ switch state{
 		if timer > 1 && timer <= 120{
 			if timer mod 23 == 0{
 				with obj_card_parent{
-					if grid_row == other.grid_row && grid_col == 5 - other.jump_times && !invincible && plant_id != "player" && plant_type != "coffee" && plant_id != "cotton_candy"{
+					if grid_row == other.grid_row && grid_col == 13 - other.jump_times && !invincible && plant_id != "player" && plant_type != "coffee" && plant_id != "cotton_candy"{
 						plant_apply_boss_lethal(id, other)
 					}
 				}
-				var effect_pos = get_world_position_from_grid(6-jump_times,grid_row)
+				var effect_pos = get_world_position_from_grid(global.grid_extra_left + 6-jump_times,grid_row)
 				var effect_inst = instance_create_depth(effect_pos.x,effect_pos.y+10,-800,obj_arno_bullet_effect)
 				effect_inst.sprite_index = spr_buzz_bullet_effect
 				jump_times ++
@@ -294,7 +294,7 @@ switch state{
 				}
 				if skill_timer == 91{
 					instance_create_depth(x+40,y,-100,obj_apple_football_fan_mouse)
-					t_pos = get_world_position_from_grid(9,irandom_range(0,global.grid_rows-1))
+					t_pos = get_world_position_from_grid(global.grid_extra_left + 9,irandom_range(0,global.grid_rows-1))
 			
 					y_move_speed = (t_pos.y+33-y)/90
 					x_move = (t_pos.x-80-x)/90
@@ -360,13 +360,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_count == 0{
 				enemy_pos = get_world_position_from_grid(irandom_range(2,6),enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(6,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 6,enemy_row)
 			}
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30

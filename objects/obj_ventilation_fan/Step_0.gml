@@ -50,7 +50,7 @@ if effect_timer == 4 * current_flash_speed{
 if effect_timer >= 4 * current_flash_speed && effect_timer <= 12 * current_flash_speed{
 	with obj_enemy_parent{
 		if target_type == "air" && array_get_index(other.ignore_list,mouse_id) == -1{
-			if x < get_world_position_from_grid(9,0).x{
+			if x < get_world_position_from_grid(global.grid_extra_left + 9,0).x{
 				x += 6
 				if other.shape >= 2{
 					//x += 6
@@ -58,7 +58,7 @@ if effect_timer >= 4 * current_flash_speed && effect_timer <= 12 * current_flash
 			}
 		}
 		if other.shape >= 1 && target_type != "air" && grid_row == other.grid_row && array_get_index(other.ignore_list,mouse_id) == -1{
-			if x < get_world_position_from_grid(9,0).x{
+			if x < get_world_position_from_grid(global.grid_extra_left + 9,0).x{
 				x += 4
 			}
 		}

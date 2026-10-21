@@ -21,7 +21,7 @@ if !appear{
 		else{
 			enemy_row = 1
 		}
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_choose == 0{
 		if skill_change_style == 0{
@@ -30,14 +30,14 @@ if !appear{
 		else{
 			enemy_row = 1
 		}
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	else{
 		if skill_change_style == 0{
-			enemy_pos = get_world_position_from_grid(8,5)
+			enemy_pos = get_world_position_from_grid(global.grid_extra_left + 8,5)
 		}
 		else{
-			enemy_pos = get_world_position_from_grid(8,1)
+			enemy_pos = get_world_position_from_grid(global.grid_extra_left + 8,1)
 		}
 	}
 	x = enemy_pos.x - 90
@@ -210,10 +210,10 @@ switch state{
 				var enemy_pos = {}
 	
 				if skill_change_style == 0{
-					enemy_pos = get_world_position_from_grid(3,1)
+					enemy_pos = get_world_position_from_grid(global.grid_extra_left + 3,1)
 				}
 				else{
-					enemy_pos = get_world_position_from_grid(3,5)
+					enemy_pos = get_world_position_from_grid(global.grid_extra_left + 3,5)
 				}
 	
 				x = enemy_pos.x - 90
@@ -267,34 +267,34 @@ switch state{
 		y += y_move_speed
 		if skill_change_style == 0{
 			if timer == 1{
-				var t_pos = get_world_position_from_grid(3,4)
+				var t_pos = get_world_position_from_grid(global.grid_extra_left + 3,4)
 				x_move_speed = (t_pos.x-x)/240
 				y_move_speed = (t_pos.y+30-y)/240
 			}
 			if timer == 241{
-				var t_pos = get_world_position_from_grid(5,2)
+				var t_pos = get_world_position_from_grid(global.grid_extra_left + 5,2)
 				x_move_speed = (t_pos.x-x)/120
 				y_move_speed = (t_pos.y+30-y)/120
 			}
 			if timer == 361{
-				var t_pos = get_world_position_from_grid(1,0)
+				var t_pos = get_world_position_from_grid(global.grid_extra_left + 1,0)
 				x_move_speed = (t_pos.x-x)/240
 				y_move_speed = (t_pos.y+30-y)/240
 			}
 		}
 		else if skill_change_style == 1{
 			if timer == 1{
-				var t_pos = get_world_position_from_grid(3,2)
+				var t_pos = get_world_position_from_grid(global.grid_extra_left + 3,2)
 				x_move_speed = (t_pos.x-x)/240
 				y_move_speed = (t_pos.y+30-y)/240
 			}
 			if timer == 241{
-				var t_pos = get_world_position_from_grid(5,4)
+				var t_pos = get_world_position_from_grid(global.grid_extra_left + 5,4)
 				x_move_speed = (t_pos.x-x)/120
 				y_move_speed = (t_pos.y+30-y)/120
 			}
 			if timer == 361{
-				var t_pos = get_world_position_from_grid(1,6)
+				var t_pos = get_world_position_from_grid(global.grid_extra_left + 1,6)
 				x_move_speed = (t_pos.x-x)/240
 				y_move_speed = (t_pos.y+30-y)/240
 			}
@@ -345,7 +345,7 @@ switch state{
 				else{
 					enemy_row = 1
 				}
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 0{
 				if skill_change_style == 0{
@@ -354,14 +354,14 @@ switch state{
 				else{
 					enemy_row = 1
 				}
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			else{
 				if skill_change_style == 0{
-					enemy_pos = get_world_position_from_grid(8,5)
+					enemy_pos = get_world_position_from_grid(global.grid_extra_left + 8,5)
 				}
 				else{
-					enemy_pos = get_world_position_from_grid(8,1)
+					enemy_pos = get_world_position_from_grid(global.grid_extra_left + 8,1)
 				}
 			}
 			x = enemy_pos.x - 90

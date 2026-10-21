@@ -28,7 +28,7 @@ if !appear{
 	skill_count ++
 	skill_change_style = irandom_range(0,1)
 	if skill_choose == 2{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_choose == 0{
 		if skill_change_style == 0{
@@ -37,10 +37,10 @@ if !appear{
 		else{
 			enemy_row = 1
 		}
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
@@ -273,7 +273,7 @@ switch state{
 			skill_choose = irandom_range(0,2)
 			skill_change_style = irandom_range(0,1)
 			if skill_choose == 2{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 0{
 				if skill_change_style == 0{
@@ -282,10 +282,10 @@ switch state{
 				else{
 					enemy_row = 1
 				}
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30
@@ -388,7 +388,7 @@ switch state{
 				}
 			}
 			if skill_choose == 2{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 0{
 				if skill_change_style == 0{
@@ -397,10 +397,10 @@ switch state{
 				else{
 					enemy_row = 1
 				}
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			x_move_speed = (enemy_pos.x-90 - x)/180
 			y_move_speed = (enemy_pos.y+30 - y)/180

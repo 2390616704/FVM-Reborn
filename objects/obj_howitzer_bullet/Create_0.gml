@@ -1,6 +1,6 @@
 damage = 0
 move_speed = 0
-target_col = 8
+target_col = 12
 row = 0
 damage_type = "normal"
 target_type = "all"

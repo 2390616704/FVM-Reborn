@@ -10,10 +10,10 @@ if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
 	if skill_count == 1 || skill_count == 3{
-		enemy_pos = get_world_position_from_grid(9,3)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(4,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 4,enemy_row)
 	}
 	x = enemy_pos.x - 80
 	y = enemy_pos.y + 30
@@ -100,7 +100,7 @@ switch state{
 			image_index = floor(timer/5) mod 8 + 8
 		}
 		
-		var target_col = abs(3 - jump_times)
+		var target_col = global.grid_extra_left + abs(3 - jump_times)
 		if timer <= 90{
 			x -= 4
 		}
@@ -208,13 +208,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 1{
-				enemy_pos = get_world_position_from_grid(9,3)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 			}
 			else if skill_count == 3{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(4,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 4,enemy_row)
 			}
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30

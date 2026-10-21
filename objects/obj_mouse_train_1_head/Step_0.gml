@@ -14,15 +14,15 @@ if !appear{
 	skill_change_style = irandom_range(0,1)
 	if skill_choose == 0{
 		enemy_row = 9
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_choose == 1{
 		if skill_change_style == 0{
 			image_angle = 180
-			enemy_pos = get_world_position_from_grid(5,-3)
+			enemy_pos = get_world_position_from_grid(global.grid_extra_left + 5,-3)
 		}
 		else{
-			enemy_pos = get_world_position_from_grid(7,9)
+			enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,9)
 		}
 		
 	}
@@ -114,7 +114,7 @@ switch state{
 				timer = 0
 				move_time = 250
 				image_angle = 180
-				var enemy_pos = get_world_position_from_grid(2,-3)
+				var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 2,-3)
 				x = enemy_pos.x - 90
 				y = enemy_pos.y + 30
 				y += (global.grid_cell_size_y * 0.5 + 15)
@@ -148,7 +148,7 @@ switch state{
 			if skill_change_style == 0{
 				for(var i = 0 ; i < 3 ; i++){
 					jump_times = 1 + 2 * i
-					var bullet_pos = get_world_position_from_grid(8,jump_times)
+					var bullet_pos = get_world_position_from_grid(global.grid_extra_left + 8,jump_times)
 					var inst = instance_create_depth(bullet_pos.x-80,bullet_pos.y-35,-800,obj_mouse_train_1_bullet)
 					inst.grid_row = jump_times
 				}
@@ -156,7 +156,7 @@ switch state{
 			else{
 				for(var i = 0 ; i < 4 ; i++){
 					jump_times = 0 + 2 * i
-					var bullet_pos = get_world_position_from_grid(8,jump_times)
+					var bullet_pos = get_world_position_from_grid(global.grid_extra_left + 8,jump_times)
 					var inst = instance_create_depth(bullet_pos.x-80,bullet_pos.y-35,-800,obj_mouse_train_1_bullet)
 					inst.grid_row = jump_times
 				}
@@ -185,8 +185,8 @@ switch state{
 			if skill_change_style == 0{
 				for(var i = 0 ; i < 4 ; i++){
 					jump_times = 0 + 2 * i
-					var mouse_pos1 = get_world_position_from_grid(3,jump_times)
-					var mouse_pos2 = get_world_position_from_grid(5,jump_times)
+					var mouse_pos1 = get_world_position_from_grid(global.grid_extra_left + 3,jump_times)
+					var mouse_pos2 = get_world_position_from_grid(global.grid_extra_left + 5,jump_times)
 					var inst1 = instance_create_depth(mouse_pos1.x+25,mouse_pos1.y+33,-800,obj_machine_iron_pan_mouse)
 					inst1.grid_row = jump_times
 					var inst2 = instance_create_depth(mouse_pos2.x-25,mouse_pos2.y+33,-800,obj_machine_iron_pan_mouse)
@@ -198,7 +198,7 @@ switch state{
 			else{
 				for(var i = 0 ; i < 4 ; i++){
 					jump_times = 0 + 2 * i
-					var mouse_pos1 = get_world_position_from_grid(2,jump_times)
+					var mouse_pos1 = get_world_position_from_grid(global.grid_extra_left + 2,jump_times)
 					var inst1 = instance_create_depth(mouse_pos1.x-25,mouse_pos1.y+33,-800,obj_machine_iron_pan_mouse)
 					inst1.grid_row = jump_times
 					inst1.move_speed *= -1
@@ -207,7 +207,7 @@ switch state{
 				}
 				for(var i = 0 ; i < 3 ; i++){
 					jump_times = 1 + 2 * i
-					var mouse_pos1 = get_world_position_from_grid(5,jump_times)
+					var mouse_pos1 = get_world_position_from_grid(global.grid_extra_left + 5,jump_times)
 					var inst1 = instance_create_depth(mouse_pos1.x+25,mouse_pos1.y+33,-800,obj_machine_iron_pan_mouse)
 					inst1.grid_row = jump_times
 				}
@@ -255,15 +255,15 @@ switch state{
 			}
 			if skill_choose == 0{
 				enemy_row = 9
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 1{
 				if skill_change_style == 0{
 					image_angle = 180
-					enemy_pos = get_world_position_from_grid(5,-3)
+					enemy_pos = get_world_position_from_grid(global.grid_extra_left + 5,-3)
 				}
 				else{
-					enemy_pos = get_world_position_from_grid(7,9)
+					enemy_pos = get_world_position_from_grid(global.grid_extra_left + 7,9)
 				}
 		
 			}

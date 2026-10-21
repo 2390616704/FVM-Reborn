@@ -9,7 +9,7 @@ if flash_value > 0 {
 if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
-	enemy_pos = get_world_position_from_grid(10,3)
+	enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,3)
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
 	image_alpha = 1
@@ -84,7 +84,7 @@ switch state{
 		
 		if timer == 18 * 5 - 1{
 			for(var i = 0 ; i < global.grid_rows ; i++){
-				var wave_pos = get_world_position_from_grid(8,i)
+				var wave_pos = get_world_position_from_grid(global.grid_extra_left + 8,i)
 				var wave_inst = instance_create_depth(wave_pos.x+10,wave_pos.y+15,-800,obj_mermaid_mary_wave)
 				wave_inst.grid_row = i
 			}
@@ -164,14 +164,14 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 0{
-				enemy_pos = get_world_position_from_grid(10,3)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,3)
 			}
 			else if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			else if skill_count == 1{
 				enemy_row = irandom_range(1,global.grid_rows-2)
-				enemy_pos = get_world_position_from_grid(0,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 0,enemy_row)
 			}
 			x_move_speed = (enemy_pos.x - 90 - x)/180
 			y_move_speed = (enemy_pos.y + 30 - y)/180

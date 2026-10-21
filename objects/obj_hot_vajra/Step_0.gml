@@ -10,13 +10,13 @@ if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
 	if skill_count == 2{
-		enemy_pos = get_world_position_from_grid(6,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 6,enemy_row)
 	}
 	else if skill_count == 0{
 		enemy_pos = get_world_position_from_grid(irandom_range(2,6),enemy_row)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(6,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 6,enemy_row)
 	}
 	x = enemy_pos.x - 80
 	y = enemy_pos.y + 30
@@ -151,13 +151,13 @@ switch state{
 		if timer == 5 * 5 - 1{
 			spike_count = irandom_range(0,1)
 			if spike_count mod 2 == 0{
-				var spike_pos1 = get_world_position_from_grid(0,0)
+				var spike_pos1 = get_world_position_from_grid(global.grid_extra_left + 0,0)
 				spike_left_1 = instance_create_depth(spike_pos1.x,spike_pos1.y+25,-800,obj_vajra_spike)
 				spike_left_1.maxhp *= (1+((maxhp - 80000)/80000)*0.5)
 				spike_left_1.hp = spike_left_1.maxhp
 				spike_left_1.hp_modified = true
 			
-				var spike_pos2 = get_world_position_from_grid(0,global.grid_rows-1)
+				var spike_pos2 = get_world_position_from_grid(global.grid_extra_left + 0,global.grid_rows-1)
 				spike_left_2 = instance_create_depth(spike_pos2.x,spike_pos2.y+25,-800,obj_vajra_spike)
 				spike_left_2.maxhp *= (1+((maxhp - 80000)/80000)*0.5)
 				spike_left_2.hp = spike_left_2.maxhp
@@ -176,13 +176,13 @@ switch state{
 				spike_right_2.hp_modified = true
 			}
 			else{
-				var spike_pos1 = get_world_position_from_grid(4,0)
+				var spike_pos1 = get_world_position_from_grid(global.grid_extra_left + 4,0)
 				spike_left_1 = instance_create_depth(spike_pos1.x,spike_pos1.y+25,-800,obj_vajra_spike)
 				spike_left_1.maxhp *= (1+((maxhp - 80000)/80000)*0.5)
 				spike_left_1.hp = spike_left_1.maxhp
 				spike_left_1.hp_modified = true
 			
-				var spike_pos2 = get_world_position_from_grid(0,3)
+				var spike_pos2 = get_world_position_from_grid(global.grid_extra_left + 0,3)
 				spike_left_2 = instance_create_depth(spike_pos2.x,spike_pos2.y+25,-800,obj_vajra_spike)
 				spike_left_2.maxhp *= (1+((maxhp - 80000)/80000)*0.5)
 				spike_left_2.hp = spike_left_2.maxhp
@@ -194,7 +194,7 @@ switch state{
 				spike_right_1.hp = spike_right_1.maxhp
 				spike_right_1.hp_modified = true
 			
-				var spike_pos4 = get_world_position_from_grid(4,global.grid_rows-1)
+				var spike_pos4 = get_world_position_from_grid(global.grid_extra_left + 4,global.grid_rows-1)
 				spike_right_2 = instance_create_depth(spike_pos4.x,spike_pos4.y+25,-800,obj_vajra_spike)
 				spike_right_2.maxhp *= (1+((maxhp - 80000)/80000)*0.5)
 				spike_right_2.hp = spike_right_2.maxhp
@@ -239,15 +239,15 @@ switch state{
 					}
 				}
 				if instance_exists(spike_left_1) && instance_exists(spike_right_1){
-					var light_pos = get_world_position_from_grid(4,0)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 4,0)
 					instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 				}
 				if instance_exists(spike_left_2) && instance_exists(spike_right_2){
-					var light_pos = get_world_position_from_grid(4,global.grid_rows-1)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 4,global.grid_rows-1)
 					instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 				}
 				if instance_exists(spike_left_1) && instance_exists(spike_left_2){
-					var light_pos = get_world_position_from_grid(0,3)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 0,3)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_horizontal
 				}
@@ -257,12 +257,12 @@ switch state{
 					light_inst.sprite_index = spr_vajra_lightning_horizontal
 				}
 				if instance_exists(spike_left_1) && instance_exists(spike_right_2){
-					var light_pos = get_world_position_from_grid(4,3)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 4,3)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_incline_1
 				}
 				if instance_exists(spike_left_2) && instance_exists(spike_right_1){
-					var light_pos = get_world_position_from_grid(4,3)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 4,3)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_incline_2
 				}
@@ -303,32 +303,32 @@ switch state{
 					}
 				}
 				if instance_exists(spike_left_1) && instance_exists(spike_right_1){
-					var light_pos = get_world_position_from_grid(6,1.5)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 6,1.5)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_incline_1_short
 				}
 				if instance_exists(spike_left_2) && instance_exists(spike_right_2){
-					var light_pos = get_world_position_from_grid(2,4.5)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 2,4.5)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_incline_1_short
 				}
 				if instance_exists(spike_left_1) && instance_exists(spike_left_2){
-					var light_pos = get_world_position_from_grid(2,1.5)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 2,1.5)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_incline_2_short
 				}
 				if instance_exists(spike_right_1) && instance_exists(spike_right_2){
-					var light_pos = get_world_position_from_grid(6,4.5)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 6,4.5)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_incline_2_short
 				}
 				if instance_exists(spike_left_1) && instance_exists(spike_right_1){
-					var light_pos = get_world_position_from_grid(4,3)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 4,3)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_horizontal
 				}
 				if instance_exists(spike_left_2) && instance_exists(spike_right_2){
-					var light_pos = get_world_position_from_grid(4,3)
+					var light_pos = get_world_position_from_grid(global.grid_extra_left + 4,3)
 					var light_inst = instance_create_depth(light_pos.x,light_pos.y-50,-800,obj_vajra_lightning)
 					light_inst.sprite_index = spr_vajra_lightning_vertical
 				}
@@ -453,13 +453,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(6,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 6,enemy_row)
 			}
 			else if skill_count == 0{
 				enemy_pos = get_world_position_from_grid(irandom_range(2,6),enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(6,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 6,enemy_row)
 			}
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30

@@ -128,12 +128,12 @@ function consume_charge(){
 		startup_reload_pending = false;
 		cooldown_timer = 0;
 	}
-	is_ready = (charges > 0 && global.flame >= current_cost);
+	is_ready = (charges > 0);
 	return true;
 }
 
 function finish_direct_placement(){
-	if (global.flame < current_cost || (charges <= 0 && (!global.pre_place_on_cooldown || !reloading))) {
+	if (charges <= 0 && (!global.pre_place_on_cooldown || !reloading)) {
 		deselect_slot_after_place();
 	}
 }
@@ -273,7 +273,7 @@ function process_auto_replants() {
 			!cell_blocks_auto_plant(col, row, rec.card_data[? "plant_type"], rec.card_data[? "feature_type"]) &&
 			can_place_at_position(logical_world.x, logical_world.y, rec.card_data[? "plant_type"], rec.card_data[? "feature_type"], rec.card_data[? "target_card"]);
 
-		if (!can_place || global.flame < rec.cost) {
+		if (!can_place) {
 			array_delete(pending_auto_replants, i, 1);
 			continue;
 		}
@@ -425,7 +425,7 @@ function try_place_once(){
 	var logical_world = get_world_position_from_grid(cell.col, cell.row);
 	var can_plant = can_place_at_position(logical_world.x, logical_world.y, card_data[? "plant_type"],card_data[? "feature_type"],card_data[? "target_card"]);
 
-	if (can_plant && global.flame >= current_cost) {
+	if (can_plant) {
 		if (charges > 0) {
 			place_card_at(cell.col, cell.row, cell.shift_x, cell.shift_y, card_data, card_obj, current_cost, true, cell.platform);
 			consume_charge();

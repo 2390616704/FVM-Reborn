@@ -16,9 +16,9 @@ skill_count = 0
 appear = false
 image_alpha = 0
 
-var up_pos = get_world_position_from_grid(8,1)
+var up_pos = get_world_position_from_grid(global.grid_extra_left + 8,1)
 up_inst = instance_create_depth(up_pos.x,up_pos.y+38,-800,obj_war_god_duck)
-var down_pos = get_world_position_from_grid(8,5)
+var down_pos = get_world_position_from_grid(global.grid_extra_left + 8,5)
 down_inst = instance_create_depth(down_pos.x,down_pos.y+38,-800,obj_war_god_duck)
 
 hpbar_inst = instance_create_depth(450,1040,-900,obj_boss_hpbar)

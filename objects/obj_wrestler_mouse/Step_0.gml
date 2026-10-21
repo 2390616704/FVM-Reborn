@@ -11,7 +11,7 @@ if global.is_paused || is_frozen || is_stun || is_scare{
 	exit
 }
 
-if hp <= maxhp * hurt_rate && state != ENEMY_STATE.ACTING && state != ENEMY_STATE.DEAD && state != ENEMY_STATE.APPEAR && grid_col > 4 && not throwed{
+if hp <= maxhp * hurt_rate && state != ENEMY_STATE.ACTING && state != ENEMY_STATE.DEAD && state != ENEMY_STATE.APPEAR && grid_col > 8 && not throwed{
 	timer = 0
 	sprite_index = spr_wrestler_mouse_throw
 	state = ENEMY_STATE.APPEAR

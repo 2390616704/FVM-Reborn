@@ -35,6 +35,9 @@ for (var i = 0; i < array_length(buttons); i++) {
 					if instance_exists(obj_player_info_ui){
 						obj_player_info_ui.menu_type = 0
 					}
+					if global.random_challenge_active {
+						random_challenge_restore_snapshot()
+					}
 					if ui_anim_level() >= 2{
 						room_transition_start(room)   // 重开本局也走淡出淡入
 					}

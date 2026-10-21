@@ -9,7 +9,7 @@ if flash_value > 0 {
 if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
-	enemy_pos = get_world_position_from_grid(9,3)
+	enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
 	image_alpha = 1
@@ -84,7 +84,7 @@ switch state{
 		}
 		if timer == 23 * 5 + 2{
 			for(var i = 0 ; i < global.grid_rows ; i++){
-				var m_pos = get_world_position_from_grid(9,i)
+				var m_pos = get_world_position_from_grid(global.grid_extra_left + 9,i)
 				var m_inst = instance_create_depth(m_pos.x,m_pos.y+38,-800,obj_undersea_panda_mouse)
 				m_inst.grid_row = i
 			}
@@ -107,11 +107,11 @@ switch state{
 		
 		if timer == 15 * 5 + 2{
 			var wind_inst1 = instance_create_depth(x,y,-800,obj_machine_shark_2_wind)
-			var wind_pos1 = get_world_position_from_grid(4,0)
+			var wind_pos1 = get_world_position_from_grid(global.grid_extra_left + 4,0)
 			wind_inst1.x_move_speed = (wind_pos1.x-wind_inst1.x)/ 60
 			wind_inst1.y_move_speed = (wind_pos1.y+10-wind_inst1.y)/ 60
 			var wind_inst2 = instance_create_depth(x,y,-800,obj_machine_shark_2_wind)
-			var wind_pos2 = get_world_position_from_grid(4,global.grid_rows-1)
+			var wind_pos2 = get_world_position_from_grid(global.grid_extra_left + 4,global.grid_rows-1)
 			wind_inst2.x_move_speed = (wind_pos2.x-wind_inst2.x)/ 60
 			wind_inst2.y_move_speed = (wind_pos2.y+10-wind_inst2.y)/ 60
 		}
@@ -214,11 +214,11 @@ switch state{
 		}
 		
 		if timer == 70 + 24 * 5{
-			var new_pos = get_world_position_from_grid(0,skill_3_row[1])
+			var new_pos = get_world_position_from_grid(global.grid_extra_left + 0,skill_3_row[1])
 			y = new_pos.y + 30
 		}
 		if timer == 140 + 36 * 5{
-			var new_pos = get_world_position_from_grid(0,skill_3_row[2])
+			var new_pos = get_world_position_from_grid(global.grid_extra_left + 0,skill_3_row[2])
 			y = new_pos.y + 30
 		}
 		if (timer >=18 * 5 && timer <= 70 + 18 * 5) || (timer >=70 + 30 * 5 && timer <= 140 + 30 * 5) || (timer >=140 + 42 * 5 && timer <= 210 + 42 * 5){
@@ -252,17 +252,17 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 1{
-				enemy_pos = get_world_position_from_grid(1,3)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 1,3)
 			}
 			else if skill_count == 3{
 				skill_3_row = []
 				skill_3_row[0] = global.grid_rows-1
 				skill_3_row[1] = 3
 				skill_3_row[2] = 0
-				enemy_pos = get_world_position_from_grid(9,skill_3_row[0])
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,skill_3_row[0])
 			}
 			else if skill_count == 0 || skill_count == 2{
-				enemy_pos = get_world_position_from_grid(9,3)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30

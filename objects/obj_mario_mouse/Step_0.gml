@@ -64,7 +64,7 @@ switch state{
 			image_index = floor(timer/5) mod 8 + 8
 		}
 		if timer == 3*60{
-			var cave_pos = get_world_position_from_grid(8,grid_row)
+			var cave_pos = get_world_position_from_grid(global.grid_extra_left + 8,grid_row)
 			var erase_col = 8
 			var erase_row = grid_row
 			with obj_card_parent{
@@ -118,7 +118,7 @@ switch state{
 		}
 		if timer == 10 * 5 + 70 * jump_times + 1{
 			jump_times++
-			var erase_col = 9-jump_times*2
+			var erase_col = 13-jump_times*2
 			var erase_row = grid_row
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
@@ -146,7 +146,7 @@ switch state{
 		}
 		if timer == 210{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30
 			image_alpha = 1

@@ -48,7 +48,7 @@ if (charges <= 0) {
 	cooling_alpha = max(cooling_alpha - 0.05, 0);
 }
 
-is_ready = (charges > 0 && global.flame >= current_cost);
+is_ready = (charges > 0);
 
 // 更新所有预放置虚影的位置和深度
 var i = 0;
@@ -126,12 +126,12 @@ if (loaded_charge && array_length(pending_ghosts) > 0 && charges > 0) {
 
 process_auto_replants();
 
-var can_select = (global.flame >= current_cost) && (charges > 0 || (reloading && global.pre_place_on_cooldown));
+var can_select = (charges > 0 || (reloading && global.pre_place_on_cooldown));
 
 if ((array_length(pending_ghosts) > 0 || array_length(pending_auto_replants) > 0) && mouse_check_button_pressed(mb_right)) {
 	if (point_in_rectangle(mouse_x, mouse_y, x-50, y-70, x+50, y+70)) {
 		clear_pending_ghosts(true);
-		is_ready = (charges > 0 && global.flame >= current_cost);
+		is_ready = (charges > 0);
 		show_notice("已取消全部预放置", 60);
 		audio_play_sound(snd_button,0,0);
 	}
@@ -241,7 +241,7 @@ if (is_selected) {
 
         var can_plant = (can_place_at_position(logical_world.x, logical_world.y, card_data[? "plant_type"],card_data[? "feature_type"],card_data[? "target_card"]));
         
-        if (can_plant && global.flame >= current_cost) {
+        if (can_plant) {
             if (charges > 0) {
                 place_card_at(cell.col, cell.row, cell.shift_x, cell.shift_y, card_data, card_obj, current_cost, true, cell.platform);
                 consume_charge();

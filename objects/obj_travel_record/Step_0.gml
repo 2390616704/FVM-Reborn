@@ -154,7 +154,7 @@ switch state{
 			timer = 0
 			state = BOSS_STATE.IDLE
 			jump_times = 0
-			var new_pos = get_world_position_from_grid(2,5)
+			var new_pos = get_world_position_from_grid(global.grid_extra_left + 2,5)
 			x = new_pos.x - 90
 			y = new_pos.y + 33
 			target_type = "normal"
@@ -198,7 +198,7 @@ switch state{
 		}
 		if timer == 210{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 50
 			y = enemy_pos.y + 30
 			image_alpha = 1
@@ -255,15 +255,15 @@ switch state{
 		if timer >= 11 * 5 - 1{
 			if jump_times == 0{
 				target_pos.row = irandom_range(1,global.grid_rows-1)
-				target_pos.col = 1
+				target_pos.col = 5
 			}
 			else if jump_times == 1{
 				target_pos.row = 3
-				target_pos.col = 7
+				target_pos.col = 11
 			}
 			else if jump_times == 2{
 				target_pos.row = 2
-				target_pos.col = 7
+				target_pos.col = 11
 			}
 			var land_pos = get_world_position_from_grid(target_pos.col,target_pos.row)
 			x_move_speed = (land_pos.x-90 - x)/120

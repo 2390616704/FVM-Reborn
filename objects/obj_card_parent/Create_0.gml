@@ -49,6 +49,7 @@ idle_anim = 0
 ice_timer = 0
 frozen_timer = 0
 is_frozen = false
+bread_cap_window = 0
 awake_anim = 0
 
 // ========== 注册信息 ==========

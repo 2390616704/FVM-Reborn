@@ -15,15 +15,15 @@ if !appear{
 	skill_count ++
 	skill_change_style = irandom_range(0,1)
 	if skill_choose == 2{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_choose == 0{
 		enemy_row = global.grid_rows-1
-		enemy_pos = get_world_position_from_grid(9,enemy_row)  
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else{
 		enemy_row = 3
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
@@ -68,7 +68,7 @@ switch state{
 			}
 		}
 		break
-		
+
 	case BOSS_STATE.APPEAR:
 		sprite_index = spr_captain_america_mouse_appear1
 		if hp > maxhp * hurt_rate{
@@ -82,7 +82,7 @@ switch state{
 			state = BOSS_STATE.IDLE
 		}
 		break
-	
+
 	case BOSS_STATE.SKILL1:
 		if timer <= 28 * 5 - 1{
 			sprite_index = spr_captain_america_mouse_skill_1_ready
@@ -132,27 +132,27 @@ switch state{
 		else{
 			image_alpha = 0
 		}
-		
+
 		if timer == 23*5+2{
 			instance_create_depth(x-90,y-15,-800,obj_captain_shield)
 		}
 		if timer == 39 * 5 - 1{
-			var enemy_pos = get_world_position_from_grid(9,0)
-	
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,0)
+
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30
 		}
-		
+
 		if timer >= 86 * 5 - 1{
 			jump_times = 0
 			timer = 0
 			state = BOSS_STATE.DISAPPEAR
 		}
 		break
-	
-		
+
+
 	case BOSS_STATE.SKILL2:
-		
+
 		sprite_index = spr_captain_america_mouse_skill_2
 		if hp > maxhp * hurt_rate{
 			image_index = floor(timer /5) mod 54
@@ -160,20 +160,20 @@ switch state{
 		else{
 			image_index = floor(timer /5) mod 54 + 54
 		}
-		
+
 		if timer >= 10 * 5 - 1 && jump_times < 5 && (timer-49) mod 45 == 1{
-			var rainbow_pos = get_world_position_from_grid(6,5-jump_times)
+			var rainbow_pos = get_world_position_from_grid(global.grid_extra_left + 6,5-jump_times)
 			instance_create_depth(rainbow_pos.x,rainbow_pos.y,-800,obj_captain_rainbow)
 			jump_times ++
 		}
 		if timer == 10 * 5 - 1{
-			var mouse_pos = get_world_position_from_grid(9,1)
+			var mouse_pos = get_world_position_from_grid(global.grid_extra_left + 9,1)
 			instance_create_depth(mouse_pos.x,mouse_pos.y,-800,obj_aircraft_carrier)
-			var mouse_pos1 = get_world_position_from_grid(9,global.grid_rows-2)
+			var mouse_pos1 = get_world_position_from_grid(global.grid_extra_left + 9,global.grid_rows-2)
 			instance_create_depth(mouse_pos1.x,mouse_pos1.y,-800,obj_aircraft_carrier)
 		}
-		
-		
+
+
 		if timer >= 54*5-1{
 			jump_times = 0
 			timer = 0
@@ -181,7 +181,7 @@ switch state{
 		}
 		break
 	case BOSS_STATE.SKILL3:
-		
+
 		skill_timer ++
 		if skill_timer <= 11 * 5 - 1{
 			sprite_index = spr_captain_america_mouse_disappear1
@@ -219,8 +219,8 @@ switch state{
 				image_index = floor((skill_timer-215) /5) mod 11 + 11
 			}
 		}
-		
-		
+
+
 		if timer == 1{
 			// 创建已选坐标数组
 			var selected_coords = [];
@@ -231,7 +231,7 @@ switch state{
 			    var rand_x = irandom_range(2, 6);
 			    var rand_y = irandom_range(0, global.grid_rows - 1);
 			    var new_coord = [rand_x, rand_y];
-    
+
 			    // 检查是否已存在
 			    var exists = false;
 			    for (var i = 0; i < array_length(selected_coords); i++) {
@@ -240,7 +240,7 @@ switch state{
 			            break;
 			        }
 			    }
-    
+
 			    // 如果不存在则添加
 			    if (!exists) {
 			        array_push(selected_coords, new_coord);
@@ -248,7 +248,7 @@ switch state{
 			}
 			target_coord = selected_coords
 		}
-		
+
 		if timer mod 335 == 55{
 			if jump_times < 3{
 				var target_pos_array = target_coord[jump_times]
@@ -271,7 +271,7 @@ switch state{
 			var effect = instance_create_depth(x-140,y-180,-800,obj_coke_bomb_explode)
 			effect.sprite_index = spr_captain_america_mouse_effect
 		}
-		
+
 		if timer >= 3*335-1{
 			jump_times = 0
 			skill_timer = 0
@@ -279,7 +279,7 @@ switch state{
 			state = BOSS_STATE.DISAPPEAR
 		}
 		break
-		
+
 	case BOSS_STATE.DISAPPEAR:
 		sprite_index = spr_captain_america_mouse_disappear1
 		if hp > maxhp * hurt_rate{
@@ -303,15 +303,15 @@ switch state{
 			skill_count ++
 			skill_change_style = irandom_range(0,1)
 			if skill_choose == 2{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 0{
 				enemy_row = global.grid_rows-1
-				enemy_pos = get_world_position_from_grid(9,enemy_row) 
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else{
 				enemy_row = 3
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30
@@ -321,7 +321,7 @@ switch state{
 			break
 		}
 		break
-	
+
 	case BOSS_STATE.DEATH:
 		sprite_index = spr_captain_america_mouse_death
 		image_index = floor(timer/5) mod image_number

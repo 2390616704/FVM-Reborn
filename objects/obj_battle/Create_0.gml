@@ -12,6 +12,7 @@ var mus_inst = instance_create_depth(0,0,0,obj_battle_music_controller)
 mus_inst.battle_music = global.level_data.pre_music
 
 global.game_over = false
+random_challenge_battle_snapshot()
 
 instance_create_depth(0,0,0,obj_battle_pause_manager)
 instance_create_depth(0,0,-2900,obj_battle_timer_display)
@@ -23,11 +24,12 @@ instance_create_depth(room_width-200,room_height-25,0,obj_level_progress_bar)
 global.selected_slot = noone;
 global.current_seed = noone;
 global.default_max_charges = 3
-global.grid_offset_x = 695
 global.grid_cell_size_x = 107
 global.grid_cell_size_y = 116
 global.grid_offset_y = 228
-global.grid_cols = global.level_file.map_cols
+global.grid_extra_left = 6
+global.grid_offset_x = 695 - global.grid_extra_left * global.grid_cell_size_x
+global.grid_cols = global.level_file.map_cols + global.grid_extra_left
 global.grid_rows = global.level_file.map_rows
 
 
@@ -103,8 +105,22 @@ for (var col = 0; col < global.grid_cols; col++) {
     }
 }
 
-var plant_list = global.level_file.map
-global.grid_terrains = global.level_file.map
+var _source_map = global.level_file.map
+var _source_cols = array_length(_source_map[0])
+var _expanded_map = array_create(global.grid_rows)
+for (var _mr = 0; _mr < global.grid_rows; _mr++) {
+	var _map_row = array_create(global.grid_cols)
+	var _left_type = _source_map[_mr][0].type
+	for (var _mc = 0; _mc < global.grid_extra_left; _mc++) {
+		_map_row[_mc] = { type: _left_type, plant: [], object: [] }
+	}
+	for (var _mc = 0; _mc < _source_cols; _mc++) {
+		_map_row[_mc + global.grid_extra_left] = _source_map[_mr][_mc]
+	}
+	_expanded_map[_mr] = _map_row
+}
+var plant_list = _expanded_map
+global.grid_terrains = _expanded_map
 global.row_feature = []
 for(var i = 0 ; i < global.grid_rows;i++){
 	if global.grid_terrains[i][0].type == "water"{
@@ -150,7 +166,7 @@ for(var i = 0 ; i < global.grid_rows ; i++){
 	var new_x = global.grid_offset_x -1 * global.grid_cell_size_x
 	var new_y = global.grid_offset_y + i * global.grid_cell_size_y
 	var grid_pos = get_grid_position_from_world(new_x,new_y)
-	var cat_inst = instance_create_depth(grid_pos.x - 10, grid_pos.y+10, 0,obj_cat);
+	var cat_inst = instance_create_depth(max(45, grid_pos.x - 10), grid_pos.y+10, 0,obj_cat);
 	cat_inst.row = i
 	if global.row_feature[i] == "water" || global.map_id == "undersea_vortex"{
 		cat_inst.sprite_index = spr_crab
@@ -321,7 +337,7 @@ function enemy_subwave_summon(){
             var enemy_obj = global.enemy_map[? enemy_list[i].type]._obj;
             
             // 计算位置（考虑偏移）
-            var new_x = global.grid_offset_x + (9 + x_offset) * global.grid_cell_size_x;
+            var new_x = global.grid_offset_x + (9 + global.grid_extra_left + x_offset) * global.grid_cell_size_x;
             var new_y = global.grid_offset_y + (target_row - 1) * global.grid_cell_size_y;
             
             var grid_pos = get_grid_position_from_world(new_x, new_y);

@@ -4,6 +4,11 @@ draw_clear_alpha(c_black, 0); // 用透明黑色清除surface，alpha值0表示�
 surface_reset_target();
 
 global.menu_screen = false
+global.is_paused = false
+global.game_over = false
+if global.random_challenge_active && global.random_challenge_snapshot != "" {
+    random_challenge_restore_snapshot();
+}
 instance_create_depth(1700,883,-2,obj_battlestart_button)
 readyroom_music = mus_readyroom
 
@@ -88,4 +93,12 @@ for(var i = 0;i < global.level_file.total_waves;i ++){
 			}
 		}
 	}
+}
+if global.random_challenge_active {
+    enemy_type_list = random_challenge_collect_preview_enemy_types(
+        global.level_file,
+        global.level_data,
+        random_challenge_has_water(global.level_file)
+    );
+    boss_type_list = random_challenge_collect_preview_boss_types(global.level_file);
 }

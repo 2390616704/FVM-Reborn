@@ -163,7 +163,7 @@ switch state{
 		}
 		if timer == 210{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30
 			image_alpha = 1

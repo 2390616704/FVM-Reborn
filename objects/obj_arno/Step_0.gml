@@ -127,7 +127,7 @@ switch state{
 		}
 		if timer == 13 * 5 * 3 + 30 * jump_times + 1{
 			jump_times++
-			var erase_col = 9-jump_times*1
+			var erase_col = 13-jump_times*1
 			var erase_row = grid_row
 			with obj_card_parent{
 				if(grid_col == erase_col && grid_row == erase_row && plant_id != "player"){
@@ -155,7 +155,7 @@ switch state{
 		}
 		if timer == 210{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
-			var enemy_pos = get_world_position_from_grid(10,enemy_row)
+			var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30
 			image_alpha = 1

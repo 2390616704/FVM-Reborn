@@ -62,7 +62,7 @@ if is_frozen || is_stun || scare_timer > 0{
 }
 
 if hp > 0 && state != ENEMY_STATE.DEAD{
-	if grid_col <= 5 && has_tire{
+	if grid_col <= 9 && has_tire{
 		anim_timer = 0
 		state = ENEMY_STATE.ACTING
 		has_tire = false

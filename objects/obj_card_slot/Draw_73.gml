@@ -16,11 +16,7 @@ if (hover_alpha > 0) {
     var box_width = text_width + 20;
     var box_height = text_height + 15;
 	var display_description = description;
-	if (global.flame < current_cost) {
-		box_height += text_height 
-		display_description = description + "\n没有足够的火苗" 
-	}
-	else if (charges <= 0) {
+	if (charges <= 0) {
 		box_height += text_height 
 		if (array_length(pending_ghosts) > 0) {
 			display_description = description + "\n已预放置" + string(array_length(pending_ghosts)) + "个，等待冷却"

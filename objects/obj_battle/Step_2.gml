@@ -52,7 +52,7 @@ if current_wave_hp <= hp_ratio * current_total_hp && level_stage != "boss"{
 if not global.is_paused{
 	wave_timer --
 }
-if (!global.save_data.unlocked_items.elite_unlocked && current_wave >= global.level_file.elite_wave)||current_wave >= global.level_file.total_waves{
+if ((!global.random_challenge_active && !global.save_data.unlocked_items.elite_unlocked && current_wave >= global.level_file.elite_wave) || current_wave >= global.level_file.total_waves) {
 	if current_wave_hp <= 0 && !instance_exists(obj_game_over){
 		global.is_paused = true
 		global.game_over = true

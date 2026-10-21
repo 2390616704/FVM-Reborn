@@ -9,6 +9,15 @@ if (keyboard_check_pressed(vk_space) || (mouse_check_button_pressed(mb_left) && 
         else if (global.is_paused && !global.show_menu) {
             // 取消暂停
 			if global.game_over{
+				if global.random_challenge_active {
+					random_challenge_restore_snapshot()
+					global.game_over = false
+					global.is_paused = true
+					global.show_menu = false
+					settlement = true
+					global.gui_stack.pop()
+					exit
+				}
 				if settlement || obj_game_over.sprite_index == spr_lose || global.level_file.version == "1.0.0"{
 					if global.map_id == "tower_cake" || global.map_id == "delicious_town"{
 						global.map_id = "delicious_island"
@@ -136,7 +145,11 @@ if (keyboard_check_pressed(vk_escape)) {
 if (keyboard_check_pressed(ord("R"))) {
 	if global.game_over{
 		if obj_game_over.sprite_index == spr_lose{
-			room_transition_start(room)   // 重开本局也走淡出淡入
+			if global.random_challenge_active {
+				random_challenge_restore_snapshot()
+			}
+			room_transition_start(room)
+   // 重开本局也走淡出淡入
 		}
 	}
 }

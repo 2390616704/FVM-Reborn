@@ -2,6 +2,9 @@
 surface_set_target(application_surface);
 draw_clear_alpha(c_black, 0); // 用透明黑色清除surface，alpha值0表示完全透明
 surface_reset_target();
+if global.random_challenge_active {
+    random_challenge_leave_mode();
+}
 instance_create_depth(100,0,-2,obj_player_info_ui)
 
 /// @type {Asset.GMObject.EventEntranceList} 
@@ -26,6 +29,10 @@ for(var i = 0 ; i <button_array_length ; i++){
 }
 
 instance_create_depth(room_width-210,room_height,-1,obj_player_menu_bg)
+
+if global.map_id == "delicious_island" {
+    instance_create_depth(960,540,-1,obj_random_challenge_bubble)
+}
 
 global.laboretory_room = false
 

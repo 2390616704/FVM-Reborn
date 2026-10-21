@@ -62,7 +62,7 @@ else{
 if left_move_flashs > 0{
 	y += y_move
 	left_move_flashs--
-	if (y <= get_world_position_from_grid(0,0).y + 38 && y_move < 0) || (y >= get_world_position_from_grid(0,global.grid_rows-1).y + 38 && y_move > 0){
+	if (y <= get_world_position_from_grid(global.grid_extra_left + 0,0).y + 38 && y_move < 0) || (y >= get_world_position_from_grid(global.grid_extra_left + 0,global.grid_rows-1).y + 38 && y_move > 0){
 		left_move_flashs = 0
 		y_move = 0
 	}
@@ -564,7 +564,7 @@ switch(state) {
 }
 
 // 死亡处理
-if (hp <= 0 && state != ENEMY_STATE.DEAD) {
+if (hp <= 0 && state != ENEMY_STATE.DEAD && !death_pending) {
     timer = 0;
     state = ENEMY_STATE.DEAD;
     target_plant = noone;  // 清除攻击目标

@@ -16,6 +16,6 @@ if y >= target_pos.y + 15{
 	inst.sprite_index = spr_lobster_knight_bullet_effect
 	var effect_inst = instance_create_depth(target_pos.x,target_pos.y+10,-800,obj_lobster_knight_bullet_extend)
 	effect_inst.is_parent = true
-	effect_inst.col = 4
+	effect_inst.col = 8
 	instance_destroy()
 }

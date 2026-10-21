@@ -14,7 +14,7 @@ if is_frozen || is_stun || is_scare{
 }
 
 if state == ENEMY_STATE.APPEAR{
-	var target_pos = get_world_position_from_grid(7,grid_row)
+	var target_pos = get_world_position_from_grid(global.grid_extra_left + 7,grid_row)
 	if x != target_pos.x+10{
 		x = target_pos.x+10
 	}

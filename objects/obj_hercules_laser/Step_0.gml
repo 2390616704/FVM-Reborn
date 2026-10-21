@@ -15,7 +15,7 @@ if state == "start"{
 	if l_type == 0{
 		target_col = grid_pos.col
 		x += move_speed
-		if x <= get_world_position_from_grid(0,0).x || x >= get_world_position_from_grid(8,0).x{
+		if x <= get_world_position_from_grid(global.grid_extra_left + 0,0).x || x >= get_world_position_from_grid(global.grid_extra_left + 8,0).x{
 			image_alpha -= 0.1
 			if image_alpha <= 0{
 				instance_destroy()
@@ -25,7 +25,7 @@ if state == "start"{
 	else{
 		y += move_speed
 		target_row = grid_pos.row
-		if y <= get_world_position_from_grid(0,0).y || y >= get_world_position_from_grid(8,6).y{
+		if y <= get_world_position_from_grid(global.grid_extra_left + 0,0).y || y >= get_world_position_from_grid(global.grid_extra_left + 8,6).y{
 			image_alpha -= 0.1
 			if image_alpha <= 0{
 				instance_destroy()

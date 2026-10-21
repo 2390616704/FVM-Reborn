@@ -28,7 +28,7 @@ if is_frozen || is_stun || scare_timer > 0{
 }
 
 if hp > 0 && state != ENEMY_STATE.DEAD{
-	if (grid_col <= 7 || state == ENEMY_STATE.ATTACK) && !bee_released{
+	if (grid_col <= 11 || state == ENEMY_STATE.ATTACK) && !bee_released{
 		anim_timer = 0
 		state = ENEMY_STATE.ACTING
 		bee_released = true

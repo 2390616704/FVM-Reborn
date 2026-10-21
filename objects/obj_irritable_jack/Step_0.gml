@@ -10,13 +10,13 @@ if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
 	if skill_count == 2{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_count == 0{
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	x = enemy_pos.x - 80
 	y = enemy_pos.y + 30
@@ -177,7 +177,7 @@ switch state{
 			}
 			for(var i = 0; i < global.grid_rows ; i++){
 				if i != t_row{
-					var rock_pos = get_world_position_from_grid(10,i)
+					var rock_pos = get_world_position_from_grid(global.grid_extra_left + 10,i)
 					var rock_inst = instance_create_depth(rock_pos.x-90,rock_pos.y+33-300,depth,obj_irritable_jack_rock_skill_4)
 					if i == head_row{
 						rock_inst.prev_spr = spr_irritable_jack_head_skill_3
@@ -335,7 +335,7 @@ switch state{
 		}
 		if timer mod 70 == 15{
 			var tg_row = irandom_range(0,global.grid_rows-1)
-			var tg_y = get_world_position_from_grid(9,tg_row).y + 33
+			var tg_y = get_world_position_from_grid(global.grid_extra_left + 9,tg_row).y + 33
 			var inst = instance_create_depth(x-80,y,-800,obj_irritable_jack_fire)
 			inst.y_move = (tg_y-y)/120
 		}
@@ -363,13 +363,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			else if skill_count == 0{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(10,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 33

@@ -17,15 +17,15 @@ if !appear{
 	skill_change_style = irandom_range(0,1)
 	if skill_choose == 0{
 		enemy_row = 0
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_choose == 1{
 		enemy_row = 0
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_choose == 2{
 		enemy_row = 3
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
@@ -158,7 +158,7 @@ switch state{
 			if skill_choose == 0 && !is_reversed{
 				timer = 0
 				move_time = 250
-				var enemy_pos = get_world_position_from_grid(0,global.grid_rows-1)
+				var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 0,global.grid_rows-1)
 				x = enemy_pos.x - 90 + 40
 				y = enemy_pos.y + 30
 				is_reversed = true
@@ -169,7 +169,7 @@ switch state{
 				timer = 0
 				move_time = 250
 				if skill_2_times == 0{
-					var enemy_pos = get_world_position_from_grid(0,global.grid_rows-1)
+					var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 0,global.grid_rows-1)
 					x = enemy_pos.x - 90 + 20
 					y = enemy_pos.y + 30
 					train_dir = 1
@@ -177,7 +177,7 @@ switch state{
 					is_reversed = true
 				}
 				else if skill_2_times == 1{
-					var enemy_pos = get_world_position_from_grid(10,3)
+					var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,3)
 					x = enemy_pos.x - 90 + 20
 					y = enemy_pos.y + 30
 					train_dir = 0
@@ -287,13 +287,13 @@ switch state{
 					
 				}
 			}
-			var mouse_pos1 = get_world_position_from_grid(0,2)
+			var mouse_pos1 = get_world_position_from_grid(global.grid_extra_left + 0,2)
 			var inst1 = instance_create_depth(mouse_pos1.x+25,mouse_pos1.y+38,-800,obj_machine_iron_pan_mouse)
 			inst1.grid_row = 2
 			inst1.move_speed *= -1
 			inst1.attack_range *= -1
 			inst1.image_xscale = -1.8
-			var mouse_pos2 = get_world_position_from_grid(0,4)
+			var mouse_pos2 = get_world_position_from_grid(global.grid_extra_left + 0,4)
 			var inst2 = instance_create_depth(mouse_pos2.x+25,mouse_pos2.y+38,-800,obj_machine_iron_pan_mouse)
 			inst2.grid_row = 4
 			inst2.move_speed *= -1
@@ -413,15 +413,15 @@ switch state{
 			skill_change_style = irandom_range(0,1)
 			if skill_choose == 0{
 				enemy_row = 0
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 1{
 				enemy_row = 0
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_choose == 2{
 				enemy_row = 3
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30

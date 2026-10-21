@@ -54,6 +54,7 @@ if keyboard_check_pressed(vk_escape){
 
 if current_map_id != global.map_id && ds_map_exists(global.maps_map, global.map_id){
 	instance_destroy(obj_levelselect_button)
+	instance_destroy(obj_random_challenge_bubble)
 	current_map_id = global.map_id
 	var map_button_array = struct_get(ds_map_find_value(global.maps_map,current_map_id),"levels_data")
 	var button_array_length = array_length(map_button_array)
@@ -68,5 +69,8 @@ if current_map_id != global.map_id && ds_map_exists(global.maps_map, global.map_
 		inst.player_level_require = button_struct.player_level_require
 		inst.pre_level_require = button_struct.pre_level_require
 		inst.sprite_index = button_struct.button_spr
+	}
+	if global.map_id == "delicious_island" {
+		instance_create_depth(960,540,-1,obj_random_challenge_bubble)
 	}
 }

@@ -11,7 +11,7 @@ else{
 	sprite_index = spr_eel_mouse_bomb
 }
 
-if state == ENEMY_STATE.ATTACK && !bomb_throwed && grid_col <= 8{
+if state == ENEMY_STATE.ATTACK && !bomb_throwed && grid_col <= 12{
 	for(var i = 0 ; i < grid_col;i++){
 		target_col = -1
 		var plant_list = ds_grid_get(global.grid_plants,i,grid_row)

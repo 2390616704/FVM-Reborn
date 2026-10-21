@@ -13,7 +13,8 @@ move_axis = "y";        // 移动所在轴："x" 横向 或 "y" 纵向
 move_distance = 2;      // 总位移格数（2格）
 current_offset = 0;     // 当前已位移格数（0 表示在起点）
 move_direction = 1;     // 1 为向下(y)/向右(x)，-1 为向上/向左
-state = "idle";         // "idle" 等待状态, "moving" 移动状态
+state = "idle";
+movement_enabled = false;
 
 // 动画与速度
 idle_timer = 0;

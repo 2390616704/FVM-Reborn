@@ -27,7 +27,7 @@ if state == "appear"{
 		image_index = floor((timer-45) /5) mod 8 + 9
 		x -= 0.5
 	}
-	if x <= get_world_position_from_grid(0,0).x{
+	if x <= get_world_position_from_grid(global.grid_extra_left + 0,0).x{
 		hp = 0
 	}
 	with obj_card_parent{

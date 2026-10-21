@@ -2,6 +2,9 @@
 if global.is_paused{
 	exit
 }
+if (bread_cap_window > 0) {
+    bread_cap_window = max(0, bread_cap_window - delta_time / 1000000);
+}
 if ice_timer > 0{
 	ice_timer--
 	is_slowdown = true
@@ -61,12 +64,18 @@ if !(variable_instance_exists(id, "platform_grid_lock") && platform_grid_lock) {
     grid_col = clamp(grid_pos.col,0,global.grid_cols-1)
     grid_row = clamp(grid_pos.row,0,global.grid_rows-1)
 }
-if (variable_global_exists("perma_hidden") &&
-    global.perma_hidden[grid_row][grid_col]) {
-    melon_permanent_hide_apply(id);
+if (variable_global_exists("perma_hidden")) {
+    if (grid_row >= 0 && grid_row < global.grid_rows &&
+        grid_col >= 0 && grid_col < global.grid_cols) {
+        if (global.perma_hidden[grid_row][grid_col]) {
+            melon_permanent_hide_apply(id);
+        }
+    }
 }
 
-depth = calculate_plant_depth(grid_pos.col, grid_pos.row, plant_type) - depth_offset * 0.001
+var depth_col = clamp(grid_col, 0, global.grid_cols - 1)
+var depth_row = clamp(grid_row, 0, global.grid_rows - 1)
+depth = calculate_plant_depth(depth_col, depth_row, plant_type) - depth_offset * 0.001
 if instance_exists(banding_star_obj){
 banding_star_obj.depth = depth - 1
 }

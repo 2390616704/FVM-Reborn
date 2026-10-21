@@ -9,7 +9,7 @@ if flash_value > 0 {
 if !appear{
 	var enemy_row = irandom_range(0,global.grid_rows-1)
 	var enemy_pos = {}
-	enemy_pos = get_world_position_from_grid(9,global.grid_rows-1)
+	enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,global.grid_rows-1)
 	x = enemy_pos.x - 90
 	y = enemy_pos.y + 30
 	image_alpha = 1
@@ -84,7 +84,7 @@ switch state{
 		}
 		if timer == 23 * 5 + 2{
 			for(var i = 0 ; i < global.grid_rows ; i++){
-				var m_pos = get_world_position_from_grid(9,i)
+				var m_pos = get_world_position_from_grid(global.grid_extra_left + 9,i)
 				var m_inst = instance_create_depth(m_pos.x,m_pos.y+38,-800,obj_conch_mouse)
 				m_inst.grid_row = i
 			}
@@ -246,13 +246,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 1{
-				enemy_pos = get_world_position_from_grid(9,3)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 			}
 			else if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(9,3)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,3)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(9,global.grid_rows-1)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,global.grid_rows-1)
 			}
 			x = enemy_pos.x - 90
 			y = enemy_pos.y + 30

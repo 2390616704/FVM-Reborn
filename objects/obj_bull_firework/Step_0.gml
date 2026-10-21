@@ -70,7 +70,7 @@ if attack_timer == idle_anim*flash_speed{
 }
 
 if attack_timer == 1 && shape >= 2{
-	var cat_pos = get_world_position_from_grid(10,grid_row)
+	var cat_pos = get_world_position_from_grid(global.grid_extra_left + 10,grid_row)
 	var cat_inst = instance_create_depth(cat_pos.x - 10, cat_pos.y+10, 0,obj_cat);
 	cat_inst.row = grid_row
 	cat_inst.idle_anim = 0

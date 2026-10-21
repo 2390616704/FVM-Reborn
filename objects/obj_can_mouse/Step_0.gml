@@ -19,7 +19,7 @@ if is_frozen || is_stun{
 	exit
 }
 
-var target_pos = get_world_position_from_grid(0,target_row)
+var target_pos = get_world_position_from_grid(global.grid_extra_left + 0,target_row)
 
 if state == ENEMY_STATE.ACTING{
 	sprite_index = spr_can_mouse_drop

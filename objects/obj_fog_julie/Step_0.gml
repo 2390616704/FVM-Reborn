@@ -10,13 +10,13 @@ if !appear{
 	var enemy_row = 0
 	var enemy_pos = {}
 	if skill_count == 2{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	else if skill_count == 0{
-		enemy_pos = get_world_position_from_grid(10,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 10,enemy_row)
 	}
 	else{
-		enemy_pos = get_world_position_from_grid(9,enemy_row)
+		enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 	}
 	x = enemy_pos.x - 80
 	y = enemy_pos.y + 30
@@ -126,7 +126,7 @@ switch state{
 		}
 		else{
 			if timer == 1{
-				t_pos = get_world_position_from_grid(9,irandom_range(0,global.grid_rows-1))
+				t_pos = get_world_position_from_grid(global.grid_extra_left + 9,irandom_range(0,global.grid_rows-1))
 			
 				y_move_speed = (t_pos.y+33-y)/240
 				x_move = (t_pos.x-90-x)/240
@@ -253,7 +253,7 @@ switch state{
 		
 		if timer == 1{
 			
-			t_pos = get_world_position_from_grid(9,irandom_range(0,global.grid_rows-1))
+			t_pos = get_world_position_from_grid(global.grid_extra_left + 9,irandom_range(0,global.grid_rows-1))
 			
 			y_move_speed = (t_pos.y+33-y)/120
 			x_move = (t_pos.x-90-x)/120
@@ -295,7 +295,7 @@ switch state{
 		if timer == 19 * 5{
 			if !instance_exists(banding_summon_obj){
 				var enemy_row = irandom_range(0,global.grid_rows-1)
-				var enemy_pos = get_world_position_from_grid(8,enemy_row)
+				var enemy_pos = get_world_position_from_grid(global.grid_extra_left + 8,enemy_row)
 				banding_summon_obj = instance_create_depth(enemy_pos.x-80,enemy_pos.y+33,-200,obj_lieutenant_buzz)
 				obj_battle.boss_count++
 				if global.level_id != "macchiato_port"{
@@ -330,13 +330,13 @@ switch state{
 			var enemy_row = irandom_range(0,global.grid_rows-1)
 			var enemy_pos = {}
 			if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_count == 0{
 				enemy_pos = get_world_position_from_grid(irandom_range(2,6),enemy_row)
 			}
 			else{
-				enemy_pos = get_world_position_from_grid(6,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 6,enemy_row)
 			}
 			x = enemy_pos.x - 80
 			y = enemy_pos.y + 30

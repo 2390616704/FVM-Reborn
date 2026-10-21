@@ -14,7 +14,7 @@ if is_frozen || is_stun || scare_timer > 0{
 }
 
 if hp > 0 && state != ENEMY_STATE.DEAD{
-	if grid_col <= 8 && (state == ENEMY_STATE.NORMAL || state == ENEMY_STATE.ATTACK){
+	if grid_col <= 12 && (state == ENEMY_STATE.NORMAL || state == ENEMY_STATE.ATTACK){
 		timer = 0
 		state = ENEMY_STATE.APPEAR
 		sprite_index = spr_swordfish_mouse_ready

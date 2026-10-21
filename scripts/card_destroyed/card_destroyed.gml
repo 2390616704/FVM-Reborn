@@ -240,7 +240,15 @@ function plant_apply_normal_damage(plant, damage, attacker = noone) {
     var receiver = (guard != noone) ? guard : plant;
     var applied_damage = damage;
     if (receiver.plant_type == "shield_outer" && receiver.plant_id != "melon_shield") {
-        applied_damage = min(damage, receiver.max_hp / 8);
+        if (damage >= 200 && receiver.bread_cap_window > 0) {
+            applied_damage = 1;
+        }
+        else {
+            applied_damage = min(damage, 200);
+            if (damage >= 200) {
+                receiver.bread_cap_window = 0.3;
+            }
+        }
     }
     receiver.hp -= applied_damage;
     with (receiver) event_user(2);

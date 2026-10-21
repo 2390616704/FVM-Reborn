@@ -260,10 +260,10 @@ switch state{
 				enemy_pos = get_world_position_from_grid(irandom_range(2,6),enemy_row)
 			}
 			else if skill_count == 2{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			else if skill_count == 1{
-				enemy_pos = get_world_position_from_grid(9,enemy_row)
+				enemy_pos = get_world_position_from_grid(global.grid_extra_left + 9,enemy_row)
 			}
 			x_move_speed = (enemy_pos.x - 90 - x)/180
 			y_move_speed = (enemy_pos.y + 30 - y)/180

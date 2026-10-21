@@ -10,7 +10,7 @@ death_anim = 11
 state = ENEMY_STATE.ACTING
 sprite_index = spr_little_armour_mouse_throw
 target_type = "air"
-target_col = 2
+target_col = 6
 target_row = 0
 
 chspeed = -4

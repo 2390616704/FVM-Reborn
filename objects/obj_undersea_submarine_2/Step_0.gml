@@ -13,7 +13,7 @@ if (hp <= 0) {
 }
 event_inherited();
 
-if x > get_world_position_from_grid(9,grid_row).x{
+if x > get_world_position_from_grid(global.grid_extra_left + 9,grid_row).x{
 	move_speed = 1.2
 }
 else{
@@ -40,7 +40,7 @@ if hp > 0 && state != ENEMY_STATE.DEAD{
 		else{
 			image_index = floor(anim_timer/flash_speed) mod 4 + 4
 		}
-		if x <= get_world_position_from_grid(7,grid_row).x{
+		if x <= get_world_position_from_grid(global.grid_extra_left + 7,grid_row).x{
 			anim_timer = 0
 			state = ENEMY_STATE.ACTING
 			if grid_row == 0{
