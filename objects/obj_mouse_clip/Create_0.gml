@@ -15,6 +15,7 @@ else if shape == 2{
 // ========== 特定属性默认值 ==========
 
 attack_anim = 7;
+move_timer = 0;
 
 can_mouse_list = ["can_mouse"]
 

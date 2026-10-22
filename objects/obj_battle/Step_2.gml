@@ -61,3 +61,5 @@ if ((!global.random_challenge_active && !global.save_data.unlocked_items.elite_u
 		global.audio.play(snd_win,0,0)
 	}
 }
+
+mouse_clip_movement_update()

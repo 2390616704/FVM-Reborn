@@ -400,3 +400,80 @@ function enemy_subwave_summon(){
     }
     
 }
+
+function mouse_clip_cell_is_empty(_col, _row) {
+    if (_col < 0 || _col >= global.grid_cols || _row < 0 || _row >= global.grid_rows) return false;
+    var _plants = ds_grid_get(global.grid_plants, _col, _row);
+    for (var _i = 0; _i < ds_list_size(_plants); _i++) {
+        var _plant = ds_list_find_value(_plants, _i);
+        if (!instance_exists(_plant)) continue;
+        if (!variable_instance_exists(_plant, "hp") || _plant.hp > 0) return false;
+    }
+    return true;
+}
+
+function mouse_clip_find_move_target(_clip) {
+    for (var _col = _clip.grid_col + 1; _col < global.grid_cols; _col++) {
+        if (mouse_clip_cell_is_empty(_col, _clip.grid_row)) return _col;
+    }
+    return -1;
+}
+
+function mouse_clip_move_to(_clip, _col) {
+    var _row = _clip.grid_row;
+    var _old_col = _clip.grid_col;
+    var _old_list = ds_grid_get(global.grid_plants, _old_col, _row);
+    var _old_index = ds_list_find_index(_old_list, _clip);
+    if (_old_index != -1) ds_list_delete(_old_list, _old_index);
+
+    var _new_list = ds_grid_get(global.grid_plants, _col, _row);
+    ds_list_add(_new_list, _clip);
+
+    var _pos = get_world_position_from_grid(_col, _row);
+    _clip.x = _pos.x;
+    _clip.y = _pos.y;
+    _clip.grid_col = _col;
+    _clip.grid_row = _row;
+
+    sort_plants_in_grid(_old_col, _row);
+    sort_plants_in_grid(_col, _row);
+
+    if (variable_instance_exists(_clip, "banding_star_obj") && instance_exists(_clip.banding_star_obj)) {
+        _clip.banding_star_obj.x = _clip.x;
+        _clip.banding_star_obj.y = _clip.y - 5;
+        _clip.banding_star_obj.depth = _clip.depth - 1;
+    }
+}
+
+function mouse_clip_movement_update() {
+    if (global.is_paused) return;
+
+    var _interval = 5 * 60;
+    var _due = [];
+    with (obj_mouse_clip) {
+        if (state == CARD_STATE.IDLE || is_frozen) continue;
+        if (grid_col < 0 || grid_col >= global.grid_cols || grid_row < 0 || grid_row >= global.grid_rows) continue;
+        move_timer++;
+        if (move_timer >= _interval) {
+            array_push(_due, { inst: id, target: mouse_clip_find_move_target(id) });
+        }
+    }
+    if (array_length(_due) <= 0) return;
+
+    array_sort(_due, function(_a, _b) {
+        var _ac = _a.inst.grid_col;
+        var _bc = _b.inst.grid_col;
+        if (_ac == _bc) return _b.inst.id - _a.inst.id;
+        return _bc - _ac;
+    });
+
+    for (var _i = 0; _i < array_length(_due); _i++) {
+        var _entry = _due[_i];
+        var _clip = _entry.inst;
+        if (!instance_exists(_clip)) continue;
+        _clip.move_timer = 0;
+        if (_entry.target < 0) continue;
+        if (!mouse_clip_cell_is_empty(_entry.target, _clip.grid_row)) continue;
+        mouse_clip_move_to(_clip, _entry.target);
+    }
+}
