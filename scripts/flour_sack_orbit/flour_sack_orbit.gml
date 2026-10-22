@@ -134,7 +134,6 @@ function flour_sack_update_orbit(_flour) {
         var _radius = _flour.orbit_radii[i];
         _visual.x = _cx + lengthdir_x(_radius, _angle);
         _visual.y = _cy + lengthdir_y(_radius, _angle) * FLOUR_SACK_ORBIT_PERSPECTIVE;
-        _visual.image_angle = 90 - _angle;
     }
 }
 
@@ -376,7 +375,6 @@ function flour_sack_payload_update_all() {
                 _visual.image_xscale = _p.scales_x[j] * _scale_mul;
                 _visual.image_yscale = _p.scales_y[j] * _scale_mul;
                 _visual.image_alpha = 1;
-                _visual.image_angle = point_direction(_visual.x, _visual.y, _p.target_x, _p.target_y);
             }
         }
         else {
