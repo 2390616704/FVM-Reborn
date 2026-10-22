@@ -294,9 +294,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_king_triple_long_bao_2_0, "cost":175, "cooldown":5*60, "description":"黑心三向国王小笼包：向最靠左的至多三行敌人发射包子，前三发优先攻击不同行，多余包子集中攻击最左行，可填充5张三向包子类卡片","plant_type":"normal","feature_type":"king_tbun","target_card":"none"}
 	])
 	register_card("chili_powder",obj_chili_powder,[
-	    {"shape":0, "sprite":spr_chili_powder, "cost":10, "cooldown":30*60, "description":"辣椒粉：接触敌人后产生十字范围爆炸并产生2朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},
-	    {"shape":1, "sprite":spr_chili_powder_1, "cost":10, "cooldown":30*60, "description":"火爆辣椒粉：接触敌人后产生十字范围爆炸并产生4朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},
-		{"shape":2, "sprite":spr_chili_powder_2, "cost":10, "cooldown":30*60, "description":"魔鬼辣椒粉：接触敌人后产生3*3范围爆炸并产生4朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"}
+	    {"shape":0, "sprite":spr_chili_powder, "cost":10, "cooldown":30*60, "description":"辣椒粉：接触敌人后产生十字范围爆炸，每命中一个敌人生成1朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_chili_powder_1, "cost":10, "cooldown":30*60, "description":"火爆辣椒粉：接触敌人后产生十字范围爆炸，每命中一个敌人生成2朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},
+		{"shape":2, "sprite":spr_chili_powder_2, "cost":10, "cooldown":30*60, "description":"魔鬼辣椒粉：接触敌人后产生3*3范围爆炸，每命中一个敌人生成2朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	])
 	register_card("tang_hu_lu", obj_tang_hu_lu, [
 	    {"shape":0, "sprite":spr_tang_hu_lu_icon, "cost":175, "cooldown":7*60, "description":"糖葫芦炮弹：发射追踪空中敌人的糖葫芦炮弹","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_tang_hu_lu},

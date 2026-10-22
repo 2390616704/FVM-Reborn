@@ -5,10 +5,12 @@
 var _x = x;
 var _y = y;
 var _range = 250
+var _hit_count = 0
 
 with (obj_enemy_parent) {
 	if (other.shape < 2 && ((grid_row == other.grid_row && abs(x - other.x) <= 2*global.grid_cell_size_x)||(abs(x - other.x) <= 100 && abs(grid_row-other.grid_row) <= 1)))
 	||(other.shape >= 2 && (point_distance(x, y, _x, _y) < _range && abs(grid_row-other.grid_row) <= 1)){
+		_hit_count++
 		if array_get_index(other.can_mouse_list,mouse_id) != -1 && !can_dropped{
 			into_act()
 		}
@@ -59,16 +61,14 @@ if shape < 2{
 	effect_inst1.interval = 2
 	effect_inst1.type = 1
 }
-if enemy_encounted{
-	for(var i = 0 ; i < 2 ; i++){
+if exploded_by_contact{
+	var _flame_multiplier = 1
+	if shape >= 1{
+		_flame_multiplier = 2
+	}
+	for(var i = 0 ; i < _hit_count * _flame_multiplier ; i++){
 		var inst = instance_create_depth(x, y - 60, depth - 1000, obj_flame);
 		inst.value = flame_produce
-	}
-	if shape == 2{
-		for(var i = 0 ; i < 2 ; i++){
-			var inst2 = instance_create_depth(x, y - 60, depth - 1000, obj_flame);
-			inst2.value = flame_produce
-		}
 	}
 }
 

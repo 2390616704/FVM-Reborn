@@ -24,3 +24,4 @@ flash_speed = 5
 plant_type = "normal"
 invincible = true
 enemy_encounted = false
+exploded_by_contact = false
