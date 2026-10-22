@@ -134,7 +134,7 @@ function flour_sack_update_orbit(_flour) {
         var _radius = _flour.orbit_radii[i];
         _visual.x = _cx + lengthdir_x(_radius, _angle);
         _visual.y = _cy + lengthdir_y(_radius, _angle) * FLOUR_SACK_ORBIT_PERSPECTIVE;
-        _visual.image_angle = point_direction(0, 0, -sin(_angle), -cos(_angle) * FLOUR_SACK_ORBIT_PERSPECTIVE);
+        _visual.image_angle = 90 - _angle;
     }
 }
 
