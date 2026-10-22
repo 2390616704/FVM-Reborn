@@ -238,6 +238,7 @@ function flour_sack_try_launch(_flour) {
         offsets_y: [],
         scales_x: [],
         scales_y: [],
+        headings: [],
         damage: _flour.orbit_damage,
         has_ice: _flour.orbit_has_ice,
         has_scare: _flour.orbit_has_scare,
@@ -254,6 +255,7 @@ function flour_sack_try_launch(_flour) {
         array_push(_payload.offsets_y, _visual.y - _cy);
         array_push(_payload.scales_x, _visual.image_xscale);
         array_push(_payload.scales_y, _visual.image_yscale);
+        array_push(_payload.headings, _visual.image_angle);
     }
 
     if (!variable_global_exists("flour_sack_payloads")) {
@@ -360,6 +362,9 @@ function flour_sack_payload_update_all() {
                 _visual.x = _ax + _p.offsets_x[j];
                 _visual.y = _ay + _p.offsets_y[j];
                 _visual.image_alpha = lerp(0.25, 1, min(1, _raw * 2));
+                var _target_dir = point_direction(_visual.x, _visual.y, _p.target_x, _p.target_y);
+                var _turn = _raw * _raw;
+                _visual.image_angle = _p.headings[j] + angle_difference(_p.headings[j], _target_dir) * _turn;
             }
         }
         else if (_t < _flight + _collapse) {
@@ -376,6 +381,7 @@ function flour_sack_payload_update_all() {
                 _visual.image_xscale = _p.scales_x[j] * _scale_mul;
                 _visual.image_yscale = _p.scales_y[j] * _scale_mul;
                 _visual.image_alpha = 1;
+                _visual.image_angle = point_direction(_visual.x, _visual.y, _p.target_x, _p.target_y);
             }
         }
         else {
