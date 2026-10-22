@@ -2,6 +2,7 @@
 #macro FLOUR_SACK_CHARGE_STEPS 60
 #macro FLOUR_SACK_ORBIT_SPEED 1.2
 #macro FLOUR_SACK_ORBIT_Y_OFFSET 40
+#macro FLOUR_SACK_ORBIT_PERSPECTIVE 0.7
 #macro FLOUR_SACK_FLIGHT_STEPS 40
 #macro FLOUR_SACK_COLLAPSE_STEPS 26
 
@@ -128,12 +129,12 @@ function flour_sack_update_orbit(_flour) {
     var _count = array_length(_flour.orbit_visuals);
     for (var i = 0; i < _count; i++) {
         var _visual = _flour.orbit_visuals[i];
-        _flour.orbit_angles[i] -= FLOUR_SACK_ORBIT_SPEED;
+        _flour.orbit_angles[i] += FLOUR_SACK_ORBIT_SPEED;
         var _angle = _flour.orbit_angles[i];
         var _radius = _flour.orbit_radii[i];
         _visual.x = _cx + lengthdir_x(_radius, _angle);
-        _visual.y = _cy + lengthdir_y(_radius, _angle);
-        _visual.image_angle = _angle + 90;
+        _visual.y = _cy + lengthdir_y(_radius, _angle) * FLOUR_SACK_ORBIT_PERSPECTIVE;
+        _visual.image_angle = point_direction(0, 0, -sin(_angle), -cos(_angle) * FLOUR_SACK_ORBIT_PERSPECTIVE);
     }
 }
 
