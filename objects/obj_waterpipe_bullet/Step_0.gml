@@ -7,7 +7,7 @@ image_speed = 1
 if burnt == 1{
 	sprite_index = spr_fire_bullet
 }
-x += move_speed
+x += move_speed * BULLET_SPEED_SCALE
 
 // 处理上下行的子弹移动动画
 if target_row != -1{
@@ -17,7 +17,7 @@ if target_row != -1{
     
     // 平滑移动到目标行（使用线性插值）
     var transition_speed = 0.15; // 调整这个值来控制移动速度
-    y = lerp(y, target_y, transition_speed);
+    y = lerp(y, target_y, min(1, transition_speed * BULLET_SPEED_SCALE));
 	
 	if abs(y - target_y) < 30 {
 		row = target_row

@@ -16,7 +16,7 @@ if not pos_set{
 }
 
 if y < target_pos.y{
-	y += 20
+	y += 20 * BULLET_SPEED_SCALE
 }
 else{
 	instance_destroy()

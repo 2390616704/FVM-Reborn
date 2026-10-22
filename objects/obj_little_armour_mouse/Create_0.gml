@@ -1,5 +1,7 @@
 event_inherited()
 
+mouse_id = "little_armour_mouse"
+guardian_eligible = true
 hp = 400
 maxhp = 400
 

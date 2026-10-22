@@ -1,3 +1,5 @@
+#macro LETHAL_BITE_DAMAGE 900
+
 function plant_consume_lethal_block(plant) {
     if (!instance_exists(plant)) return false;
     if (!variable_instance_exists(plant, "lethal_blocks") || plant.lethal_blocks <= 0) return false;
@@ -233,7 +235,11 @@ function melon_shield_handle_damage(plant, damage, attacker) {
 }
 
 function plant_apply_normal_damage(plant, damage, attacker = noone) {
-    if (!instance_exists(plant) || plant.invincible) return;
+    if (!instance_exists(plant)) return;
+    if (attacker != noone && variable_instance_exists(plant, "plant_id") && plant.plant_id == "flour_sack") {
+        flour_sack_try_jump(plant);
+    }
+    if (plant.invincible) return;
     if (melon_shield_handle_damage(plant, damage, attacker)) return;
 
     var guard = plant_find_guard(plant, false);
@@ -293,30 +299,12 @@ function plant_apply_overlap_attack(target, damage, attacker = noone) {
 
 function plant_apply_boss_lethal(plant, attacker) {
     if (!instance_exists(plant)) return;
-    if (variable_instance_exists(plant, "invincible") && plant.invincible) return;
-    if (melon_shield_handle_damage(plant, 9999999, attacker)) return;
 
-    var guard = plant_find_guard(plant, false);
-    if (guard != noone && guard.plant_type == "shield_outer" && guard.plant_id != "melon_shield") {
-        plant_apply_normal_damage(guard, 9999999, attacker);
-        if (guard.hp > 0) plant_push_attacker(attacker);
-        return;
+    var _damage = LETHAL_BITE_DAMAGE;
+    if (instance_exists(attacker) && variable_instance_exists(attacker, "atk")) {
+        _damage = max(_damage, attacker.atk);
     }
-    if (guard != noone && plant_consume_lethal_block(guard)) {
-        if (guard.hp > 0) plant_push_attacker(attacker);
-        return;
-    }
-    if (plant.plant_type == "shield_outer" && plant.plant_id != "melon_shield") {
-        plant_apply_normal_damage(plant, 9999999, attacker);
-        if (plant.hp > 0) plant_push_attacker(attacker);
-        return;
-    }
-    if (plant_consume_lethal_block(plant)) {
-        if (plant.hp > 0) plant_push_attacker(attacker);
-        return;
-    }
-
-    plant.hp -= 9999999;
+    plant_apply_normal_damage(plant, _damage, attacker);
 }
 
 function plant_push_attacker(attacker) {

@@ -10,8 +10,8 @@ if (instance_exists(target_enemy) && target_enemy.hp > 0 && can_hit(target_type,
     
     // 计算朝向目标的方向
     var dir = point_direction(x, y, target_x, target_y);
-    x += lengthdir_x(move_speed, dir);
-    y += lengthdir_y(move_speed, dir);
+    x += lengthdir_x(move_speed * BULLET_SPEED_SCALE, dir);
+    y += lengthdir_y(move_speed * BULLET_SPEED_SCALE, dir);
 	//show_debug_message(dir)
     
     // 检查是否需要重新选择目标（有更高优先级的目标出现）
@@ -100,8 +100,8 @@ if (instance_exists(target_enemy) && target_enemy.hp > 0 && can_hit(target_type,
     } else {
         // 没有敌人，按原方向继续飞行
         var dir = point_direction(xstart, ystart, x, y);
-        x += lengthdir_x(move_speed, dir);
-        y += lengthdir_y(move_speed, dir);
+        x += lengthdir_x(move_speed * BULLET_SPEED_SCALE, dir);
+        y += lengthdir_y(move_speed * BULLET_SPEED_SCALE, dir);
     }
 }
 

@@ -1,3 +1,7 @@
+if (variable_instance_exists(id, "flour_sack_captured") && flour_sack_captured) {
+	exit
+}
+
 
 
 	if other.hp > 0 and row == other.grid_row  and can_hit(target_type,other.target_type){

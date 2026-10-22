@@ -60,11 +60,15 @@ grid_row = 99
 damage_amount = 0
 damage_type = ""
 ghost_transfer_damage = false
+guardian_transfer_damage = false
 
 hit_sound = snd_hit1
 
 water_effect_timer = 0
 hp_modified = false
+transfer_base_hp = 0
+transfer_base_helmet_hp = 0
+transfer_base_shield_hp = 0
 
 block_mouse_id_list = ["mouse_train_1"]
 

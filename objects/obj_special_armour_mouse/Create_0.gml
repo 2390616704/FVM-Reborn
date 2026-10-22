@@ -1,5 +1,6 @@
  // Inherit the parent event
 event_inherited();
+mouse_id = "special_armour_mouse"
 hp = 10800
 maxhp = 10800
 atk = 900

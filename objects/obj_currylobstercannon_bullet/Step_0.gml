@@ -4,7 +4,7 @@ if global.is_paused{
 timer++
 if state == "start"{
 	image_index = floor(timer/5) mod 4
-	y -= 15
+	y -= 15 * BULLET_SPEED_SCALE
 	if y <= -200{
 		var target_pos = get_world_position_from_grid(target_col,target_row)
 		x = target_pos.x 
@@ -15,7 +15,7 @@ if state == "start"{
 if state == "drop"{
 	image_index = floor(timer/5) mod 4 + 4
 	var target_pos = get_world_position_from_grid(target_col,target_row)
-	y += 15
+	y += 15 * BULLET_SPEED_SCALE
 	if y >= (target_pos.y-15){
 		var inst = instance_create_depth(x+15,y-15,-800,obj_coke_bomb_explode)
 		inst.sprite_index = spr_curry_lobster_cannon_bullet_effect

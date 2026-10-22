@@ -48,3 +48,5 @@ if is_stun{
 if(climb_stage==1){
 	y = climb_base_y
 }
+
+enemy_guardian_draw_marker(id)

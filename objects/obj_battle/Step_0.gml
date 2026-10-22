@@ -2,6 +2,8 @@ if global.is_paused{
 	exit
 }
 
+enemy_guardian_update_lines()
+
 if global.lose_focus_pause{
 	if !window_has_focus() && !global.is_paused{
 		global.is_paused = true
@@ -293,3 +295,5 @@ for(var i = 0; i < global.grid_rows; i++){
 		global.has_enemy_underground[row_base + j] += global.has_enemy_underground[row_base + j - 1];
 	}
 }
+
+flour_sack_payload_update_all()

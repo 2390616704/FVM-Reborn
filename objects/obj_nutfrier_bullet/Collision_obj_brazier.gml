@@ -1,3 +1,7 @@
+if (variable_instance_exists(id, "flour_sack_captured") && flour_sack_captured) {
+	exit
+}
+
 if ds_list_find_index(brazier_list,other.id) == -1 && burnt == 0{
 	burnt += 1
 	damage = round(damage * other.atk)

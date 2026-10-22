@@ -8,7 +8,7 @@ timer++;
 image_index = (floor(timer / 3)) mod 4;
 
 // 水平移动
-x += move_speed;
+x += move_speed * BULLET_SPEED_SCALE;
 
 // 处理上下行的子弹移动动画
 if variable_instance_exists(id, "target_row"){
@@ -18,7 +18,7 @@ if variable_instance_exists(id, "target_row"){
     
     // 平滑移动到目标行（使用线性插值）
     var transition_speed = 0.15; // 调整这个值来控制移动速度
-    y = lerp(y, target_y, transition_speed);
+    y = lerp(y, target_y, min(1, transition_speed * BULLET_SPEED_SCALE));
 	
 	if abs(y - target_y) < 30 {
 		row = target_row

@@ -10,7 +10,7 @@ if burnt == 1{
 else if burnt == 2{
 	sprite_index = spr_fire_bullet
 }
-y += move_speed
+y += move_speed * BULLET_SPEED_SCALE
 if x > 2200 or y > 1200 or x < 0 or y < -200{
 	instance_destroy()
 }

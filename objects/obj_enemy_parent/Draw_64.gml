@@ -42,6 +42,6 @@ if (global.enemy_hpbar && hp > 0) {
 	if shield_hp > 0{
 		draw_set_colour(c_black)
 	}
-	draw_text(x,bar_y+9,string(hp))
+	draw_text(x,bar_y+9,string(floor(hp)))
 	draw_set_alpha(1)
 }

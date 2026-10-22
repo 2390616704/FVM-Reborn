@@ -6,7 +6,7 @@ image_speed = 1
 
 
 if state == "move"{
-	x += move_speed
+	x += move_speed * BULLET_SPEED_SCALE
 	if x >= target_x{
 		state = "target"
 	}

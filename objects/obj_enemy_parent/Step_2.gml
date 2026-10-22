@@ -37,6 +37,9 @@ if not hp_modified{
 		shield_max_hp *= global.level_file.hp_modify
 	}
 	
+	transfer_base_hp = maxhp
+	transfer_base_helmet_hp = helmet_max_hp
+	transfer_base_shield_hp = shield_max_hp
 	hp_modified = true
 }
 with obj_lava{

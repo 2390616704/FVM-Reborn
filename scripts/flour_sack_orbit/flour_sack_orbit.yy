@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"flour_sack_orbit",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"flour_sack_orbit",
+  "parent":{
+    "name":"assistant",
+    "path":"folders/脚本/assistant.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

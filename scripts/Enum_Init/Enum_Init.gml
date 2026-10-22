@@ -1,3 +1,5 @@
+#macro BULLET_SPEED_SCALE 4
+
 function Enum_Init(){
 	enum CARD_STATE{
 		IDLE,

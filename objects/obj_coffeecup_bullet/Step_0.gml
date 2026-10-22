@@ -19,14 +19,14 @@ if timer < 4{
 else{
 	if state == 0{
 		image_index = state_timer / 5
-		x -= move_speed
+		x -= move_speed * BULLET_SPEED_SCALE
 	}
 	else{
 		image_index = 4+floor(state_timer / 5) mod 3
 	}
 	timer = 0
 }
-x += move_speed
+x += move_speed * BULLET_SPEED_SCALE
 if x > 2200 or y > 1200 or x < 0 or y < 0{
 	instance_destroy()
 }

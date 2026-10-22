@@ -1,7 +1,7 @@
 if global.is_paused{
 	exit
 }
-x += move_speed
+x += move_speed * BULLET_SPEED_SCALE
 timer++
 if timer <= 4* 3 - 1{
 	image_index = floor(timer/3) mod 4

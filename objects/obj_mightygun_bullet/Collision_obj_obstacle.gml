@@ -1,3 +1,7 @@
+if (variable_instance_exists(id, "flour_sack_captured") && flour_sack_captured) {
+	exit
+}
+
 if target_type == "normal" && row == other.row{
 	if burnt == 0{
 		instance_create_depth(x,y,depth,obj_xiaolongbao_bullet_effect)

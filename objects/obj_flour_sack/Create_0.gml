@@ -31,3 +31,12 @@ first_target_y = 0
 
 origin_row = -1
 origin_col = -1
+
+orbit_charge = 0
+orbit_visuals = []
+orbit_angles = []
+orbit_radii = []
+orbit_damage = 0
+orbit_has_ice = false
+orbit_has_scare = false
+payload_active = false

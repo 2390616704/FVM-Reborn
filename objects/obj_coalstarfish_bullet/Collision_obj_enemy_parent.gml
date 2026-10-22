@@ -1,3 +1,7 @@
+if (variable_instance_exists(id, "flour_sack_captured") && flour_sack_captured) {
+	exit
+}
+
 if other.hp > 0 and can_hit(target_type,other.target_type) and (b_type == 0 ||(b_type == 1 && row == other.grid_row)){
 	with(other){
 		if other.burnt == 1{

@@ -1,9 +1,11 @@
 if global.is_paused{
 	exit
 }
-x += move_speed
-y -= cvspeed
-cvspeed -= cgravity
+for (var _i = 0; _i < BULLET_SPEED_SCALE; _i++) {
+	x += move_speed
+	y -= cvspeed
+	cvspeed -= cgravity
+}
 image_angle -= 5
 if x > 2200 or y > 1200 or x < -200 or y < -200{
 	instance_destroy()

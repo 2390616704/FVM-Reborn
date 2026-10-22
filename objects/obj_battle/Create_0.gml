@@ -12,6 +12,8 @@ var mus_inst = instance_create_depth(0,0,0,obj_battle_music_controller)
 mus_inst.battle_music = global.level_data.pre_music
 
 global.game_over = false
+flour_sack_clear_all_payloads()
+enemy_guardian_reset()
 random_challenge_battle_snapshot()
 
 instance_create_depth(0,0,0,obj_battle_pause_manager)
@@ -230,6 +232,51 @@ function enemy_subwave_summon(){
     
     var subwave_enemy = global.level_file.waves[current_wave].subwaves
     enemy_list = subwave_enemy[current_subwave].enemy_list
+    
+	var _type_counts = {};
+	for (var _i = 0; _i < array_length(enemy_list); _i++) {
+		var _type = enemy_list[_i].type;
+		if (_type == "" || !ds_map_exists(global.enemy_map, _type)) continue;
+		_type_counts[$ _type] = variable_struct_exists(_type_counts, _type) ? _type_counts[$ _type] + 1 : 1;
+	}
+	var _converted_types = {};
+	var _types = variable_struct_get_names(_type_counts);
+	for (var _t = 0; _t < array_length(_types); _t++) {
+		var _type = _types[_t];
+		var _data = global.enemy_map[? _type];
+		if (!is_struct(_data) || !variable_struct_exists(_data, "_obj")) continue;
+		var _count = _type_counts[$ _type];
+		var _targets = [];
+		var _target_count = instance_number(_data._obj);
+		for (var _k = 0; _k < _target_count; _k++) {
+			var _inst = instance_find(_data._obj, _k);
+			if (_inst.hp > 0 && _inst.hp <= 3000) array_push(_targets, _inst);
+		}
+		if (array_length(_targets) <= 0) continue;
+		var _target = _targets[irandom(array_length(_targets) - 1)];
+		var _base_hp = _target.transfer_base_hp > 0 ? _target.transfer_base_hp : _target.maxhp;
+		var _base_helmet = _target.transfer_base_helmet_hp > 0 ? _target.transfer_base_helmet_hp : _target.helmet_max_hp;
+		var _base_shield = _target.transfer_base_shield_hp > 0 ? _target.transfer_base_shield_hp : _target.shield_max_hp;
+		var _amount_hp = _base_hp * _count;
+		var _amount_helmet = _base_helmet * _count;
+		var _amount_shield = _base_shield * _count;
+		_target.hp += _amount_hp;
+		_target.maxhp += _amount_hp;
+		_target.helmet_hp += _amount_helmet;
+		_target.helmet_max_hp += _amount_helmet;
+		_target.shield_hp += _amount_shield;
+		_target.shield_max_hp += _amount_shield;
+		current_total_hp += _data.hp * _count;
+		_converted_types[$ _type] = true;
+	}
+	if (array_length(variable_struct_get_names(_converted_types)) > 0) {
+		var _spawn_list = [];
+		for (var _i = 0; _i < array_length(enemy_list); _i++) {
+			var _type = enemy_list[_i].type;
+			if (_type == "" || !variable_struct_exists(_converted_types, _type)) array_push(_spawn_list, enemy_list[_i]);
+		}
+		enemy_list = _spawn_list;
+	}
     
     // 第一阶段：先处理已有行数的敌人
     var row_enemy_count = array_create(global.grid_rows, 0); // 记录每行已有敌人数

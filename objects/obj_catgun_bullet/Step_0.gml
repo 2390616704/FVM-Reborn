@@ -8,7 +8,7 @@ timer++;
 image_index = (floor(timer / 3)) mod 4;
 
 // 水平移动
-x += move_speed;
+x += move_speed * BULLET_SPEED_SCALE;
 
 // 边界检查
 if x > 2200 or y > 1200 or x < 0 or y < 0 {

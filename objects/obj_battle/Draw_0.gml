@@ -14,6 +14,8 @@ for (var _gr = 0; _gr <= global.grid_rows; _gr++) {
 }
 draw_set_alpha(1)
 
+enemy_guardian_draw_lines()
+
 draw_set_valign(fa_top)
 draw_set_halign(fa_left)
 draw_set_color(c_white)

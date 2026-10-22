@@ -13,6 +13,18 @@ if (_has_ghost_aura) {
 	damage_amount *= 0.75;
 }
 
+if (mouse_id == "glider_mouse" && glider_try_transfer_damage(id, damage_amount, damage_type)) {
+	damage_amount = 0;
+	damage_type = "";
+	exit;
+}
+
+if (enemy_guardian_try_transfer(id, damage_amount, damage_type)) {
+	damage_amount = 0;
+	damage_type = "";
+	exit;
+}
+
 if (!_is_transferred && mouse_id == "ghost_mouse") {
 	var _recipients = [];
 	with (obj_enemy_parent) {
