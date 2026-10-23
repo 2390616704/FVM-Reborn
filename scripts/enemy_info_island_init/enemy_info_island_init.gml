@@ -52,7 +52,7 @@ function enemy_info_island_init(){
 	register_enemy_info_island("penguin_mouse","入场后，如果碰到卡片，则会向本行最左侧的一张卡片投掷冰炸弹，冰炸弹\n会将3*3范围内的卡片冰冻4秒并减速10秒。如果没有碰到卡片，则会在7秒\n后投掷冰炸弹。")
 	register_enemy_info_island("arson_mouse","入场后，如果碰到卡片，则会向本行最左侧的一张卡片投掷炸弹，炸弹会摧\n毁3*3范围内的卡片。如果没有碰到卡片，则会在7秒后投掷炸弹。投掷后速\n度降低至0.3。")
 	register_enemy_info_island("non_mainstream_mouse","使用华丽的舞步躲避子弹，但是无法躲避咖啡喷雾、鱼刺、炸弹等非实体伤\n害。啃食时无法躲避子弹。")
-	register_enemy_info_island("flute_mouse","入场5秒后会奏响笛子，为场上所有敌人恢复200点生命值，如果该敌人的生\n命上限不足200则会补足200。首次吹奏后，每10秒都会再次吹奏笛子。")
+	register_enemy_info_island("flute_mouse","入场5秒后会奏响笛子，为场上生命百分比最低的最多10只受伤敌人恢复200点生命值；若目标生命上限不足200则补足200。首次吹奏后，每10秒都会再次吹奏笛子。")
 	register_enemy_info_island("panda_mouse","生命值降低至一半时，如果自身在第五列之外，能够向其他老鼠推进1~3格并投掷小熊猫鼠。")
 	register_enemy_info_island("can_mouse","第一次遇到爆炸时，会免疫伤害，并借助爆炸动力向前跳跃，随后扔下罐头。\n失去罐头后无法免疫爆炸。\nTip：猫猫箱可以将罐头吓掉。")
 	register_enemy_info_island("blonde_mary","金发玛丽会在地图中出场，并拥有以下技能组：\n技能1：金发玛丽从第四列的随机行出现，来回移动并摧毁两次最后四列的\n卡片。\n技能2：金发玛丽从第4行第9列出现，扔出回旋镖，摧毁圆形范围的卡片。\n技能3：金发玛丽从第9列的随机行出现，并催眠全场卡片5秒。\n金发玛丽会使用1-2-1-3的技能循环。")
