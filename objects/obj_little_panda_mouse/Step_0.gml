@@ -13,7 +13,7 @@ if global.is_paused || is_frozen || is_stun{
 var target_pos = get_world_position_from_grid(target_col,target_row)
 
 if state = ENEMY_STATE.ACTING{
-	if grid_col > target_col && y < target_pos.y+38{
+	if ((target_col - grid_col) * sign(chspeed) > 0 && y < target_pos.y+38){
 		x += chspeed
 		y -= cvspeed
 		cvspeed -= cgravity

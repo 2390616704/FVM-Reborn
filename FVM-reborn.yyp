@@ -1392,6 +1392,7 @@
     {"id":{"name":"enemy_info_island_registry","path":"scripts/enemy_info_island_registry/enemy_info_island_registry.yy",},},
     {"id":{"name":"enemy_init","path":"scripts/enemy_init/enemy_init.yy",},},
     {"id":{"name":"enemy_registry","path":"scripts/enemy_registry/enemy_registry.yy",},},
+    {"id":{"name":"enemy_throw_helper","path":"scripts/enemy_throw_helper/enemy_throw_helper.yy",},},
     {"id":{"name":"Enum_Init","path":"scripts/Enum_Init/Enum_Init.yy",},},
     {"id":{"name":"FileUtil","path":"scripts/FileUtil/FileUtil.yy",},},
     {"id":{"name":"flour_sack_orbit","path":"scripts/flour_sack_orbit/flour_sack_orbit.yy",},},
