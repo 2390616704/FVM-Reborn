@@ -15,7 +15,7 @@ state = ENEMY_STATE.APPEAR
 
 target_col = -1
 
-cycle = 480
+cycle = 240
 anim_timer = 0
 atk_cycle = 1
 atk = 2000
