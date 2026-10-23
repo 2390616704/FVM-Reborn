@@ -39,6 +39,15 @@ function create_battle_slots() {
         inst.slot_index = n + 1;
 		inst.card_id = deck_entry[? "card_id"];
         inst.shape = deck_entry[? "shape"]; // 存储形态信息
+		if ds_map_exists(card_data, "max_charges") {
+			inst.max_charges = card_data[? "max_charges"];
+		}
+		if ds_map_exists(card_data, "start_full") && card_data[? "start_full"] {
+			inst.charges = inst.max_charges;
+			inst.reloading = false;
+			inst.startup_reload_pending = false;
+			inst.cooldown_timer = inst.cooldown;
+		}
 		inst.depth = -2000
 		//show_debug_message("植物卡槽已生成，id：" + inst.card_id)
         n++

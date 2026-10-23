@@ -96,6 +96,7 @@ function unlock_all(){//测试版设置初始存档
 	unlock_card("durian",13,2,8)
 	unlock_card("pineapple_explosive_bread",13,2,8)
 	unlock_card("ice_cream",13,2,8)
+	unlock_card("coffee_bean",0,0,8)
 	unlock_card("lightning_baguette",13,2,8)
 	unlock_card("bull_firework",13,2,8)
 	unlock_card("magic_chicken",0,0,0)

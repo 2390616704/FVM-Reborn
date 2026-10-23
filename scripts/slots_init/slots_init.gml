@@ -265,6 +265,9 @@ function slots_init(){
 	    {"shape":1, "sprite":spr_ice_cream_icon_1, "cost":150, "cooldown":60*60, "description":"果蔬冰激凌：3*3范围内卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"},
 		{"shape":2, "sprite":spr_ice_cream_icon_2, "cost":350, "cooldown":60*60, "description":"极寒冰沙：全体卡片的装填次数上限+1（本局有效）","plant_type":"coffee","feature_type":"normal","target_card":"none"}
 	])
+	register_card("coffee_bean",obj_coffee_bean,[
+		{"shape":0, "sprite":spr_coffee_bean_icon, "cost":0, "cooldown":7*60, "description":"咖啡豆：使同格内植物（除玩家与咖啡豆）的卡槽冷却推进30秒，冷却少于30秒的卡槽可能连续装填多次。本局内每使用一次，价格+25。自身冷却固定7秒，开局装满10发。","plant_type":"coffee","feature_type":"normal","target_card":"none","max_charges":10,"start_full":true}
+	])
 	register_card("lightning_baguette",obj_lightning_baguette,[
 	    {"shape":0, "sprite":spr_lightning_baguette_icon, "cost":225, "cooldown":60*60, "description":"雷电长棍面包：同列的两根面包右侧两列处会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette},
 	    {"shape":1, "sprite":spr_lightning_baguette_1_icon, "cost":175, "cooldown":60*60, "description":"节能面包：同列的两根面包右侧两列处会产生电流","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_lightning_baguette_1},

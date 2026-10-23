@@ -3,6 +3,7 @@ function shop_init(){
 	register_goods("iron_fishbone",{"type":"card","cost":"5000","unlock_item_id":"iron_fishbone","description":"钢鱼刺：警戒并攻击3*3范围内的敌人，可抵挡4次致命攻击，并卡坏车辆","display_name":"钢鱼刺"})
 	register_goods("gatlin_long_bao",{"type":"card","cost":"50000","unlock_item_id":"gatlin_long_bao","description":"机枪小笼包：发射四发包子","display_name":"机枪小笼包"})
 	register_goods("rotating_coffee_pot",{"type":"card","cost":"50000","unlock_item_id":"rotating_coffee_pot","description":"旋转咖啡喷壶：3*3范围穿透攻击，白天睡觉","display_name":"旋转咖啡喷壶"})
+	register_goods("coffee_bean",{"type":"card","cost":"20000","unlock_item_id":"coffee_bean","description":"咖啡豆：使同格植物的卡槽冷却推进30秒，冷却少于30秒的卡槽可能连续装填多次。本局内每使用一次，价格+25","display_name":"咖啡豆"})
 	register_goods("takoyaki",{"type":"card","cost":"30000","unlock_item_id":"takoyaki","description":"章鱼烧：甩出两发追踪飞镖","display_name":"章鱼烧"})
 	register_goods("ice_egg_boiler_pult",{"type":"card","cost":"30000","unlock_item_id":"ice_egg_boiler_pult","description":"冰煮蛋器：投掷减速冰鸡蛋","display_name":"冰煮蛋器"})
 	register_goods("chocolate_cannon",{"type":"card","cost":"80000","unlock_item_id":"chocolate_cannon","description":"巧克力大炮：发射3*3范围爆炸的巧克力球","display_name":"巧克力大炮"})

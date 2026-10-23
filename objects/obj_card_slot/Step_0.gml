@@ -79,49 +79,7 @@ while (i < array_length(pending_ghosts)) {
 
 // 每装填一次只实体化最前面的一个虚影
 if (loaded_charge && array_length(pending_ghosts) > 0 && charges > 0) {
-	while (array_length(pending_ghosts) > 0) {
-		var mat_rec = pending_ghosts[0];
-		if (!instance_exists(mat_rec.ghost)) {
-			global.flame += mat_rec.cost;
-			array_delete(pending_ghosts, 0, 1);
-			continue;
-		}
-		var mat_world = get_world_position_from_grid(mat_rec.col, mat_rec.row);
-		var is_auto = variable_struct_exists(mat_rec, "is_auto") && mat_rec.is_auto;
-		var auto_blocked = is_auto && cell_blocks_auto_plant(mat_rec.col, mat_rec.row, mat_rec.card_data[? "plant_type"], mat_rec.card_data[? "feature_type"]);
-		var can_materialize = !auto_blocked && can_place_at_position(mat_world.x, mat_world.y, mat_rec.card_data[? "plant_type"], mat_rec.card_data[? "feature_type"], mat_rec.card_data[? "target_card"]);
-		if (can_materialize) {
-			var prev_before = global.prev_place_id;
-			global.prev_place_id = mat_rec.prev_place_id;
-			place_card_at(mat_rec.col, mat_rec.row, mat_rec.shift_x, mat_rec.shift_y, mat_rec.card_data, mat_rec.card_obj, mat_rec.cost, false, mat_rec.platform);
-			if (is_auto) {
-				global.prev_place_id = prev_before;
-			}
-			else if (mat_rec.card_id == "magic_chicken") {
-				global.prev_place_id = mat_rec.prev_place_id;
-			}
-			else if (array_get_index(cooldown_ignore_list, mat_rec.card_id) == -1) {
-				global.prev_place_id = mat_rec.card_id;
-			}
-			else {
-				global.prev_place_id = prev_before;
-			}
-			if (instance_exists(mat_rec.ghost)) {
-				instance_destroy(mat_rec.ghost);
-			}
-			array_delete(pending_ghosts, 0, 1);
-			consume_charge();
-			break;
-		}
-		else {
-			global.flame += mat_rec.cost;
-			if (instance_exists(mat_rec.ghost)) {
-				instance_destroy(mat_rec.ghost);
-			}
-			array_delete(pending_ghosts, 0, 1);
-			show_notice("预放置失败，已退还火苗", 60);
-		}
-	}
+	materialize_one_pending_ghost();
 }
 
 process_auto_replants();

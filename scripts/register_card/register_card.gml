@@ -22,6 +22,12 @@ function register_card(card_id, _obj, _shapes_array) {
 		if struct_exists(shape_info,"place_preview"){
 			shape_data[? "place_preview"] = shape_info.place_preview
 		}
+		if struct_exists(shape_info, "max_charges") {
+			shape_data[? "max_charges"] = shape_info.max_charges
+		}
+		if struct_exists(shape_info, "start_full") {
+			shape_data[? "start_full"] = shape_info.start_full
+		}
         
         ds_list_add(card[? "shapes"], shape_data);
     }
