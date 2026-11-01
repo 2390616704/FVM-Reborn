@@ -205,7 +205,7 @@ function slots_init(){
 		{"shape":2, "sprite":spr_cherry_pudding_2, "cost":75, "cooldown":7*60, "description":"热量反弹布丁：反弹子弹并附加伤害","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	])
 	register_card("skewer_bomb",obj_skewer_bomb,[
-	    {"shape":0, "sprite":spr_skewer_bomb_icon, "cost":50, "cooldown":30*60, "description":"麻辣串炸弹：炸死5×5范围空军","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_skewer_bomb}
+	    {"shape":0, "sprite":spr_skewer_bomb_icon, "cost":50, "cooldown":30*60, "description":"麻辣串炸弹：炸死5*5范围空军","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_skewer_bomb}
 	])
 	register_card("gatlin_ice_long_bao",obj_gatlin_ice_long_bao,[
 	    {"shape":0, "sprite":spr_gatlin_ice_long_bao, "cost":300, "cooldown":50*60, "description":"机枪冰冻小笼包：发射四发冰包子","plant_type":"normal","feature_type":"upgrade","target_card":"double_ice_long_bao"}
@@ -380,4 +380,10 @@ function slots_init(){
 	//    {"shape":1, "sprite":spr_fruit_tart_1, "cost":150, "cooldown":7*60, "description":"风车水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_1},
 	//	{"shape":2, "sprite":spr_fruit_tart_2, "cost":150, "cooldown":7*60, "description":"巧克力水果塔：为本行投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_2}
 	//]);
+
+	register_card("ice_ball_cup", obj_ice_ball_cup, [
+	    {"shape":0, "sprite":spr_ice_ball_cup_icon, "cost":300, "cooldown":7*60, "description":"冰球杯：4束激光锁定7*7内血量最高的目标，越打越痛；对地图障碍3倍伤害。","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_ice_ball_cup_icon},
+	    {"shape":1, "sprite":spr_ice_ball_cup_icon_1, "cost":300, "cooldown":7*60, "description":"幻彩冰球杯：5束激光，其中1束专门对空。","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_ice_ball_cup_icon_1},
+	    {"shape":2, "sprite":spr_ice_ball_cup_icon_2, "cost":300, "cooldown":7*60, "description":"棱镜冰球杯：6束激光，通用光束可打所有类型，另有1束对空。","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_ice_ball_cup_icon_2}
+	]);
 }

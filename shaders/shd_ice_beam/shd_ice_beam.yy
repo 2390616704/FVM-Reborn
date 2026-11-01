@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shd_ice_beam",
+  "name":"shd_ice_beam",
+  "parent":{
+    "name":"着色器",
+    "path":"folders/着色器.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

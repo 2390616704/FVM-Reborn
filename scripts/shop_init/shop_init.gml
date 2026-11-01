@@ -77,4 +77,6 @@ function shop_init(){
 	register_goods("sugar_roxburghii_2",{"type":"camp","cost":"3","unlock_item_id":"sugar_roxburghii","description":"生腌酸刺梨：购买后解锁糖渍刺梨二转","display_name":"生腌酸刺梨（二转）","coin_type":"camp_coin","target_shape":2})
 	register_goods("nut_frier_1",{"type":"camp","cost":"3","unlock_item_id":"nut_frier","description":"橡子搅拌机：购买后解锁坚果爆炒机一转","display_name":"橡子搅拌机（一转）","coin_type":"less_camp_coin","target_shape":1})
 	register_goods("nut_frier_2",{"type":"camp","cost":"3","unlock_item_id":"nut_frier","description":"松塔爆破机：购买后解锁坚果爆炒机二转","display_name":"松塔爆破机（二转）","coin_type":"camp_coin","target_shape":2})
+
+	register_goods("ice_ball_cup",{"type":"card","cost":"20000","unlock_item_id":"ice_ball_cup","description":"冰球杯：7*7索敌，多束激光锁定最高血量目标，越打越痛；对地图障碍3倍伤害。","display_name":"冰球杯"})
 }

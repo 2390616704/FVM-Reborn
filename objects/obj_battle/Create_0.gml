@@ -21,6 +21,7 @@ instance_create_depth(0,0,-2900,obj_battle_timer_display)
 instance_create_depth(mouse_x,mouse_y,0,obj_player_character)
 
 instance_create_depth(room_width-200,room_height-25,0,obj_level_progress_bar)
+instance_create_depth(room_width-115,room_height-80,-2900,obj_next_wave_button)
 
 
 global.selected_slot = noone;
