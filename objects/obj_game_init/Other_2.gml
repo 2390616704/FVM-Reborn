@@ -72,6 +72,7 @@ function unlock_all(){//测试版设置初始存档
 	unlock_card("ice_egg_boiler_pult",13,2,8)
 	unlock_card("coffee_grounds",13,2,8)
 	unlock_card("hamburger",13,2,8)
+	unlock_card("sugar_painting_sword",16,2,8)
 	unlock_card("steel_wool",13,0,8)
 	unlock_card("wooden_cork",13,0,8)
 	unlock_card("sausage",13,0,8)

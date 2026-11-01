@@ -102,3 +102,11 @@ if global.random_challenge_active {
     );
     boss_type_list = random_challenge_collect_preview_boss_types(global.level_file);
 }
+
+random_card_level_btn = {
+    x: 1700,
+    y: 1010,
+    scale: 0.75,
+    hover: false,
+    pressed: false
+}

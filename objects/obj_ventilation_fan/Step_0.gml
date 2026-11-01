@@ -48,18 +48,22 @@ if effect_timer == 4 * current_flash_speed{
 	}
 }
 if effect_timer >= 4 * current_flash_speed && effect_timer <= 12 * current_flash_speed{
+	var _right_x = get_world_position_from_grid(global.grid_extra_left + 9,0).x;
+	var _frames_left = max(1, (12 * current_flash_speed) - effect_timer + 1);
 	with obj_enemy_parent{
 		if target_type == "air" && array_get_index(other.ignore_list,mouse_id) == -1{
-			if x < get_world_position_from_grid(global.grid_extra_left + 9,0).x{
-				x += 6
-				if other.shape >= 2{
-					//x += 6
+			if x < _right_x{
+				if other.shape >= 1{
+					x = min(x + (_right_x - x) / _frames_left, _right_x);
+				}
+				else{
+					x += 6
 				}
 			}
 		}
 		if other.shape >= 1 && target_type != "air" && grid_row == other.grid_row && array_get_index(other.ignore_list,mouse_id) == -1{
-			if x < get_world_position_from_grid(global.grid_extra_left + 9,0).x{
-				x += 4
+			if x < _right_x{
+				x = min(x + (_right_x - x) / _frames_left, _right_x);
 			}
 		}
 	}

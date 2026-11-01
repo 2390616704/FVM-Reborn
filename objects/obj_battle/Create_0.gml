@@ -450,30 +450,38 @@ function mouse_clip_movement_update() {
 
     var _interval = 5 * 60;
     var _due = [];
+    var _targets = [];
     with (obj_mouse_clip) {
         if (state == CARD_STATE.IDLE || is_frozen) continue;
         if (grid_col < 0 || grid_col >= global.grid_cols || grid_row < 0 || grid_row >= global.grid_rows) continue;
         move_timer++;
         if (move_timer >= _interval) {
-            array_push(_due, { inst: id, target: mouse_clip_find_move_target(id) });
+            array_push(_due, id);
+            array_push(_targets, mouse_clip_find_move_target(id));
         }
     }
     if (array_length(_due) <= 0) return;
 
-    array_sort(_due, function(_a, _b) {
-        var _ac = _a.inst.grid_col;
-        var _bc = _b.inst.grid_col;
-        if (_ac == _bc) return _b.inst.id - _a.inst.id;
-        return _bc - _ac;
-    });
+    for (var _i = 0; _i < array_length(_due) - 1; _i++) {
+        for (var _j = _i + 1; _j < array_length(_due); _j++) {
+            if (_due[_j].grid_col > _due[_i].grid_col) {
+                var _tmp = _due[_i];
+                _due[_i] = _due[_j];
+                _due[_j] = _tmp;
+                _tmp = _targets[_i];
+                _targets[_i] = _targets[_j];
+                _targets[_j] = _tmp;
+            }
+        }
+    }
 
     for (var _i = 0; _i < array_length(_due); _i++) {
-        var _entry = _due[_i];
-        var _clip = _entry.inst;
+        var _clip = _due[_i];
         if (!instance_exists(_clip)) continue;
         _clip.move_timer = 0;
-        if (_entry.target < 0) continue;
-        if (!mouse_clip_cell_is_empty(_entry.target, _clip.grid_row)) continue;
-        mouse_clip_move_to(_clip, _entry.target);
+        var _target = _targets[_i];
+        if (_target < 0) continue;
+        if (!mouse_clip_cell_is_empty(_target, _clip.grid_row)) continue;
+        mouse_clip_move_to(_clip, _target);
     }
 }

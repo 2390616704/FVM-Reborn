@@ -1,3 +1,4 @@
+// 新增植物/卡牌前先读：docs/agents/plant-registration.md
 function slots_init(){
 	register_card("xiao_long_bao", obj_xiao_long_bao, [
 	    {"shape":0, "sprite":spr_xiao_long_bao, "cost":100, "cooldown":7*60, "description":"小笼包：发射包子","plant_type":"normal","feature_type":"bun","target_card":"none"}
@@ -300,6 +301,11 @@ function slots_init(){
 	    {"shape":0, "sprite":spr_chili_powder, "cost":10, "cooldown":30*60, "description":"辣椒粉：接触敌人后产生十字范围爆炸，每命中一个敌人生成1朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},
 	    {"shape":1, "sprite":spr_chili_powder_1, "cost":10, "cooldown":30*60, "description":"火爆辣椒粉：接触敌人后产生十字范围爆炸，每命中一个敌人生成2朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"},
 		{"shape":2, "sprite":spr_chili_powder_2, "cost":10, "cooldown":30*60, "description":"魔鬼辣椒粉：接触敌人后产生3*3范围爆炸，每命中一个敌人生成2朵火苗","plant_type":"normal","feature_type":"normal","target_card":"none"}
+	])
+	register_card("sugar_painting_sword", obj_sugar_painting_sword, [
+	    {"shape":0, "sprite":spr_sugar_painting_sword_icon, "cost":200, "cooldown":7*60, "description":"糖画剑：剑刃圆形往返斩击，越近越快","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_sugar_painting_sword},
+	    {"shape":1, "sprite":spr_sugar_painting_sword_1_icon, "cost":200, "cooldown":7*60, "description":"拔丝糖画剑：判定更宽","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_sugar_painting_sword_1},
+	    {"shape":2, "sprite":spr_sugar_painting_sword_2_icon, "cost":200, "cooldown":7*60, "description":"游龙糖画剑：全类型 + 破盾","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_sugar_painting_sword_2}
 	])
 	register_card("tang_hu_lu", obj_tang_hu_lu, [
 	    {"shape":0, "sprite":spr_tang_hu_lu_icon, "cost":175, "cooldown":7*60, "description":"糖葫芦炮弹：发射追踪空中敌人的糖葫芦炮弹","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_tang_hu_lu},

@@ -70,6 +70,9 @@ function shop_init(){
 	register_goods("player_attire_13",{"type":"player_attire","cost":"50000","unlock_item_id":"player_attire_13","description":"角色的梦恋花语时装","display_name":"梦恋花语"})
 	register_goods("player_attire_14",{"type":"player_attire","cost":"50000","unlock_item_id":"player_attire_14","description":"角色的探险家时装","display_name":"探险家"})
 	
+	register_goods("sugar_painting_sword",{"type":"card","cost":"30000","unlock_item_id":"sugar_painting_sword","description":"糖画剑：剑刃圆形往返斩击，越近越快","display_name":"糖画剑"})
+	register_goods("sugar_painting_sword_1",{"type":"camp","cost":"3","unlock_item_id":"sugar_painting_sword","description":"糖画剑一转移型","display_name":"拔丝糖画剑（一转）","coin_type":"less_camp_coin","target_shape":1})
+	register_goods("sugar_painting_sword_2",{"type":"camp","cost":"3","unlock_item_id":"sugar_painting_sword","description":"糖画剑二转移型","display_name":"游龙糖画剑（二转）","coin_type":"camp_coin","target_shape":2})
 	register_goods("sugar_roxburghii_1",{"type":"camp","cost":"3","unlock_item_id":"sugar_roxburghii","description":"烟熏刺梨：购买后解锁糖渍刺梨一转","display_name":"烟熏刺梨（一转）","coin_type":"less_camp_coin","target_shape":1})
 	register_goods("sugar_roxburghii_2",{"type":"camp","cost":"3","unlock_item_id":"sugar_roxburghii","description":"生腌酸刺梨：购买后解锁糖渍刺梨二转","display_name":"生腌酸刺梨（二转）","coin_type":"camp_coin","target_shape":2})
 	register_goods("nut_frier_1",{"type":"camp","cost":"3","unlock_item_id":"nut_frier","description":"橡子搅拌机：购买后解锁坚果爆炒机一转","display_name":"橡子搅拌机（一转）","coin_type":"less_camp_coin","target_shape":1})

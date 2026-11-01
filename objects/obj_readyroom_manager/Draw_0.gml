@@ -420,5 +420,19 @@ draw_text(1820,1080,"右键点击或按ESC退出")
     }
 }
 
+// 随机挑战：刷新卡牌星级按钮
+if (global.random_challenge_active && !is_submenu_open) {
+    var _btn = random_card_level_btn;
+    var _frame = _btn.pressed ? 2 : (_btn.hover ? 1 : 0);
+    draw_sprite_ext(spr_option_common_button, _frame, _btn.x, _btn.y, _btn.scale, _btn.scale, 0, c_white, 1);
+    draw_set_font(font_yuan);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_color(c_white);
+    draw_text(_btn.x, _btn.y, "刷新卡牌星级");
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+}
+
 // 提示框：推进尺寸/消失动画并绘制（每帧一次）
 tooltip_draw();

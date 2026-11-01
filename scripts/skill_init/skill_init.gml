@@ -1,3 +1,4 @@
+// 每张卡都必须注册技能条目，否则 get_plant_data_with_skill 会崩。见 docs/agents/plant-registration.md
 function skill_init(){
 	register_card_skill("small_fire","flame_produce",[25,27,29,31,34,37,40,44,48])
 	register_card_skill("xiao_long_bao","cycle",[1.3*60,1.25*60,1.2*60,1.15*60,1.1*60,1.05*60,1*60,0.95*60,0.9*60])
@@ -33,6 +34,7 @@ function skill_init(){
 	register_card_skill("ice_egg_boiler_pult","cycle",[3*60,2.9*60,2.8*60,2.7*60,2.6*60,2.4*60,2.2*60,2*60,1.8*60])
 	register_card_skill("coffee_grounds","cooldown",[7*60,6.5*60,6*60,5.5*60,5*60,4.5*60,4*60,3.5*60,3*60])
 	register_card_skill("hamburger","hp",[50,60,70,80,90,100,110,130,150])
+	register_card_skill("sugar_painting_sword","hp",[50,60,70,80,90,100,110,130,150])
 	register_card_skill("steel_wool","atk",[900,950,1000,1050,1100,1150,1200,1250,1300])
 	register_card_skill("wooden_cork","cooldown",[7*60,6.5*60,6*60,5.5*60,5*60,4.5*60,4*60,3.5*60,3*60])
 	register_card_skill("sausage","cycle",[1.3*60,1.25*60,1.2*60,1.15*60,1.1*60,1.05*60,1*60,0.95*60,0.9*60])

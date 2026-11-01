@@ -29,6 +29,32 @@ else{
 	is_submenu_open = false
 }
 
+// 随机挑战：刷新所有已解锁卡牌的星级
+if (global.random_challenge_active && !is_submenu_open) {
+	var _btn = random_card_level_btn;
+	var _half_w = 107 * _btn.scale;
+	var _half_h = 37.5 * _btn.scale;
+	var _inside = point_in_rectangle(mouse_x, mouse_y, _btn.x - _half_w, _btn.y - _half_h, _btn.x + _half_w, _btn.y + _half_h);
+	if (_inside) {
+		_btn.hover = true;
+		if (mouse_check_button_pressed(mb_left)) _btn.pressed = true;
+		if (!mouse_check_button(mb_left) && _btn.pressed) {
+			_btn.pressed = false;
+			var _ok = random_challenge_refresh_card_levels();
+			global.audio.play(snd_button, 0, 0);
+			show_notice(_ok ? "已刷新卡牌星级" : "刷新卡牌星级失败", 45);
+		}
+	}
+	else {
+		_btn.hover = false;
+		_btn.pressed = false;
+	}
+}
+else {
+	random_card_level_btn.hover = false;
+	random_card_level_btn.pressed = false;
+}
+
 // 选卡区快捷键：光标悬停在卡池卡片上时按「卡槽 N」，直接把这张卡放进第 N 槽
 // （槽号与右侧卡槽显示一致；只认已解锁槽位，目标槽在另一页时先翻页，否则飞行终点落在看不见的格子）
 if (hover_card_index != -1 && !is_submenu_open && !instance_exists(obj_package_bg)) {

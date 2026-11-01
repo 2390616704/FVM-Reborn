@@ -392,6 +392,22 @@ function random_challenge_refresh_map() {
     return true;
 }
 
+function random_challenge_refresh_card_levels() {
+    if (!global.random_challenge_active) return false;
+    var _cards = global.save_data.unlocked_cards;
+    if (!is_array(_cards) || array_length(_cards) <= 0) return false;
+    for (var i = 0; i < array_length(_cards); i++) {
+        var _card = _cards[i];
+        if (!is_struct(_card)) continue;
+        var _max_level = 0;
+        if (variable_struct_exists(_card, "max_level")) _max_level = _card.max_level;
+        if (!is_real(_max_level) || _max_level < 0) _max_level = 0;
+        _card.level = irandom(floor(_max_level));
+    }
+    save_file(global.save_slot);
+    return true;
+}
+
 function random_challenge_save_template() {
     var _state = global.save_data.random_challenge.current;
     if (!random_challenge_state_is_populated(_state)) return false;

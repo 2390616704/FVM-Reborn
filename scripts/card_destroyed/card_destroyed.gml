@@ -169,8 +169,13 @@ function plant_damage_attacker(attacker, amount) {
 function melon_permanent_hide_apply(plant) {
     if (!instance_exists(plant)) return;
     if (!variable_instance_exists(plant, "is_hidden")) return;
+    if (!plant.is_hidden) {
+        plant.stealth_original_alpha = plant.image_alpha;
+        plant.stealth_original_invincible = plant.invincible;
+    }
     plant.is_hidden = true;
     plant.image_alpha = 0.75;
+    plant.invincible = true;
 }
 
 function melon_permanent_hide_cell(col, row) {

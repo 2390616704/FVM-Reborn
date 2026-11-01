@@ -369,7 +369,8 @@ function maps_init(){
 					"boss_music":mus_volcanic_tower_boss,
 					"pre_level":"tower_cake_12_1",
 					"rewards":[
-						{"card_id":"cotton_candy","target_shape":1}
+						{"card_id":"cotton_candy","target_shape":1},
+						{"card_id":"sugar_painting_sword","target_shape":1}
 					]
 				},
 				{
@@ -936,7 +937,8 @@ function maps_init(){
 					"boss_music":mus_floating_island_daytime_boss,
 					"pre_level":"tower_cake_31_1",
 					"rewards":[
-						{"card_id":"bull_firework","target_shape":2}
+						{"card_id":"bull_firework","target_shape":2},
+						{"card_id":"sugar_painting_sword","target_shape":2}
 					]
 				},
 				{
