@@ -851,6 +851,7 @@
     {"id":{"name":"obj_coffeecup_bullet","path":"objects/obj_coffeecup_bullet/obj_coffeecup_bullet.yy",},},
     {"id":{"name":"obj_coffeepot_bullet","path":"objects/obj_coffeepot_bullet/obj_coffeepot_bullet.yy",},},
     {"id":{"name":"obj_coffeepot_mist_manager","path":"objects/obj_coffeepot_mist_manager/obj_coffeepot_mist_manager.yy",},},
+    {"id":{"name":"obj_oden_spray_manager","path":"objects/obj_oden_spray_manager/obj_oden_spray_manager.yy",},},
     {"id":{"name":"obj_coffeepot_mist","path":"objects/obj_coffeepot_mist/obj_coffeepot_mist.yy",},},
     {"id":{"name":"obj_coin","path":"objects/obj_coin/obj_coin.yy",},},
     {"id":{"name":"obj_coke_bomb_explode","path":"objects/obj_coke_bomb_explode/obj_coke_bomb_explode.yy",},},

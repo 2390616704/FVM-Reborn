@@ -14,3 +14,10 @@ image_speed = 0
 timer = 0
 
 hitted_enemy = ds_list_create()
+fx_tex = sprite_get_texture(spr_coffeepot_mist_blob, 0);
+var _uv = sprite_get_uvs(spr_coffeepot_mist_blob, 0);
+fx_u0 = _uv[0];
+fx_v0 = _uv[1];
+fx_u1 = _uv[2];
+fx_v1 = _uv[3];
+fx_time = random(1000);
