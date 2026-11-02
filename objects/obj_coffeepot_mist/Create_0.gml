@@ -1,0 +1,16 @@
+damage = 0;
+move_speed = 0;
+row = 0;
+start_col = 0;
+shape = 0;
+damage_type = "pierce";
+target_type = "pierce";
+attack_timer = 0;
+visual_time = 0;
+life = 18;
+max_life = 18;
+visual_seed = random(10000);
+spray_len = 4 * global.grid_cell_size_x;
+spray_h = global.grid_cell_size_y;
+sprite_index = -1;
+image_speed = 0;

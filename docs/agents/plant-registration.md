@@ -550,3 +550,25 @@ python -c "import re,json; s=open('FVM-reborn.yyp',encoding='utf-8-sig').read();
 - `docs/agents/domain.md`：领域文档 / ADR 约定
 - `docs/agents/issue-tracker.md`：本地 issue 约定
 - `CONTEXT.md`：如果后续创建，用它统一“浮空植物 / 装填 / 冷却推进 / 预放置”等术语
+
+## 11. 快速定位现有卡牌与特效
+
+按卡牌 id 定位，不要先全局搜特效名：
+
+1. `scripts/slots_init/slots_init.gml`：搜 `register_card("<id>", obj_<id>, ...)`，确认对象、卡面图标、放置预览。
+2. `scripts/cards_init/cards_init.gml`：确认数值与形态注册。
+3. `objects/obj_<id>/`：看 `Create_0.gml` 的默认值、`Step_0.gml` 的索敌/攻击节奏。
+4. `objects/obj_<id>/Other_11.gml`：通常是攻击触发点（User Event 1），从这里找 `instance_create_depth(...)` 生成子弹/特效。
+5. `objects/obj_..._bullet/` 或 `objects/obj_..._effect/`：看伤害、生命周期、碰撞和绘制。
+6. `sprites/spr_...`：确认是逐帧动画、单图、还是需要替换成共享贴图/合批特效。
+7. 如果子弹复用了共享对象，检查 `sprite_index` 覆盖；视觉资源可能不在当前卡牌目录下。
+
+替换喷射/子弹特效时，先保留原伤害与生命周期接口，再替换视觉资源或新增合批特效层；不要先改数值逻辑。最后用 Igor 编译并在游戏内验收。
+
+## 12. 文档导航
+
+- `AGENTS.md`：agent 全局规范、美术/特效注册流程
+- `docs/agents/plant-registration.md`：卡牌注册与现有卡牌/特效定位
+- `docs/agents/issue-tracker.md`：issue 约定
+- `docs/agents/triage-labels.md`：triage 标签
+- `docs/agents/domain.md`：domain 文档 / ADR 约定

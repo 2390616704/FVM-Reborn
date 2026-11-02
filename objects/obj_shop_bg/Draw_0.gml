@@ -88,7 +88,10 @@ for(var i = 0 ; i< 4; i++){
 		if shop_button_select == 1{
 			if ds_list_find_value(goods_list,i*4+j+(current_page-1)*16) != undefined{
 				//根据商品id获取卡片信息
-				var card_data = deck_get_card_data(global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].unlock_item_id,0)
+				var _goods = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)]
+				var _need_shape = 0
+				if (variable_struct_exists(_goods, "target_shape")) _need_shape = _goods.target_shape
+				var card_data = deck_get_card_data(_goods.unlock_item_id,_need_shape)
 				draw_sprite_ext(spr_slot, 0, x-618+411*j-122,y-190+165*i, 0.33, 0.33, 0, c_white, 1);
 				draw_sprite_ext(card_data[? "sprite"],0,x-618+411*j-122,y-190+165*i+25,1,1,0,c_white,1)
 				draw_set_halign(fa_left);
@@ -99,15 +102,17 @@ for(var i = 0 ; i< 4; i++){
 				draw_sprite_ext(spr_flame, 0, x-618+411*j-122-24, y-190+165*i+43, 0.3, 0.3, 0, c_white, 1);
 				draw_set_halign(fa_left);
 				draw_set_valign(fa_top);
-				// 检查卡片是否已解锁
-		            var is_unlocked = false;
-		            for(var k = 0; k < array_length(global.save_data.unlocked_cards); k++) {
-		                if (global.save_data.unlocked_cards[k].id == global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].unlock_item_id) {
-		                    is_unlocked = true;
-		                    break;
-		                }
-		            }
-				if is_unlocked{
+				var _owned_shape = -1
+				for(var k = 0; k < array_length(global.save_data.unlocked_cards); k++) {
+					var _card = global.save_data.unlocked_cards[k]
+					if (_card.id == _goods.unlock_item_id) {
+						if (variable_struct_exists(_card, "max_shape")) _owned_shape = _card.max_shape
+						else if (variable_struct_exists(_card, "shape")) _owned_shape = _card.shape
+						else _owned_shape = 0
+						break
+					}
+				}
+				if (_owned_shape >= _need_shape) {
 					
 					draw_set_color(c_black)
 					draw_set_alpha(0.5)

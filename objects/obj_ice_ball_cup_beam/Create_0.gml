@@ -7,6 +7,15 @@ tick_index = 0;
 intensity = 0;
 visual_time = 0;
 sparks = [];
+target_hit_y = function(t) {
+    if (!instance_exists(t)) return y;
+    var _s = t.sprite_index;
+    if (_s == -1) return t.y;
+    var _ys = abs(t.image_yscale);
+    var _h = sprite_get_height(_s) * _ys;
+    var _off = sprite_get_yoffset(_s) * _ys;
+    return t.y - _off + _h * 0.56;
+};
 depth = -500;
 image_speed = 0;
 
@@ -40,7 +49,9 @@ acquire_target = function() {
         for (var _bi = 0; _bi < array_length(_beams); _bi++) {
             var _b = _beams[_bi];
             if (_b == _self) continue;
-            if (instance_exists(_b) && _b.target == id) { _taken = true; break; }
+            if (instance_exists(_b)) {
+                if (_b.target == id && instance_exists(_b.target) && _b.target.hp > 0) { _taken = true; break; }
+            }
         }
         if (_taken) continue;
         var _rd = abs(grid_row - _gr);
@@ -64,7 +75,9 @@ acquire_target = function() {
             for (var _bi2 = 0; _bi2 < array_length(_beams); _bi2++) {
                 var _b2 = _beams[_bi2];
                 if (_b2 == _self) continue;
-                if (instance_exists(_b2) && _b2.target == id) { _taken2 = true; break; }
+                if (instance_exists(_b2)) {
+                    if (_b2.target == id && instance_exists(_b2.target) && _b2.target.hp > 0) { _taken2 = true; break; }
+                }
             }
             if (_taken2) continue;
             var _rd2 = abs(grid_row - _gr);

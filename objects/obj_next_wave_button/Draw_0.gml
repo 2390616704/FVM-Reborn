@@ -1,8 +1,6 @@
 if (!can_advance_wave()) exit
 
-var _mx = mouse_x
-var _my = mouse_y
-var _hover = point_in_rectangle(_mx, _my, x - button_width / 2, y - button_height / 2, x + button_width / 2, y + button_height / 2)
+var _hover = mouse_over_next_wave_button()
 var _frame = 0
 if (_hover) {
 	_frame = mouse_check_button(mb_left) ? 2 : 1

@@ -92,22 +92,28 @@ function shop_list_recharge(){
 			//绘制卡片类型商品
 			if shop_button_select == 1{
 				if ds_list_find_value(goods_list,i*4+j+(current_page-1)*16) != undefined{
-					// 检查卡片是否已解锁
-		            var is_unlocked = false;
-		            for(var k = 0; k < array_length(global.save_data.unlocked_cards); k++) {
-		                if (global.save_data.unlocked_cards[k].id == global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].unlock_item_id) {
-		                    is_unlocked = true;
-		                    break;
-		                }
-		            }
+					var _goods = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)]
+					var _need_shape = 0
+					if (variable_struct_exists(_goods, "target_shape")) _need_shape = _goods.target_shape
+					var _owned_shape = -1
+					for(var k = 0; k < array_length(global.save_data.unlocked_cards); k++) {
+						var _card = global.save_data.unlocked_cards[k]
+						if (_card.id == _goods.unlock_item_id) {
+							if (variable_struct_exists(_card, "max_shape")) _owned_shape = _card.max_shape
+							else if (variable_struct_exists(_card, "shape")) _owned_shape = _card.shape
+							else _owned_shape = 0
+							break
+						}
+					}
 					//根据商品id获取卡片信息
 					var inst = instance_create_depth(x-618+411*j+77, y-190+165*i+60,depth-1,obj_shop_buy_btn)
-					inst.target_item = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].unlock_item_id
-					inst.cost = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].cost
-					inst.goods_name = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].display_name
-					inst.tooltip_text = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*16)].description
+					inst.target_item = _goods.unlock_item_id
+					inst.target_shape = _need_shape
+					inst.cost = _goods.cost
+					inst.goods_name = _goods.display_name
+					inst.tooltip_text = _goods.description
 					inst.btn_type = "card"
-					if is_unlocked{
+					if (_owned_shape >= _need_shape) {
 						inst.is_disabled = true
 					}
 				}

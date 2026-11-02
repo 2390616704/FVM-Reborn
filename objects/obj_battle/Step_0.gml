@@ -166,20 +166,7 @@ if wave_data.boss_wave && level_stage != "boss" && (global.random_challenge_acti
 	}
 }
 if wave_timer <= 0 && level_stage == "pre"{
-	if (global.random_challenge_active || global.save_data.unlocked_items.elite_unlocked || current_wave < global.level_file.elite_wave) {
-		if current_wave < total_wave{
-			enemy_subwave_summon()
-		}
-		if current_subwave < current_total_subwaves-1{
-			current_subwave+=1
-		}
-		else if current_wave < total_wave{
-			current_wave += 1
-			current_subwave = 0
-			global.audio.play(snd_mouse_wave_attack,0,0)
-			instance_create_depth(room_width/2,room_height/2,-300,obj_huge_wave_text)
-		}
-	}
+	advance_wave()
 }
 if wave_timer <= 0 && level_stage == "boss"{
 	enemy_subwave_summon()

@@ -3,6 +3,7 @@ image_yscale = 1.8
 image_speed = 0
 
 target_item = ""
+target_shape = 0
 btn_type = ""
 goods_name = ""
 tooltip_text = ""

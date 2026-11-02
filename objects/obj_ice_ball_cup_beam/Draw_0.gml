@@ -5,7 +5,7 @@ if (target == noone || !instance_exists(target) || owner.is_frozen) exit;
 var ox = owner.x;
 var oy = owner.y + owner.orb_offset_y;
 var tx = target.x;
-var ty = target.y - 20;
+var ty = target_hit_y(target);
 var len = point_distance(ox, oy, tx, ty);
 if (len < 1) exit;
 var ang = point_direction(ox, oy, tx, ty);
@@ -52,7 +52,7 @@ gpu_set_blendmode(bm_normal);
 
 gpu_set_blendmode(bm_add);
 var ix = target.x;
-var iy = target.y - 20;
+var iy = ty;
 var core_r = 2.5 + 3.5 * intensity;
 draw_set_alpha(0.55 + 0.35 * intensity);
 draw_circle_colour(ix, iy, core_r, c_white, c_aqua, false);

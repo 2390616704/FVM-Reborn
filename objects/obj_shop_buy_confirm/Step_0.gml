@@ -37,7 +37,9 @@ for (var i = 0; i < array_length(buttons); i++) {
 					with banding_buy_btn{
 						if btn_type == "card"{
 							global.save_data.player.gold -= cost
-							unlock_card(target_item,0,0,global.save_data.unlocked_items.max_skill_level)
+							var _shape = 0
+							if (variable_instance_exists(id, "target_shape")) _shape = target_shape
+							unlock_card(target_item,get_card_level(target_item),_shape,global.save_data.unlocked_items.max_skill_level)
 						}
 						else if btn_type == "weapon"{
 							global.save_data.player.gold -= cost

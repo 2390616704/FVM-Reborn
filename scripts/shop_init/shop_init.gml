@@ -79,4 +79,6 @@ function shop_init(){
 	register_goods("nut_frier_2",{"type":"camp","cost":"3","unlock_item_id":"nut_frier","description":"松塔爆破机：购买后解锁坚果爆炒机二转","display_name":"松塔爆破机（二转）","coin_type":"camp_coin","target_shape":2})
 
 	register_goods("ice_ball_cup",{"type":"card","cost":"20000","unlock_item_id":"ice_ball_cup","description":"冰球杯：7*7索敌，多束激光锁定最高血量目标，越打越痛；对地图障碍3倍伤害。","display_name":"冰球杯"})
+	register_goods("ice_ball_cup_1",{"type":"card","cost":"20000","unlock_item_id":"ice_ball_cup","target_shape":1,"description":"幻彩冰球杯（一转）：4束通用激光（地面/障碍）+1束专用对空激光。","display_name":"幻彩冰球杯（一转）"})
+	register_goods("ice_ball_cup_2",{"type":"card","cost":"20000","unlock_item_id":"ice_ball_cup","target_shape":2,"description":"棱镜冰球杯（二转）：5束通用激光（所有类型）+1束专用对空激光。","display_name":"棱镜冰球杯（二转）"})
 }

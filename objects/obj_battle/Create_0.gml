@@ -402,6 +402,30 @@ function enemy_subwave_summon(){
     
 }
 
+function advance_wave(){
+	var _total_sub = 0
+	if current_wave < total_wave{
+		_total_sub = array_length(global.level_file.waves[current_wave].subwaves)
+	}
+	else{
+		_total_sub = array_length(global.level_file.waves[current_wave-1].subwaves)
+	}
+	if (global.random_challenge_active || global.save_data.unlocked_items.elite_unlocked || current_wave < global.level_file.elite_wave) {
+		if current_wave < total_wave{
+			enemy_subwave_summon()
+		}
+		if current_subwave < _total_sub-1{
+			current_subwave+=1
+		}
+		else if current_wave < total_wave{
+			current_wave += 1
+			current_subwave = 0
+			global.audio.play(snd_mouse_wave_attack,0,0)
+			instance_create_depth(room_width/2,room_height/2,-300,obj_huge_wave_text)
+		}
+	}
+}
+
 function mouse_clip_cell_is_empty(_col, _row) {
     if (_col < 0 || _col >= global.grid_cols || _row < 0 || _row >= global.grid_rows) return false;
     var _plants = ds_grid_get(global.grid_plants, _col, _row);

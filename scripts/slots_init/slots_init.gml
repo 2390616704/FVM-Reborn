@@ -58,9 +58,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_salad_pult_2, "cost":100, "cooldown":7*60, "description":"凯撒色拉投手：投掷两颗可弹射的番茄","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	]);
 	register_card("coffee_pot", obj_coffee_pot, [
-	    {"shape":0, "sprite":spr_coffee_pot, "cost":75, "cooldown":7*60, "description":"咖啡喷壶：穿透攻击四格内敌人，白天睡觉","plant_type":"normal","feature_type":"normal","target_card":"none"},
-	    {"shape":1, "sprite":spr_coffee_pot_1, "cost":75, "cooldown":7*60, "description":"香醇咖啡喷壶：穿透攻击四格内敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
-		{"shape":2, "sprite":spr_coffee_pot_icon_2, "cost":75, "cooldown":7*60, "description":"红温咖啡喷壶：穿透攻击一行敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_coffee_pot_2}
+	    {"shape":0, "sprite":spr_coffee_pot_icon, "cost":75, "cooldown":7*60, "description":"咖啡喷壶：穿透攻击四格内敌人，白天睡觉","plant_type":"normal","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_coffee_pot_icon_1, "cost":75, "cooldown":7*60, "description":"香醇咖啡喷壶：穿透攻击四格内敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
+		{"shape":2, "sprite":spr_coffee_pot_icon_2, "cost":75, "cooldown":7*60, "description":"红温咖啡喷壶：穿透攻击一行敌人","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_coffee_pot_icon_2}
 	]);
 	register_card("chocolate_bread",obj_chocolate_bread,[
 		{"shape":0,"sprite":spr_chocolate_bread,"cost":125,"cooldown":30*60,"description":"巧克力面包：阻挡敌人翻越，受到致命攻击时也按200点限伤，作为所在格外层，并为自身3列×所有行中心承担普通和致命伤害（不比较目标血量），普通伤害不击退，成功抵挡致命伤后击退攻击者1格","plant_type":"shield_outer","feature_type":"normal","target_card":"none"},

@@ -24,6 +24,7 @@ if (owner.is_frozen) {
     exit;
 }
 
+if (!instance_exists(target)) target = noone;
 if (instance_exists(target)) {
     var valid = (target.hp > 0);
     if (valid && !in_owner_range(target)) valid = false;
@@ -58,7 +59,7 @@ if (target != noone) {
 
 if (target != noone && instance_exists(target)) {
     var _sx = target.x + irandom_range(-9, 9);
-    var _sy = target.y - 20 + irandom_range(-9, 9);
+    var _sy = target_hit_y(target) + irandom_range(-9, 9);
     var _ang = random(360);
     var _spd = random_range(0.8, 2.4);
     var _sp = {
